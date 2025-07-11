@@ -1,11 +1,125 @@
 ---
-title: "oficinaggplotufpel.github.io"
+title: "Oficina ggplot2 UFPel"
 ---
 
-This is a Quarto website.
+# Introdução
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+O ggplot2 é um pacote de código aberto para a visualização gráfica de dados para a linguagem de programação R. Foi criada por Hadley Wickham em 2005, sendo uma implementação do livro Grammar Graphics de Leland Wilkison também lançado em 2005.
+
+Ele aborda que visualização gráfica dos dados pode ser divida em componentes semânticos, como escalas e camadas.
+
+## Por que usar o ggplot2?
+
+1- Alta costumização gráfica
+
+2- Alta diversidade de modelos de gráficos
+
+3- Integração com outros pacotes do tidyverse, como por exemplo dplyr e forcats
+
+4- Criação de gráficos a partir de camadas
+
+## Como instalar o ggplot2?
+
+```{r,label="cran"}
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+```
+
+```{r, label="instalando pacotes"}
+#| echo: true
+#| message: false
+#| warning: false
+#| output: false
+
+#instalando pacote ggplot2
+install.packages("ggplot2")
+
+#instalando dplyr, forcats e patchwork
+install.packages("dplyr")
+install.packages("forcats")
+install.packages("patchwork")
+```
+
+Para usar o **ggplot2** em seus scripts tem que carrega-lo
+
+```{r, label="carregando pacotes"}
+#| echo: true
+#| message: false
+#| warning: false
+#| output: false
+
+#Carregando o pacote ggplot2
+library(ggplot2)
+
+#Carregando dplyr, forcats e patchwork
+library(dplyr)
+library(forcats)
+library(patchwork)
+```
+
+# Banco de dados *iris*
+
+Para essa oficina será utilizado bancos de dados **iris**.
+
+**iris** - é referente tamanho de pételas e sepalas de 3 espécies do gênero *Iris* do trabalho de Fisher em 1936 (*Iris setosa*,*Iris versicolor* e *Iris virginica*)
+
+```{r, label="carregando banco de dados"}
+#| echo: true
+data(iris)
+
+head(iris)
+```
+
+# Box-plot
+
+1- escrevemos **iris** - para indicar qual banco de dados estamos trabalhando
+
+2- usamos o simbolo de pipe **"%\>%"** para indicar que função futura vai ser utilizada com esse banco de dados
+
+3- usamos a função **ggplot()** para iniciar a criação de nosso gráfico
+
+4- dentro da função **ggplot()** será inserido a função **aes()**, nela será definido os fatores estéticos (*aesthetic*) do gráfico. Como que variável vai estar no eixo x, eixo y, na cor de preenchimento, etc.
+
+5- é usado o símbolo de **"+"** na sintaxe para acrescentar camadas e alterações no gráfico, como legendas e alteração na escala dos eixos.
 
 ```{r}
-1 + 1
+#| echo: true
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length))+geom_boxplot()
+
 ```
+
+### Colocando cores no gráfico
+
+Uma das formas de acrescentar cor ao gráfico é adicionando o argumento "*fill*" dentro da função *aes()*. Indicará ao ggplot que você quer que as cores de preenchimentos do **ggplot** mude de acordo com alguma variável de seu *data.frame*.
+
+
+```{r, label="Box-plot"}
+#| echo: true
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()
+
+```
+
+**Há várias maneiras de fazer isso, irei demonstrar algumas ao longo da oficina.** 
+
+Por exemplo na linha de código abaixo foi acrescentado o argumento *fill* dentro da função *geom_boxplot()*.Nesse argumento usei a função de contatenar (*c()*), para denominar as três cores desejadas para o gráfico. Note que os nomes das cores estão escritos entre aspas **" "**. Ao invés de colocar nome de cores em inglês, pode-se colocar o código RGB hexadecimal da cor, como "#4287f5".
+
+Atenção se queremos que as cores sejam diferenciadas de acordo com algum fator, ou variável nominal de nosso data.frame, temos que indicar dentro do *aes()*. Como fill para mudar o preenchimento, colour para mudar o contorno, e shape para mudar formato (caso esteja trabalhando com gráficos possuem pontos).
+
+```{r, label="Box-plot2"}
+#| echo: true
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length))+geom_boxplot(fill=c("lightpink","lightgreen","lightblue"))
+
+```
+
+A outra forma é delimitar através da função "scale_fill_manual()", esse comando serve para alterar os parâmetros de *fill*. Nele foi utilizado *values = c()* para concatenar as cores escolhidas.
+
+```{r, label="Box-plot3"}
+#| echo: true
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+scale_fill_manual(values=c("#704c41","#41704f","#584170"))
+
+```
+
+

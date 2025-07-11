@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>oficinaggplotufpel.github.io</title>
+<title>Oficina ggplot2 UFPel – oficinaggplotufpel.github.io</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -143,15 +143,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução">Introdução</a>
+  <ul class="collapse">
+  <li><a href="#por-que-usar-o-ggplot2" id="toc-por-que-usar-o-ggplot2" class="nav-link" data-scroll-target="#por-que-usar-o-ggplot2">Por que usar o ggplot2?</a></li>
+  <li><a href="#como-instalar-o-ggplot2" id="toc-como-instalar-o-ggplot2" class="nav-link" data-scroll-target="#como-instalar-o-ggplot2">Como instalar o ggplot2?</a></li>
+  </ul></li>
+  <li><a href="#banco-de-dados-iris" id="toc-banco-de-dados-iris" class="nav-link" data-scroll-target="#banco-de-dados-iris">Banco de dados <em>iris</em></a></li>
+  <li><a href="#box-plot" id="toc-box-plot" class="nav-link" data-scroll-target="#box-plot">Box-plot</a>
+  <ul class="collapse">
+  <li><a href="#colocando-cores-no-gráfico" id="toc-colocando-cores-no-gráfico" class="nav-link" data-scroll-target="#colocando-cores-no-gráfico">Colocando cores no gráfico</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">oficinaggplotufpel.github.io</h1>
+<h1 class="title">Oficina ggplot2 UFPel</h1>
 </div>
 
 
@@ -168,16 +183,119 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This is a Quarto website.</p>
-<p>To learn more about Quarto websites visit <a href="https://quarto.org/docs/websites" class="uri">https://quarto.org/docs/websites</a>.</p>
+<section id="introdução" class="level1">
+<h1>Introdução</h1>
+<p>O ggplot2 é um pacote de código aberto para a visualização gráfica de dados para a linguagem de programação R. Foi criada por Hadley Wickham em 2005, sendo uma implementação do livro Grammar Graphics de Leland Wilkison também lançado em 2005.</p>
+<p>Ele aborda que visualização gráfica dos dados pode ser divida em componentes semânticos, como escalas e camadas.</p>
+<section id="por-que-usar-o-ggplot2" class="level2">
+<h2 class="anchored" data-anchor-id="por-que-usar-o-ggplot2">Por que usar o ggplot2?</h2>
+<p>1- Alta costumização gráfica</p>
+<p>2- Alta diversidade de modelos de gráficos</p>
+<p>3- Integração com outros pacotes do tidyverse, como por exemplo dplyr e forcats</p>
+<p>4- Criação de gráficos a partir de camadas</p>
+</section>
+<section id="como-instalar-o-ggplot2" class="level2">
+<h2 class="anchored" data-anchor-id="como-instalar-o-ggplot2">Como instalar o ggplot2?</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">CRAN =</span> <span class="st">"https://cloud.r-project.org"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#instalando pacote ggplot2</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#instalando dplyr, forcats e patchwork</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"dplyr"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"forcats"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"patchwork"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para usar o <strong>ggplot2</strong> em seus scripts tem que carrega-lo</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Carregando o pacote ggplot2</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Carregando dplyr, forcats e patchwork</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="banco-de-dados-iris" class="level1">
+<h1>Banco de dados <em>iris</em></h1>
+<p>Para essa oficina será utilizado bancos de dados <strong>iris</strong>.</p>
+<p><strong>iris</strong> - é referente tamanho de pételas e sepalas de 3 espécies do gênero <em>Iris</em> do trabalho de Fisher em 1936 (<em>Iris setosa</em>,<em>Iris versicolor</em> e <em>Iris virginica</em>)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(iris)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<pre><code>  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+1          5.1         3.5          1.4         0.2  setosa
+2          4.9         3.0          1.4         0.2  setosa
+3          4.7         3.2          1.3         0.2  setosa
+4          4.6         3.1          1.5         0.2  setosa
+5          5.0         3.6          1.4         0.2  setosa
+6          5.4         3.9          1.7         0.4  setosa</code></pre>
+</div>
+</div>
+</section>
+<section id="box-plot" class="level1">
+<h1>Box-plot</h1>
+<p>1- escrevemos <strong>iris</strong> - para indicar qual banco de dados estamos trabalhando</p>
+<p>2- usamos o simbolo de pipe <strong>“%&gt;%”</strong> para indicar que função futura vai ser utilizada com esse banco de dados</p>
+<p>3- usamos a função <strong>ggplot()</strong> para iniciar a criação de nosso gráfico</p>
+<p>4- dentro da função <strong>ggplot()</strong> será inserido a função <strong>aes()</strong>, nela será definido os fatores estéticos (<em>aesthetic</em>) do gráfico. Como que variável vai estar no eixo x, eixo y, na cor de preenchimento, etc.</p>
+<p>5- é usado o símbolo de <strong>“+”</strong> na sintaxe para acrescentar camadas e alterações no gráfico, como legendas e alteração na escala dos eixos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length))<span class="sc">+</span><span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="colocando-cores-no-gráfico" class="level3">
+<h3 class="anchored" data-anchor-id="colocando-cores-no-gráfico">Colocando cores no gráfico</h3>
+<p>Uma das formas de acrescentar cor ao gráfico é adicionando o argumento “<em>fill</em>” dentro da função <em>aes()</em>. Indicará ao ggplot que você quer que as cores de preenchimentos do <strong>ggplot</strong> mude de acordo com alguma variável de seu <em>data.frame</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/Box-plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Há várias maneiras de fazer isso, irei demonstrar algumas ao longo da oficina.</strong></p>
+<p>Por exemplo na linha de código abaixo foi acrescentado o argumento <em>fill</em> dentro da função <em>geom_boxplot()</em>.Nesse argumento usei a função de contatenar (<em>c()</em>), para denominar as três cores desejadas para o gráfico. Note que os nomes das cores estão escritos entre aspas <strong>” “</strong>. Ao invés de colocar nome de cores em inglês, pode-se colocar o código RGB hexadecimal da cor, como “#4287f5”.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length))<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="at">fill=</span><span class="fu">c</span>(<span class="st">"lightpink"</span>,<span class="st">"lightgreen"</span>,<span class="st">"lightblue"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/Box-plot2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>A outra forma é delimitar através da função “scale_fill_manual”</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"#704c41"</span>,<span class="st">"#41704f"</span>,<span class="st">"#584170"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/Box-plot3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
