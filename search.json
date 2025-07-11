@@ -2,9 +2,23 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "oficinaggplotufpel.github.io",
+    "title": "Oficina ggplot2 UFPel",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+    "text": "O ggplot2 é um pacote de código aberto para a visualização gráfica de dados para a linguagem de programação R. Foi criada por Hadley Wickham em 2005, sendo uma implementação do livro Grammar Graphics de Leland Wilkison também lançado em 2005.\nEle aborda que visualização gráfica dos dados pode ser divida em componentes semânticos, como escalas e camadas.\n\n\n1- Alta costumização gráfica\n2- Alta diversidade de modelos de gráficos\n3- Integração com outros pacotes do tidyverse, como por exemplo dplyr e forcats\n4- Criação de gráficos a partir de camadas\n\n\n\n\noptions(repos = c(CRAN = \"https://cloud.r-project.org\"))\n\n\n#instalando pacote ggplot2\ninstall.packages(\"ggplot2\")\n\n#instalando dplyr, forcats e patchwork\ninstall.packages(\"dplyr\")\ninstall.packages(\"forcats\")\ninstall.packages(\"patchwork\")\n\nPara usar o ggplot2 em seus scripts tem que carrega-lo\n\n#Carregando o pacote ggplot2\nlibrary(ggplot2)\n\n#Carregando dplyr, forcats e patchwork\nlibrary(dplyr)\nlibrary(forcats)\nlibrary(patchwork)"
+  },
+  {
+    "objectID": "index.html#por-que-usar-o-ggplot2",
+    "href": "index.html#por-que-usar-o-ggplot2",
+    "title": "Oficina ggplot2 UFPel",
+    "section": "",
+    "text": "1- Alta costumização gráfica\n2- Alta diversidade de modelos de gráficos\n3- Integração com outros pacotes do tidyverse, como por exemplo dplyr e forcats\n4- Criação de gráficos a partir de camadas"
+  },
+  {
+    "objectID": "index.html#como-instalar-o-ggplot2",
+    "href": "index.html#como-instalar-o-ggplot2",
+    "title": "Oficina ggplot2 UFPel",
+    "section": "",
+    "text": "options(repos = c(CRAN = \"https://cloud.r-project.org\"))\n\n\n#instalando pacote ggplot2\ninstall.packages(\"ggplot2\")\n\n#instalando dplyr, forcats e patchwork\ninstall.packages(\"dplyr\")\ninstall.packages(\"forcats\")\ninstall.packages(\"patchwork\")\n\nPara usar o ggplot2 em seus scripts tem que carrega-lo\n\n#Carregando o pacote ggplot2\nlibrary(ggplot2)\n\n#Carregando dplyr, forcats e patchwork\nlibrary(dplyr)\nlibrary(forcats)\nlibrary(patchwork)"
   },
   {
     "objectID": "about.html",
