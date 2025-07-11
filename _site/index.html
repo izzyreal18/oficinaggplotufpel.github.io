@@ -197,14 +197,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introdução" class="level1">
 <h1>Introdução</h1>
-<p>O ggplot2 é um pacote de código aberto para a visualização gráfica de dados para a linguagem de programação R. Foi criada por Hadley Wickham em 2005, sendo uma implementação do livro Grammar Graphics de Leland Wilkison também lançado em 2005.</p>
+<p>O <code>ggplot2</code> é um pacote de código aberto para a visualização gráfica de dados para a linguagem de programação R. Foi criada por Hadley Wickham em 2005, sendo uma implementação do livro <code>Grammar Graphics</code> de Leland Wilkison também lançado em 2005.</p>
 <p>Ele aborda que visualização gráfica dos dados pode ser divida em componentes semânticos, como escalas e camadas.</p>
 <section id="por-que-usar-o-ggplot2" class="level2">
 <h2 class="anchored" data-anchor-id="por-que-usar-o-ggplot2">Por que usar o ggplot2?</h2>
-<p>1- Alta costumização gráfica</p>
-<p>2- Alta diversidade de modelos de gráficos</p>
-<p>3- Integração com outros pacotes do tidyverse, como por exemplo dplyr e forcats</p>
-<p>4- Criação de gráficos a partir de camadas</p>
+<ol type="1">
+<li><p>Alta costumização gráfica.</p></li>
+<li><p>Alta diversidade de modelos de gráficos.</p></li>
+<li><p>Integração com outros pacotes do tidyverse, como por exemplo <code>dplyr</code>, <code>forcats</code> e o <code>plotly</code>.</p></li>
+<li><p>Criação de gráficos a partir de camadas, podendo sobrepor diferentes gráficos.</p></li>
+</ol>
 </section>
 <section id="como-instalar-o-ggplot2" class="level2">
 <h2 class="anchored" data-anchor-id="como-instalar-o-ggplot2">Como instalar o ggplot2?</h2>
@@ -220,7 +222,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"forcats"</span>)</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"patchwork"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Para usar o <strong>ggplot2</strong> em seus scripts tem que carrega-lo</p>
+<p>Para usar o <code>ggplot2</code> em seus scripts tem que carrega-lo</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Carregando o pacote ggplot2</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -254,40 +256,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="box-plot" class="level1">
 <h1>Box-plot</h1>
 <p>1- escrevemos <strong>iris</strong> - para indicar qual banco de dados estamos trabalhando</p>
-<p>2- usamos o simbolo de pipe <strong>“%&gt;%”</strong> para indicar que função futura vai ser utilizada com esse banco de dados</p>
-<p>3- usamos a função <strong>ggplot()</strong> para iniciar a criação de nosso gráfico</p>
-<p>4- dentro da função <strong>ggplot()</strong> será inserido a função <strong>aes()</strong>, nela será definido os fatores estéticos (<em>aesthetic</em>) do gráfico. Como que variável vai estar no eixo x, eixo y, na cor de preenchimento, etc.</p>
-<p>5- é usado o símbolo de <strong>“+”</strong> na sintaxe para acrescentar camadas e alterações no gráfico, como legendas e alteração na escala dos eixos.</p>
-<p>6- sempre para gerar alguma forma “geométrica” no gráfico, como colunas, box-plots, curvas, texte, entre outras, será utilizado geom_“forma geométrica”, neste caso será utilizado o <em>geom_boxplot</em></p>
+<p>2- usamos o simbolo de pipe <code>%&gt;%</code> para indicar que função futura vai ser utilizada com esse banco de dados</p>
+<p>3- usamos a função <code>ggplot()</code> para iniciar a criação de nosso gráfico</p>
+<p>4- dentro da função <code>ggplot()</code> será inserido a função <code>aes()</code>, nela será definido os fatores estéticos (<em>aesthetic</em>) do gráfico. Como que variável vai estar no eixo x, eixo y, na cor de preenchimento, etc.</p>
+<p>5- é usado o símbolo de “<code>+</code>” na sintaxe para acrescentar camadas e alterações no gráfico, como legendas e alteração na escala dos eixos.</p>
+<p>6- sempre para gerar alguma forma “geométrica” no gráfico, como colunas, box-plots, curvas, texte, entre outras, será utilizado <code>geom_"forma geométrica"</code>, neste caso será utilizado o <code>geom_boxplot</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length))<span class="sc">+</span><span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/Box-plot simples1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>iris poderia estar dentro de ggplot, como o primeiro argumento da função, se a necessidade de usar <em>pipe</em> <code>%&gt;%</code>, segue o exemplo abaixo </strong></p>
+<p>Obs.: pode se indicar o <em>data frame</em> através de <code>data=iris</code> dentro da função <code>ggplot()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris,<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length))<span class="sc">+</span><span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/Box-plot simples-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <section id="mudando-cores-de-preenchimento-no-ggplot" class="level2">
 <h2 class="anchored" data-anchor-id="mudando-cores-de-preenchimento-no-ggplot">Mudando cores de preenchimento no ggplot</h2>
-<p>Uma das formas de acrescentar cor ao gráfico é adicionando o argumento “<em>fill</em>” dentro da função <em>aes()</em>. Indicará ao ggplot que você quer que as cores de preenchimentos do <strong>ggplot</strong> mude de acordo com alguma variável de seu <em>data.frame</em>.</p>
+<p>Uma das formas de acrescentar cor ao gráfico é adicionando o argumento <code>fill</code> dentro da função <code>aes()</code>. Indicará ao ggplot que você quer que as cores de preenchimentos do <code>ggplot</code> mude de acordo com alguma variável de seu <em>data frame</em>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/Box-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/Box-plot1-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p><strong>Há várias maneiras de fazer isso, irei demonstrar algumas ao longo da oficina.</strong></p>
-<p>Por exemplo na linha de código abaixo foi acrescentado o argumento <em>fill</em> dentro da função <em>geom_boxplot()</em>.Nesse argumento usei a função de contatenar (<em>c()</em>), para denominar as três cores desejadas para o gráfico. Note que os nomes das cores estão escritos entre aspas <strong>” “</strong>. Ao invés de colocar nome de cores em inglês, pode-se colocar o código RGB hexadecimal da cor, como “#4287f5”.</p>
-<p>Atenção se queremos que as cores sejam diferenciadas de acordo com algum fator, ou variável nominal de nosso data.frame, temos que indicar dentro do <em>aes()</em>. Como fill para mudar o preenchimento, colour para mudar o contorno, e shape para mudar formato (caso esteja trabalhando com gráficos possuem pontos).</p>
+<p>Por exemplo na linha de código abaixo foi acrescentado o argumento <code>fill</code> dentro da função <code>geom_boxplot()</code>.Nesse argumento usei a função de contatenar (<code>c()</code>), para denominar as três cores desejadas para o gráfico. Note que os nomes das cores estão escritos entre aspas <strong>““</strong>. Ao invés de colocar nome de cores em inglês, pode-se colocar o código RGB hexadecimal da cor, como <code>#4287f5</code>.</p>
+<p>Atenção se queremos que as cores sejam diferenciadas de acordo com algum fator, ou variável nominal de nosso data.frame, temos que indicar dentro do <code>aes()</code>. Como fill para mudar o preenchimento, colour para mudar o contorno, e shape para mudar formato (caso esteja trabalhando com gráficos possuem pontos).</p>
 <p><strong>Note</strong>: quando colocamos as cores escolhidas dentro da forma geométrica (geom_), não será gerado legenda.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length))<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="at">fill=</span><span class="fu">c</span>(<span class="st">"lightpink"</span>,<span class="st">"lightgreen"</span>,<span class="st">"lightblue"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length))<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="at">fill=</span><span class="fu">c</span>(<span class="st">"lightpink"</span>,<span class="st">"lightgreen"</span>,<span class="st">"lightblue"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -296,9 +310,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>A outra forma é delimitar através da função “scale_fill_manual()”, esse comando serve para alterar os parâmetros de <em>fill</em>. Nele foi utilizado <em>values = c()</em> para concatenar as cores escolhidas.</p>
+<p>A outra forma é delimitar através da função <code>scale_fill_manual()</code>, esse comando serve para alterar os parâmetros de <code>fill</code>. Nele foi utilizado <code>values = c()</code> para concatenar as cores escolhidas.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"#704c41"</span>,<span class="st">"#41704f"</span>,<span class="st">"#584170"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"#704c41"</span>,<span class="st">"#41704f"</span>,<span class="st">"#584170"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -310,9 +324,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="mudando-cores-de-contorno-no-ggplot" class="level2">
 <h2 class="anchored" data-anchor-id="mudando-cores-de-contorno-no-ggplot">Mudando cores de contorno no ggplot</h2>
-<p>O mesmo processo poderia ser feito igual ao <em>fill</em>, porém utilizando o comando color. Esse paramêtro também pode ser utilizado para diferênciar algum fator do data frame, apenas colocando dentro do <em>aes(color=“coluna do data.frame”)</em>. Nesse caso coloquei dentro da funçã <em>geom_boxplot()</em>, e coloquei o contorno do boxplot na cor azul.</p>
+<p>O mesmo processo poderia ser feito igual ao <code>fill</code>, porém utilizando o comando color. Esse paramêtro também pode ser utilizado para diferenciar algunciar algum fator do <em>data frame</em>, apenas colocando dentro do <code>aes(color="coluna do data.frame")</code>. Nesse caso foi colocado dentro da função <code>geom_boxplot()</code>, e coloquei o contorno do boxplot na cor marrom.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="at">fill=</span><span class="fu">c</span>(<span class="st">"lightblue"</span>,<span class="st">"lightgreen"</span>,<span class="st">"lightpink"</span>), <span class="at">color=</span><span class="st">"brown"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="at">fill=</span><span class="fu">c</span>(<span class="st">"lightblue"</span>,<span class="st">"lightgreen"</span>,<span class="st">"lightpink"</span>), <span class="at">color=</span><span class="st">"brown"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -324,7 +338,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="alterando-elementos-textuais-no-ggplot" class="level2">
 <h2 class="anchored" data-anchor-id="alterando-elementos-textuais-no-ggplot">Alterando elementos textuais no ggplot</h2>
-<p>Os nomes dos eixos são alterados pela função labs, onde você indica qual elemento gráfico você quer renomear. Lembre-se: o nome que você quer renomear tem que estar entre aspas ” “.</p>
+<p>Os nomes dos eixos são alterados pela função labs, onde você indica qual elemento gráfico você quer renomear. Lembre-se: o nome que você quer renomear tem que estar entre aspas <strong>” “</strong>.</p>
 <ul>
 <li><strong>y</strong> para alterar o título do eixo y.</li>
 <li><strong>x</strong> para alterar o título do eixo x.</li>
@@ -336,9 +350,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>size</strong> para alterar o título da legenda referente ao fator colocado no size.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="at">fill=</span><span class="fu">c</span>(<span class="st">"lightblue"</span>,<span class="st">"lightgreen"</span>,<span class="st">"lightpink"</span>), <span class="at">color=</span><span class="st">"brown"</span>)<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Comparação de comprimento de pétalas"</span>, <span class="at">subtitle =</span> <span class="st">"Banco de dados iris"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>(<span class="at">fill=</span><span class="fu">c</span>(<span class="st">"lightblue"</span>,<span class="st">"lightgreen"</span>,<span class="st">"lightpink"</span>), <span class="at">color=</span><span class="st">"brown"</span>)<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Comparação de comprimento de pétalas"</span>, <span class="at">subtitle =</span> <span class="st">"Banco de dados iris"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -349,26 +363,60 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="alterando-a-fonte" class="level3">
 <h3 class="anchored" data-anchor-id="alterando-a-fonte">Alterando a fonte</h3>
-<p>Para alterar o tipo fonte do gráficos é necessário usar o pacote extrafont. Abaixo estará os comandos para instalar o pacote e carrega-lo</p>
+<p>Para alterar o tipo fonte do gráficos é necessário usar o pacote <code>extrafont</code>. Abaixo estará os comandos para instalar o pacote e carrega-lo</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instalando o pacote extrafont</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"extrafont"</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Carregando o pacote extrafont</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(extrafont)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Carregando as fontes presentes no computador</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">loadfonts</span>(<span class="at">device=</span><span class="st">"all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instalando o pacote extrafont</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"extrafont"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Carregando o pacote extrafont</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(extrafont)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Carregando as fontes presentes no computador</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">loadfonts</span>(<span class="at">device=</span><span class="st">"all"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Aqui alteramos as fontes através do comando <em>theme()</em> este comando altera elementos temáticos do gráfico, como por exemplo fontes, tamanhos, cor de fundo, entre outros. Neste exemplo colocamons o argumento <em>text = element_text()</em>. Dentro dele vai alguns argumentos:</p>
+<p>Aqui alteramos as fontes através do comando <code>theme()</code> este comando altera elementos temáticos do gráfico, como por exemplo fontes, tamanhos, cor de fundo, entre outros. Neste exemplo colocamons o argumento <code>text = element_text()</code>. Dentro dele vai alguns argumentos:</p>
 <ul>
-<li><strong>face</strong> é para definir se a fonte estará em itálico (<em>“italic”</em>), negrito (<em>“bold”</em>) ou ambos (<em>“italic.bold”</em>)</li>
-<li><strong>family</strong> é para definir se o tipo de fonte. Esse argumento pode ter variações de acordo com sistema operacional do computador. Em sistema windows pode-se utilizar “TT Times New Roman”, “Arial”, etc. Enquanto em sistemas Linux e MacOS estarão “serif”, “mono”, etc.</li>
+<li><strong>face</strong> é para definir se a fonte estará em itálico (<code>"italic"</code>), negrito (<code>"bold"</code>) ou ambos (<code>"italic.bold"</code>)</li>
+<li><strong>family</strong> é para definir se o tipo de fonte. Esse argumento pode ter variações de acordo com sistema operacional do computador. Em sistema windows pode-se utilizar <code>"TT Times New Roman"</code>, <code>"Arial"</code>, etc. Enquanto em sistemas Linux e MacOS estarão <code>"serif"</code>, <code>"mono"</code>, etc.</li>
 <li><strong>size</strong> é para definir se o tamanho da fonte.</li>
 </ul>
 <p><strong>Obs.:</strong> esses elementos são importantes para garantir boa visualização gráfica e seguir padrões gráficos de publicações ou revistas.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>, <span class="at">family=</span><span class="st">"serif"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>, <span class="at">family=</span><span class="st">"serif"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold.italic"</span>, <span class="at">family=</span><span class="st">"mono"</span>, <span class="at">size=</span><span class="dv">16</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-2-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-2-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">fill=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Aqui é o título"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -376,7 +424,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold.italic"</span>, <span class="at">family=</span><span class="st">"mono"</span>, <span class="at">size=</span><span class="dv">16</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">fill=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Aqui é o título"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>), <span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -384,7 +432,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">fill=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Aqui é o título"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>), <span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -392,7 +440,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">fill=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Aqui é o título"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>), <span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -400,49 +448,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">fill=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Aqui é o título"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">fill=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Aqui é o título"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>), <span class="at">legend.position =</span> <span class="st">"left"</span>, <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-3-5.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">fill=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Aqui é o título"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>), <span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">fill=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Aqui é o título"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>), <span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">fill=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Aqui é o título"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>), <span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-4-4.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">fill=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Aqui é o título"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>), <span class="at">legend.position =</span> <span class="st">"left"</span>, <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-4-5.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">fill=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Aqui é o título"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>), <span class="at">legend.position =</span> <span class="st">"left"</span>, <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>))<span class="sc">+</span> <span class="fu">geom_text</span>(<span class="at">x =</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="dv">4</span>, <span class="at">label =</span> <span class="st">"Ponto importante"</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">face=</span><span class="st">"bold"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">fill=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Aqui é o título"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>), <span class="at">legend.position =</span> <span class="st">"left"</span>, <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>))<span class="sc">+</span> <span class="fu">geom_text</span>(<span class="at">x =</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="dv">4</span>, <span class="at">label =</span> <span class="st">"Ponto importante"</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">face=</span><span class="st">"bold"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in geom_text(x = 2.5, y = 4, label = "Ponto importante", color = "red",
 : Ignoring unknown parameters: `face`</code></pre>
@@ -450,11 +464,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-4-6.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-3-6.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">fill=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Aqui é o título"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>), <span class="at">legend.position =</span> <span class="st">"left"</span>, <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>))<span class="sc">+</span> <span class="fu">geom_text</span>(<span class="at">x =</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="dv">4</span>, <span class="at">label =</span> <span class="st">"Ponto importante"</span>, <span class="at">color =</span> <span class="st">"red"</span>)<span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"vline"</span>, <span class="at">x =</span> <span class="dv">2</span>, <span class="at">xintercept =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">fill=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Aqui é o título"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>), <span class="at">legend.position =</span> <span class="st">"left"</span>, <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>))<span class="sc">+</span> <span class="fu">geom_text</span>(<span class="at">x =</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="dv">4</span>, <span class="at">label =</span> <span class="st">"Ponto importante"</span>, <span class="at">color =</span> <span class="st">"red"</span>)<span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"vline"</span>, <span class="at">x =</span> <span class="dv">2</span>, <span class="at">xintercept =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: `geom` must not be "vline".
 ℹ Please use `geom_vline()` directly instead.</code></pre>
@@ -466,15 +480,15 @@ Ignoring unknown aesthetics: x</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-4-7.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-3-7.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">fill=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Aqui é o título"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>), <span class="at">legend.position =</span> <span class="st">"left"</span>, <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>))<span class="sc">+</span> <span class="fu">geom_text</span>(<span class="at">x =</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="dv">4</span>, <span class="at">label =</span> <span class="st">"Ponto importante"</span>, <span class="at">color =</span> <span class="st">"red"</span>)<span class="sc">+</span><span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="fl">3.5</span>, <span class="at">label =</span> <span class="st">"outro ponto"</span>, <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">fill=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Aqui é o título"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>), <span class="at">legend.position =</span> <span class="st">"left"</span>, <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>))<span class="sc">+</span> <span class="fu">geom_text</span>(<span class="at">x =</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="dv">4</span>, <span class="at">label =</span> <span class="st">"Ponto importante"</span>, <span class="at">color =</span> <span class="st">"red"</span>)<span class="sc">+</span><span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="fl">3.5</span>, <span class="at">label =</span> <span class="st">"outro ponto"</span>, <span class="at">color =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-4-8.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-3-8.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
