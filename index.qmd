@@ -1,5 +1,6 @@
 ---
 title: "Oficina ggplot2 UFPel"
+author: "Isadora Real"
 ---
 
 # Introdução
