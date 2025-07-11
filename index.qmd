@@ -81,6 +81,8 @@ head(iris)
 
 5- é usado o símbolo de **"+"** na sintaxe para acrescentar camadas e alterações no gráfico, como legendas e alteração na escala dos eixos.
 
+6- sempre para gerar alguma forma "geométrica" no gráfico, como colunas, box-plots, curvas, texte, entre outras, será utilizado geom_"forma geométrica", neste caso será utilizado o *geom_boxplot*
+
 ```{r}
 #| echo: true
 
@@ -88,7 +90,7 @@ iris%>%ggplot(aes(x=Species, y=Petal.Length))+geom_boxplot()
 
 ```
 
-### Colocando cores no gráfico
+## Mudando cores de preenchimento no ggplot
 
 Uma das formas de acrescentar cor ao gráfico é adicionando o argumento "*fill*" dentro da função *aes()*. Indicará ao ggplot que você quer que as cores de preenchimentos do **ggplot** mude de acordo com alguma variável de seu *data.frame*.
 
@@ -106,6 +108,8 @@ Por exemplo na linha de código abaixo foi acrescentado o argumento *fill* dentr
 
 Atenção se queremos que as cores sejam diferenciadas de acordo com algum fator, ou variável nominal de nosso data.frame, temos que indicar dentro do *aes()*. Como fill para mudar o preenchimento, colour para mudar o contorno, e shape para mudar formato (caso esteja trabalhando com gráficos possuem pontos).
 
+**Note**: quando colocamos as cores escolhidas dentro da forma geométrica (geom_), não será gerado legenda.
+
 ```{r, label="Box-plot2"}
 #| echo: true
 
@@ -122,4 +126,89 @@ iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+scale
 
 ```
 
+## Mudando cores de contorno no ggplot
 
+O mesmo processo poderia ser feito igual ao *fill*, porém utilizando o comando color. Esse paramêtro também pode ser utilizado para diferênciar algum fator do data frame, apenas colocando dentro do *aes(color="coluna do data.frame")*. Nesse caso coloquei dentro da funçã *geom_boxplot()*, e coloquei o contorno do boxplot na cor azul.
+
+```{r, label="Box-plot4"}
+#| echo: true
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c("lightblue","lightgreen","lightpink"), color="brown")
+
+```
+
+## Alterando elementos textuais no ggplot
+
+Os nomes dos eixos são alterados pela função labs, onde você indica qual elemento gráfico você quer renomear. Lembre-se: o nome que você quer renomear tem que estar entre aspas " ".
+
+- **y** para alterar o título do eixo y.
+- **x** para alterar o título do eixo x.
+- **title** para alterar o título ou acrescentar um título.
+- **subtitle** para alterar o subtítulo ou acrescentar um subtítulo.
+- **fill** para alterar o título da legenda referente ao fator colocado no fill.
+- **color** para alterar o título da legenda referente ao fator colocado no color.
+- **shape** para alterar o título da legenda referente ao fator colocado no shape.
+- **size** para alterar o título da legenda referente ao fator colocado no size.
+
+```{r, label="Box-plot eixos"}
+
+#| echo: true
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c("lightblue","lightgreen","lightpink"), color="brown")+labs(y="Comprimento de pétala", x="Espécies", title="Comparação de comprimento de pétalas", subtitle = "Banco de dados iris")
+
+```
+
+### Alterando a fonte
+
+Para alterar o tipo fonte do gráficos é necessário usar o pacote extrafont. Abaixo estará os comandos para instalar o pacote e carrega-lo
+
+```{r}
+#| output: false
+# Instalando o pacote extrafont
+install.packages("extrafont")
+
+#Carregando o pacote extrafont
+library(extrafont)
+
+#Carregando as fontes presentes no computador
+loadfonts(device="all")
+```
+
+Aqui alteramos as fontes através do comando *theme()* este comando altera elementos temáticos do gráfico, como por exemplo fontes, tamanhos, cor de fundo, entre outros. Neste exemplo colocamons o  argumento *text = element_text()*. Dentro dele vai alguns argumentos:
+
+- **face** é para definir se a fonte estará em itálico (*"italic"*), negrito (*"bold"*) ou ambos (*"italic.bold"*)
+- **family** é para definir se o tipo de fonte. Esse argumento pode ter variações de acordo com sistema operacional do computador. Em sistema windows pode-se utilizar "TT Times New Roman", "Arial", etc. Enquanto em sistemas Linux e MacOS estarão "serif", "mono", etc.
+- **size** é para definir se o tamanho da fonte.
+
+**Obs.:** esses elementos são importantes para garantir boa visualização gráfica e seguir padrões gráficos de publicações ou revistas.
+
+```{r}
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies")+theme(text = element_text(face="bold", family="serif"))
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies")+theme(text = element_text(face = "bold.italic", family="mono", size=16))
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies")+theme(text = element_text(face="italic"))
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies")+theme(axis.text.x = element_text(face="italic"))
+``` 
+
+```{r}
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"))
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "none")
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "top")
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "bottom")
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "left", legend.text = element_text(face="italic"))
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "left", legend.text = element_text(face="italic"))+ geom_text(x = 2.5, y = 4, label = "Ponto importante", color = "red", face="bold")
+
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "left", legend.text = element_text(face="italic"))+ geom_text(x = 2.5, y = 4, label = "Ponto importante", color = "red")+ annotate("vline", x = 2, xintercept = 2, linetype = "dashed", color = "blue")
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "left", legend.text = element_text(face="italic"))+ geom_text(x = 2.5, y = 4, label = "Ponto importante", color = "red")+annotate("text", x = 1, y = 3.5, label = "outro ponto", color = "blue")
+
+
+```
