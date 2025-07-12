@@ -3,4 +3,14 @@ title: "Downloads"
 format: html
 ---
 
-1+1
+# Baixando o R e RStudio
+
+ **Windows:**  <https://cloud.r-project.org/bin/windows/base/>
+ 
+ **MacOS:** <https://cloud.r-project.org/bin/macosx/big-sur-arm64/base/R-4.5.1-arm64.pkg>
+ 
+ **Linux:** <https://cloud.r-project.org>
+ 
+- **Baixando RStudio:** <https://posit.co/download/rstudio-desktop/>
+
+ 

@@ -86,8 +86,8 @@
   {
     "objectID": "download.html",
     "href": "download.html",
-    "title": "download",
+    "title": "Downloads",
     "section": "",
-    "text": "1+1"
+    "text": "Baixando o R e RStudio\nWindows: https://cloud.r-project.org/bin/windows/base/\nMacOS: https://cloud.r-project.org/bin/macosx/big-sur-arm64/base/R-4.5.1-arm64.pkg\nLinux: https://cloud.r-project.org\n\nBaixando RStudio: https://posit.co/download/rstudio-desktop/"
   }
 ]
