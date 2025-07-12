@@ -1,11 +1,13 @@
 ---
 title: "Introdução ao ggplot2"
 author: "Isadora Real"
+bibliography: ref.bib
+csl: abnt.csl
 ---
 
 # Introdução
 
-O `ggplot2` é um pacote de código aberto para a visualização gráfica de dados para a linguagem de programação R. Foi criada por Hadley Wickham em 2005, sendo uma implementação do livro `Grammar Graphics` de Leland Wilkison também lançado em 2005.
+O `ggplot2` é um pacote de código aberto para a visualização gráfica de dados para a linguagem de programação R. Foi criada por Hadley Wickham em 2005 [@ggplot2], sendo uma implementação do livro `Grammar Graphics` de Leland Wilkison também lançado em 2005 [@wilkinson2011grammar].
 
 Ele aborda que visualização gráfica dos dados pode ser divida em componentes semânticos, como escalas e camadas.
 
@@ -15,7 +17,7 @@ Ele aborda que visualização gráfica dos dados pode ser divida em componentes 
 
 2. Alta diversidade de modelos de gráficos.
 
-3. Integração com outros pacotes do tidyverse, como por exemplo `dplyr`, `forcats` e o `plotly`.
+3. Integração com outros pacotes do tidyverse, como por exemplo `dplyr` [@dplyr], `forcats` [@forcats] e o `plotly`[@plotly].
 
 4. Criação de gráficos a partir de camadas, podendo sobrepor diferentes gráficos.
 
@@ -101,7 +103,83 @@ ggplot(iris,aes(x=Species, y=Petal.Length))+geom_boxplot()
 
 ```
 
+# Gráfico violino
 
+O gráfico violino é graficamente semelhante ao Box-plot, demonstrando a densidade dos dados na formade violino. Para utilizar essa forma é adicnoando a função `geom_violin`
+
+```{r, label="violino"}
+ggplot(iris, aes(x=Species,y=Sepal.Width, fill=Species))+geom_violin()
+
+```
+
+# Histograma
+
+Para gerar histogramas iremos utilizar a função `geom_histogram`, e só colocaremos a variável 
+
+```{r, label="histograma"}
+
+ggplot(iris,aes(x=Sepal.Width))+geom_histogram(bins=10, color="black", fill="white")+labs(y="Frequência", x="Largura de Sépala")
+
+ggplot(iris,aes(x=Sepal.Width))+geom_histogram(bins=11, color="black", fill="white")+labs(y="Frequência", x="Largura de Sépala")+scale_x_continuous(n.breaks = 11)
+
+```
+
+# Polígono
+
+```{r, label="histograma1"}
+
+ggplot(iris,aes(x=Sepal.Width))+geom_density(color="black", fill="white")+labs(y="Frequência", x="Largura de Sépala")
+
+ggplot(iris,aes(x=Sepal.Width))+geom_freqpoly(bins=11, color="black")+labs(y="Frequência", x="Largura de Sépala")+scale_x_continuous(n.breaks = 11)
+
+ggplot(iris,aes(x=Sepal.Width))+labs(y="Frequência", x="Largura de Sépala")+scale_x_continuous(n.breaks = 11)+geom_histogram(bins=11, color="black", fill="white")+geom_freqpoly(bins=11, color="blue")
+
+ggplot(iris,aes(x=Sepal.Width))+labs(y="Frequência", x="Largura de Sépala")+scale_x_continuous(n.breaks = 11)+geom_histogram(bins=11, color="black", fill="white")+geom_freqpoly(bins=11, color="blue")+facet_grid(~Species)
+```
+
+# Gráfico de frequência
+
+```{r,label="Frequência"}
+
+iris%>%ggplot(aes(x=Species))+geom_bar()
+
+iris%>%group_by(Species)%>%summarise(count=n())%>%ggplot(aes(x=" ", fill=Species, y=count))+geom_col(color="black")+coord_polar(theta="y")+ geom_label(aes(label = count),
+             position = position_stack(vjust = 0.5),
+             show.legend = FALSE)+theme_void()
+
+```
+
+# Gráfico de pontos
+
+```{r}
+
+ggplot(iris,aes(x=Sepal.Length, y=Sepal.Width, color=Species))+geom_point()
+
+ggplot(iris,aes(x=Sepal.Length, y=Sepal.Width, color=Species))+geom_point()+geom_smooth(se=FALSE, method="lm")
+
+ggplot(iris,aes(x=Sepal.Length, y=Sepal.Width, color=Species, shape=Species))+geom_point()+geom_smooth(se=FALSE, method="lm")
+
+ggplot(iris,aes(x=Sepal.Length, y=Sepal.Width, color=Species, shape=Species))+geom_point()+geom_smooth(se=FALSE, method="lm")+coord_flip()
+
+```
+
+# Gráfico de barras (média e desvio)
+
+```{r,label="grafico de barras"}
+
+iris%>%group_by(Species)%>%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%ggplot(aes(x=Species, y=mean))+geom_col()+geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd), width=0.5)+labs(y="Comprimento da Sepala", x="Espécies")+theme_bw()+scale_y_continuous(limits=c(0,10))
+
+
+iris%>%group_by(Species)%>%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%ggplot(aes(x=Species, y=mean))+geom_col()+geom_linerange(aes(ymin=mean-sd,ymax=mean+sd))+labs(y="Comprimento da Sepala", x="Espécies")+theme_bw()+scale_y_continuous(limits=c(0,10))
+
+iris%>%group_by(Species)%>%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%ggplot(aes(x=Species, y=mean))+geom_col()+geom_pointrange(aes(ymin=mean-sd,ymax=mean+sd))+labs(y="Comprimento da Sepala", x="Espécies")+theme_bw()+scale_y_continuous(limits=c(0,10))
+
+iris%>%group_by(Species)%>%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%ggplot(aes(x=Species, y=mean))+geom_linerange(aes(ymin=mean-sd,ymax=mean+sd))+labs(y="Comprimento da Sepala", x="Espécies")+theme_bw()+scale_y_continuous(limits=c(0,10))
+
+
+```
+
+# Alterando cores, fontes e temas 
 ## Mudando cores de preenchimento no ggplot
 
 Uma das formas de acrescentar cor ao gráfico é adicionando o argumento `fill` dentro da função `aes()`. Indicará ao ggplot que você quer que as cores de preenchimentos do `ggplot` mude de acordo com alguma variável de seu *data frame*.
@@ -252,3 +330,160 @@ iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(
 
 
 ```
+
+# Extra
+
+## Mapas
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+#| output: false
+#instalando o pacote raster e sf
+install.packages("raster")
+install.packages("sf")
+
+#carregando o pacote raster e sf
+library(raster)
+library(sf)
+```
+
+```{r}
+#| warning: false
+prec<-raster("pelprec.tiff")
+
+pel<-read_sf("Pelotas/Pelotas.shp")
+plot(pel)
+
+prec_df<-as.data.frame(prec, xy = TRUE, na.rm = TRUE)
+
+ggplot(prec_df,aes(x=x,y=y,fill=pelprec))+geom_raster()
+
+ggplot()+geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+geom_sf(data=pel,fill=NA, color="gray",linewidth=2, alpha=.01)+labs(title="Mapa da média anual da precipitação \n em Pelotas-RS entre 1970-2000", y="Latitude", x="Longitude", fill="Precipitação (mm)")+theme_bw()
+
+ggplot()+geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+geom_sf(data=pel,fill=NA, color="gray",linewidth=2, alpha=.01)+labs(title="Mapa da média anual da precipitação \n em Pelotas-RS entre 1970-2000", y="Latitude", x="Longitude", fill="Precipitação (mm)")+theme_bw()+scale_fill_gradient(low="gray",high="blue")
+
+ggplot()+geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+geom_sf(data=pel,fill=NA, color="gray",linewidth=2, alpha=.01)+labs(title="Mapa da média anual da precipitação \n em Pelotas-RS entre 1970-2000", y="Latitude", x="Longitude", fill="Precipitação (mm)")+theme_bw()+scale_fill_gradientn(colours = terrain.colors(10))
+```
+
+```{r}
+#| echo: true
+#| output: false
+
+#intalando pacote viridis
+install.packages("viridis")
+#carregando pacote viridis
+library(viridis)
+```
+
+```{r}
+ggplot()+geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+geom_sf(data=pel,fill=NA, color="gray",linewidth=2, alpha=.01)+labs(title="Mapa da média anual da precipitação \n em Pelotas-RS entre 1970-2000", y="Latitude", x="Longitude", fill="Precipitação (mm)")+theme_bw()+scale_fill_viridis()
+
+
+```
+
+## Temas divertidos
+
+```{r, label="theme park1"}
+#| echo: true
+#| output: false
+install.packages("remotes")
+remotes::install_github("MatthewBJane/ThemePark")
+library(ThemePark)
+```
+
+```{r, label="theme park"}
+
+#| echo: true
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(lordoftherings_theme_colors["light"],lordoftherings_theme_colors["medium"],lordoftherings_theme_colors["dark"]))+labs(y="Comprimento de pétala", x="Espécies", title= "Tema Senhor dos Anéis")+theme_lordoftherings()
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(barbie_theme_colors["light"],barbie_theme_colors["medium"],barbie_theme_colors["dark"]))+labs(y="Comprimento de pétala", x="Espécies", title= "Tema Barbie")+theme_barbie()
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(zelda_theme_colors["light"],zelda_theme_colors["medium"],zelda_theme_colors["dark"]))+labs(y="Comprimento de pétala", x="Espécies", title= "Tema Zelda")+theme_zelda()
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(simpsons_theme_colors["light"],simpsons_theme_colors["medium"],simpsons_theme_colors["dark"]))+labs(y="Comprimento de pétala", x="Espécies", title= "Tema Simpsons")+theme_simpsons()
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(asteroid_city_theme_colors["light"],asteroid_city_theme_colors["medium"],asteroid_city_theme_colors["dark"]))+labs(y="Comprimento de pétala", x="Espécies", title= "Tema Asteroid city")+theme_asteroid_city()
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(elf_theme_colors["light"],elf_theme_colors["medium"],elf_theme_colors["dark"]))+labs(y="Comprimento de pétala", x="Espécies", title= "Tema Elf")+theme_elf()
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(friends_theme_colors["light"],friends_theme_colors["medium"],friends_theme_colors["dark"]))+labs(y="Comprimento de pétala", x="Espécies", title= "Tema Friends")+theme_friends()
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(alien_theme_colors["light"],alien_theme_colors["medium"],alien_theme_colors["dark"]))+labs(y="Comprimento de pétala", x="Espécies", title= "Tema Alien")+theme_alien()
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(starwars_theme_colors["light"],starwars_theme_colors["medium"],starwars_theme_colors["dark"]))+labs(y="Comprimento de pétala", x="Espécies", title= "Tema Star wars")+theme_starwars()
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(snes_theme_colors["light"],snes_theme_colors["medium"],snes_theme_colors["dark"]))+labs(y="Comprimento de pétala", x="Espécies", title= "Tema SNES")+theme_snes()
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(french_dispatch_theme_colors["light"],french_dispatch_theme_colors["medium"],french_dispatch_theme_colors["dark"]))+labs(y="Comprimento de pétala", x="Espécies", title= "Tema French Dispatch")+theme_french_dispatch()
+
+```
+
+## Gráficos interativos
+
+```{r, label="gráficos interativos1"}
+#| echo: true
+#| message: false
+#| warning: false
+#| output: false
+#instalando plotly
+install.packages("plotly")
+#carregando plotly
+library(plotly)
+```
+
+```{r}
+#| warning: false
+default<-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c("lightblue","lightgreen","lightpink"), color="black")+labs(y="Comprimento de pétala", x="Espécies", title="Default")
+
+ggplotly(default)
+
+snes1<-ggplot()+geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+geom_sf(data=pel,fill=NA, color="gray",linewidth=2, alpha=.01)+labs(title="Mapa da média anual da precipitação \n em Pelotas-RS entre 1970-2000", y="Latitude", x="Longitude", fill="Precipitação (mm)")+theme_bw()+scale_fill_snes_b()
+
+ggplotly(snes1)
+
+```
+
+## Gráficos animados
+
+```{r, label="gráficos interativos"}
+#| echo: true
+#| message: false
+#| warning: false
+#| output: false
+#instalando pacotes: gganimate,gapminder,gifski, av e magick
+install.packages("gganimate")
+install.packages("gapminder")
+install.packages("gifski")
+install.packages("av")
+install.packages("magick")
+
+#carregand os pacotes gganimate, gapminder, av, gifski e magick
+library(gganimate)
+library(gapminder)
+library(av)
+library(gifski)
+library(magick)
+```
+
+```{r}
+
+data("gapminder")
+
+head(gapminder)
+```
+
+```{r}
+ggplot(gapminder,aes(x=gdpPercap,y=lifeExp,color=country,size=pop))+geom_point(alpha=.7, show.legend = FALSE)+scale_colour_manual(values=country_colors)+facet_wrap(~continent)+scale_size(range=c(2,12))+scale_x_log10() + labs(title = 'Year: {frame_time}', x = 'GDP per capita', y = 'life expectancy') +
+  transition_time(year) +
+  ease_aes('linear')+theme_light()
+
+```
+
+# Referências
+
+:::{#refs}
+
+:::
