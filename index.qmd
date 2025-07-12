@@ -146,13 +146,13 @@ No exemplo abaixo note que é possível sobrepor dois gráficos (o polígono de 
 
 2. Em seguida colocamos o "`+`" para adicionar a próxima camada
 
-3. Para depois adicionar o gráfico que gostariámos de sobrepor `geom_freqpoly`
+3. Para depois adicionar o gráfico que gostariámos de sobrepor, que neste caso é o polígono de frequência  `geom_freqpoly`.
 
 ```{r}
 ggplot(iris,aes(x=Sepal.Width))+labs(y="Frequência", x="Largura de Sépala")+scale_x_continuous(n.breaks = 11)+geom_histogram(bins=11, color="black", fill="white")+geom_freqpoly(bins=11, color="blue")
 ```
 
-Caso queira gerar diferentes histogramas de acordo com uma variável categórica de seu *data frame*, utilizaremos o comando `facet_grid()`. Note que colocamos a variável `Species` 
+Caso queira gerar diferentes histogramas de acordo com uma variável categórica de seu *data frame*, utilizaremos o comando `facet_grid()`. Note que colocamos a variável `Species` antes e depois do `~`, se é colocado antes os gráficos serão divididos pela vertical se for colocado depois será divididos na horizontal.
 
 ```{r}
 ggplot(iris,aes(x=Sepal.Width))+labs(y="Frequência", x="Largura de Sépala")+scale_x_continuous(n.breaks = 11)+geom_histogram(bins=11, color="black", fill="white")+geom_freqpoly(bins=11, color="blue")+facet_grid(~Species)
@@ -163,6 +163,8 @@ ggplot(iris,aes(x=Sepal.Width))+labs(y="Frequência", x="Largura de Sépala")+sc
 
 # Gráfico de densidade
 
+O gráfico de densidade é uma outra forma de ver a distribuição dos dados, através do `geom_density`
+
 ```{r}
 ggplot(iris,aes(x=Sepal.Width))+geom_density(color="black", fill="white")+labs(y="Frequência", x="Largura de Sépala")
 
@@ -171,13 +173,47 @@ ggplot(iris,aes(x=Sepal.Width))+geom_density(color="black", fill="white")+labs(y
 
 
 
-# Gráfico de frequência
+# Gráfico de barras de frequência
+
+Para realizar esse gráfico se utiliza o `geom_bar`, essa função sem argumentos `stat=` realizará o gráfico a partir da frequência de cada fator da variável.
 
 ```{r,label="Frequência"}
 
 iris%>%ggplot(aes(x=Species))+geom_bar()
 
-iris%>%group_by(Species)%>%summarise(count=n())%>%ggplot(aes(x=" ", fill=Species, y=count))+geom_col(color="black")+coord_polar(theta="y")+ geom_label(aes(label = count),
+```
+
+Esse gráfico pode ser gerado com o `geom_col`. Porém nele é necessário realizar a contagem. Realizamos desta maneira: 
+
+1. colocamos `iris` para delimitar o *data frame* em que vamos utilizar.
+
+2. colocamos o `%>%`.
+
+3. colocamos a função `group_by(Species)` para indicar que queremos que a contagemda frequência seje feita de acordo com os fatores da variável `Species`.
+
+4. Acrescentamos o `%>%`novamente.
+
+5. Utilizaremos a função `summarise()`, ela serve para fazer sumários de seus dados, como calcular média, mediana, desvio padrão, ou algum índice desejado. Neste caso utilizaremos o argumento `count=n()`, onde `n()`realizará a contagem que será armazenada na coluna `count`.
+
+6. Utilizaremos o `%>%` mais uma vez para prosseguir com o ggplot
+
+7. Nesse caso é necessário chamar a coluna recém criada com a frequência (a coluna `count`) para indicar o que vai no eixo y, 
+
+```{r}
+iris%>%group_by(Species)%>%summarise(count=n())%>%ggplot(aes(x=Species, fill=Species, y=count))+geom_col(color="black")
+```
+
+# Gráfico de pizza
+
+Para o gráfico de pizza, iremos seguir uma linha de código semelhante que a anterior, porém para calcular porcentagem em `summarise` colocaremos `count=n()/150*100`, onde 150 é o total de observações do *data frame*. Neste caso o eixo x idicaremos com vazio `x= " "`. Para transformar o gráfico de barras em pizza adicionaresmo a função `coord_polar(theta="y")`. O `theme_void()` foi utilizado para remover o fundo do gráfico. Para colocar o números indicando a porcentagem utilizaremos o `geom_label(aes(label=count), position=position_stack(vjust=0.5), show.legend=FALSE)`. O `geom_label`é um comando que se utiliza de variáveis de um *data frame* para colocar "rótulos" no gráfico. Definimos dentro de `aes()` que o nosso `label` é `count`. No argumento `position=position_stack(vjust=0.5)`, definimos que a posição do nosso label será ajustada verticalmente por `vjust=0.5` na metade da altura da "fatia".
+
+**Note:** que no segundo gráfico fizemos um ajuste em `count` onde utlizamos o comando `round(n()/150*100, 2)`, para arrendondar o valor do calculo da porcentagem para duas casas decimais.
+
+
+```{r}
+iris%>%group_by(Species)%>%summarise(count=n()/150*100)%>%ggplot(aes(x=" ", fill=Species, y=count))+geom_col(color="black")+coord_polar(theta="y")+theme_void()
+
+iris%>%group_by(Species)%>%summarise(count=round(n()/150*100, 2))%>%ggplot(aes(x=" ", fill=Species, y=count))+geom_col(color="black")+coord_polar(theta="y")+ geom_label(aes(label = count),
              position = position_stack(vjust = 0.5),
              show.legend = FALSE)+theme_void()
 
@@ -185,19 +221,37 @@ iris%>%group_by(Species)%>%summarise(count=n())%>%ggplot(aes(x=" ", fill=Species
 
 # Gráfico de pontos
 
+Para realizar gráficos de pontos é necessário indicar o eixo x e y em `aes()` e adicionar a função `geom_point()`
+
+```{r}
+ggplot(iris,aes(x=Sepal.Length, y=Sepal.Width))+geom_point()
+```
+
+Caso queria que os pontos fique de acordo com uma variável de seu *data frame*, é indicando através do argumento `color=`, a mesma coisa se aplica à `shape=`. Neste caso inicamos conforme a espécie (`Species`)
+
+```{r}
+ggplot(iris,aes(x=Sepal.Length, y=Sepal.Width, color=Species, shape=Species))+geom_point()
+```
+
+É possível adicionar a linha de tendência dos pontos através o `geom_smooth`, dentro dele colocamos alguns argumentos. `se=FALSE` é para não plotar o erro padrão na reta e `method="lm"` para que o método para desenhar a reta seje o modelo linear. 
+
 ```{r}
 
-ggplot(iris,aes(x=Sepal.Length, y=Sepal.Width, color=Species))+geom_point()
-
-ggplot(iris,aes(x=Sepal.Length, y=Sepal.Width, color=Species))+geom_point()+geom_smooth(se=FALSE, method="lm")
-
 ggplot(iris,aes(x=Sepal.Length, y=Sepal.Width, color=Species, shape=Species))+geom_point()+geom_smooth(se=FALSE, method="lm")
+
+```
+
+Caso queria inverter o eixo x com o y, utiliza o comando `coord_flip`
+
+```{r}
 
 ggplot(iris,aes(x=Sepal.Length, y=Sepal.Width, color=Species, shape=Species))+geom_point()+geom_smooth(se=FALSE, method="lm")+coord_flip()
 
 ```
 
 # Gráfico de barras (média e desvio)
+
+
 
 ```{r,label="grafico de barras"}
 
