@@ -13,8 +13,8 @@ format:
   html:
     respect-user-color-scheme: true
     theme:
-      light: [cosmo, theme.scss]
-      dark: [cosmo, theme-dark.scss]
+      light: flatly
+      dark: darkly
     css: styles.css
     toc: true
 
