@@ -8,7 +8,7 @@
 
 <meta name="author" content="Isadora Real">
 
-<title>Oficina ggplot2 UFPel – oficinaggplotufpel.github.io</title>
+<title>Introdução ao ggplot2 – Oficina ggplot2 UFPel</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">oficinaggplotufpel.github.io</span>
+    <span class="navbar-title">Oficina ggplot2 UFPel</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -162,6 +162,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#alterando-elementos-textuais-no-ggplot" id="toc-alterando-elementos-textuais-no-ggplot" class="nav-link" data-scroll-target="#alterando-elementos-textuais-no-ggplot">Alterando elementos textuais no ggplot</a>
   <ul class="collapse">
   <li><a href="#alterando-a-fonte" id="toc-alterando-a-fonte" class="nav-link" data-scroll-target="#alterando-a-fonte">Alterando a fonte</a></li>
+  <li><a href="#manipulação-da-legenda" id="toc-manipulação-da-legenda" class="nav-link" data-scroll-target="#manipulação-da-legenda">Manipulação da legenda</a></li>
+  <li><a href="#anotação-me-gráfico" id="toc-anotação-me-gráfico" class="nav-link" data-scroll-target="#anotação-me-gráfico">Anotação me gráfico</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -172,7 +174,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Oficina ggplot2 UFPel</h1>
+<h1 class="title">Introdução ao ggplot2</h1>
 </div>
 
 
@@ -363,7 +365,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="alterando-a-fonte" class="level3">
 <h3 class="anchored" data-anchor-id="alterando-a-fonte">Alterando a fonte</h3>
-<p>Para alterar o tipo fonte do gráficos é necessário usar o pacote <code>extrafont</code>. Abaixo estará os comandos para instalar o pacote e carrega-lo</p>
+<p>Para alterar o tipo fonte do gráficos é necessário usar o pacote <code>extrafont</code>. Abaixo estará os comandos para instalar o pacote e carrega-lo.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instalando o pacote extrafont</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"extrafont"</span>)</span>
@@ -406,17 +408,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-2-4.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
-</div>
-</div>
+<p>As vezes é necessário colocar nomes em itálico, como por exemplo nomes de espécies que estão no eixo x. Com isso dentro de <code>theme()</code> colocaremos o arguemento <code>axis.text.x = element_text(face="italic")</code> se referindo que estaremos trabalhando com o texto presente na escala do eixo x. Caso fosse no eixo y seria <code>axis.text.y</code>. Essa alteração também pode ser aplicada à outros parâmetros, como <code>fill</code> e <code>color</code>. Trabalhando assim, podemos alterar a fonte apenas daquele parâmetro.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">fill=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Aqui é o título"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -424,11 +419,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
+</div>
+<p>A seguir há o exemplo de deixar o título em negrito com maior destaque, utilizando o argumento <code>plot.title = element_text(face="bold")</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">fill=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Aqui é o título"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="manipulação-da-legenda" class="level3">
+<h3 class="anchored" data-anchor-id="manipulação-da-legenda">Manipulação da legenda</h3>
+<p>Caso queremos tirar a legenda ou alterar a posição da legenda, utilizaremos o argumento <code>legend.position =</code>:</p>
+<ul>
+<li><p><strong>“none”</strong> para tirar a legenda</p></li>
+<li><p><strong>“top”</strong> para a legenda ficar em cima</p></li>
+<li><p><strong>“bottom”</strong> para a legenda ficar em baixo</p></li>
+<li><p><strong>“left”</strong> para a legenda ficar na esquerda</p></li>
+<li><p><strong>“right”</strong> para a legenda ficar na direita</p></li>
+</ul>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">fill=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Aqui é o título"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>), <span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -436,7 +455,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-3.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -444,7 +463,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-4.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -452,10 +471,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-5.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-5-4.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
+</div>
+</section>
+<section id="anotação-me-gráfico" class="level3">
+<h3 class="anchored" data-anchor-id="anotação-me-gráfico">Anotação me gráfico</h3>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>iris<span class="sc">%&gt;%</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>Petal.Length, <span class="at">fill=</span>Species))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span><span class="fu">labs</span>(<span class="at">y=</span><span class="st">"Comprimento de pétala"</span>, <span class="at">x=</span><span class="st">"Espécies"</span>, <span class="at">fill=</span><span class="st">"Espécies"</span>, <span class="at">title=</span><span class="st">"Aqui é o título"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>), <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"bold"</span>), <span class="at">legend.position =</span> <span class="st">"left"</span>, <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">face=</span><span class="st">"italic"</span>))<span class="sc">+</span> <span class="fu">geom_text</span>(<span class="at">x =</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="dv">4</span>, <span class="at">label =</span> <span class="st">"Ponto importante"</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">face=</span><span class="st">"bold"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in geom_text(x = 2.5, y = 4, label = "Ponto importante", color = "red",
@@ -464,7 +488,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-6.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -480,7 +504,7 @@ Ignoring unknown aesthetics: x</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-7.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -488,7 +512,7 @@ Ignoring unknown aesthetics: x</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-8.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
