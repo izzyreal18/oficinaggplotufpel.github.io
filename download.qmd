@@ -17,4 +17,9 @@ format: html
 
 [Raster da média anual da precipitação em Pelotas entre 1970-2000](<https://github.com/izzyreal18/oficinaggplotufpel.github.io/raw/refs/heads/main/pelprec.tiff>)
 
-[Shapefile da cidade de Pelotas](<>)
+[Shapefile da cidade de Pelotas](<https://github.com/izzyreal18/oficinaggplotufpel.github.io/raw/refs/heads/main/Pelotas.zip>)
+
+[Script completo em R]()
+
+[Apresentação PDF]()
+
