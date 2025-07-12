@@ -12,7 +12,7 @@ O `ggplot2` é um pacote de código aberto para a visualização gráfica de dad
 
 Ele aborda que visualização gráfica dos dados pode ser divida em componentes semânticos, como escalas e camadas.
 
-![ ](Gplot2_hex_logo.svg.png)
+![ ](Ggplot2_hex_logo.svg.png)
 
 ## Por que usar o ggplot2?
 
@@ -333,6 +333,34 @@ iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(
 
 
 ```
+
+## Temas
+
+```{r, label="Box-plot tema"}
+#| echo: true
+
+default<-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c("lightblue","lightgreen","lightpink"), color="black")+labs(y="Comprimento de pétala", x="Espécies", title="Default")
+
+classic<-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c("lightblue","lightgreen","lightpink"), color="black")+labs(y="Comprimento de pétala", x="Espécies", title="Classic")+theme_classic()
+
+dark<-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c("lightblue","lightgreen","lightpink"), color="black")+labs(y="Comprimento de pétala", x="Espécies", title="Dark")+theme_dark()
+
+bw<-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c("lightblue","lightgreen","lightpink"), color="black")+labs(y="Comprimento de pétala", x="Espécies", title="bw")+theme_bw()
+
+minimal<-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c("lightblue","lightgreen","lightpink"), color="black")+labs(y="Comprimento de pétala", x="Espécies", title="Minimal")+theme_minimal()
+
+gray<-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c("lightblue","lightgreen","lightpink"), color="black")+labs(y="Comprimento de pétala", x="Espécies", title="Gray")+theme_gray()
+
+light<-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c("lightblue","lightgreen","lightpink"), color="black")+labs(y="Comprimento de pétala", x="Espécies", title="Light")+theme_light()
+
+linedraw<-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c("lightblue","lightgreen","lightpink"), color="black")+labs(y="Comprimento de pétala", x="Espécies", title="Linedraw")+theme_linedraw()
+
+void<-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c("lightblue","lightgreen","lightpink"), color="black")+labs(y="Comprimento de pétala", x="Espécies", title="Void")+theme_void()
+
+default+classic+dark+bw+minimal+gray+light+linedraw+void
+
+```
+
 
 # Extra
 

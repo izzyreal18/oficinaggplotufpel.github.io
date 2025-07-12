@@ -14,3 +14,7 @@ format: html
 - **Baixando RStudio:** <https://posit.co/download/rstudio-desktop/>
 
 # Baixando arquivos da oficina
+
+[Raster da média anual da precipitação em Pelotas entre 1970-2000](<https://github.com/izzyreal18/oficinaggplotufpel.github.io/raw/refs/heads/main/pelprec.tiff>)
+
+[Shapefile da cidade de Pelotas](<>)
