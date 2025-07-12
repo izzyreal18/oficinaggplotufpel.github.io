@@ -1,5 +1,5 @@
 ---
-title: "Oficina ggplot2 UFPel"
+title: "Introdução ao ggplot2"
 author: "Isadora Real"
 ---
 
@@ -172,7 +172,7 @@ iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(
 
 ### Alterando a fonte
 
-Para alterar o tipo fonte do gráficos é necessário usar o pacote `extrafont`. Abaixo estará os comandos para instalar o pacote e carrega-lo
+Para alterar o tipo fonte do gráficos é necessário usar o pacote `extrafont`. Abaixo estará os comandos para instalar o pacote e carrega-lo.
 
 ```{r}
 #| output: false
@@ -200,13 +200,35 @@ iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(
 iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies")+theme(text = element_text(face = "bold.italic", family="mono", size=16))
 
 iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies")+theme(text = element_text(face="italic"))
+```
 
+As vezes é necessário colocar nomes em itálico, como por exemplo nomes de espécies que estão no eixo x. Com isso dentro de `theme()` colocaremos o arguemento `axis.text.x = element_text(face="italic")` se referindo que estaremos trabalhando com o texto presente na escala do eixo x. Caso fosse no eixo y seria `axis.text.y`. Essa alteração também pode ser aplicada à outros parâmetros, como  `fill` e `color`. Trabalhando assim, podemos alterar a fonte apenas daquele parâmetro.
+
+```{r}
 iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies")+theme(axis.text.x = element_text(face="italic"))
 ``` 
 
+A seguir há o exemplo de deixar o título em negrito com maior destaque, utilizando o argumento `plot.title = element_text(face="bold")`
+
 ```{r}
 iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"))
+```
 
+### Manipulação da legenda
+
+Caso queremos tirar a legenda ou alterar a posição da legenda, utilizaremos o argumento `legend.position =`:
+
+- **"none"** para tirar a legenda
+
+- **"top"** para a legenda ficar em cima
+
+- **"bottom"** para a legenda ficar em baixo
+
+- **"left"** para a legenda ficar na esquerda
+
+- **"right"** para a legenda ficar na direita
+
+```{r}
 iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "none")
 
 iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "top")
@@ -214,7 +236,13 @@ iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(
 iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "bottom")
 
 iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "left", legend.text = element_text(face="italic"))
+```
 
+### Anotação me gráfico
+
+
+
+```{r}
 iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "left", legend.text = element_text(face="italic"))+ geom_text(x = 2.5, y = 4, label = "Ponto importante", color = "red", face="bold")
 
 
