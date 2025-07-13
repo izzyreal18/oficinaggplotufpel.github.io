@@ -303,17 +303,17 @@ iris%>%group_by(Species)%>%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length
 
 Em um *data frame* podemos ter variáveis ordinais, que em uma visualização gráfica não faz sentido que elas não sejam apresentadas na ordem correta. Então usaremos o pacote `forcats` para isso. Aqui ire gerar um *data frame* hipotético da frequência da escolaridade dos entrevistados de uma pesquisa,
 
-Nesse primeiro modelo, note que a escolaridade não está seguindo a sequência correta.
+Nesse primeiro modelo, note que a escolaridade não está seguindo a sequência correta. Já que o R por padrão ordena por ordem alfabética.
 
 ```{r}
-set.seed(123)
 Escolaridade<-c(rep("Graduação", 42), rep("Médio", 30), rep("Fundamental", 20))
 Escolaridade<-as.data.frame(Escolaridade)
 
 Escolaridade%>%ggplot(aes(x=Escolaridade))+geom_bar()+labs(y="Frequência", x="Escolaridade")
 ```
 
-Nesse próximo isso é corrigido
+Nesse próximo isso é corrigido pelo comando `mutate(Escolaridade=fct_relevel(Escolaridade,"Fundamental","Médio", "Graduação"))`. A função `mutate()` serve para fazer alterações no *data frame*, como mudar nome, ordem, características, entre outros. Dentro dela colocamos o argumento `Escolaridade=fct_relevel(Escolaridade,"Fundamental","Médio","Graduação")`, o `fct_relevel()` é a função que atua na reordenação, dentro dela colocamos `Escolaridade` pois é a que queremos ordenar, depois colocamos qual é a ordem que queremos `"Fundamental", "Médio", Graduação"`, e toda essa alteração será armazenado em `Escolaridade`. 
+
 
 ```{r}
 
@@ -458,12 +458,17 @@ iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(
 
 ### Anotação em gráfico
 
+Também é possível fazer anotações em gráficos no ggplot2, como colocar linhas  e anotações para destacar pontos interessantes.
 
+No primeiro exemplo colocamos o `geom_text` para adicionar o texto. Os argumentos `x` e `y` são para delimitar onde vai ficar o nosso texto, `label` é para definir o que vai estar no texto (nunca se esqueça de colocar entre aspas `" "`). 
 
 ```{r}
 iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "left", legend.text = element_text(face="italic"))+ geom_text(x = 2.5, y = 4, label = "Ponto importante", color = "red", face="bold")
+```
 
+Aqui é um exemplo utilizando `annotate`, nele além de adicionar texto, você pode adicionar linhas. Como nesse caso colocamos uma linha vertical no gráfico utilizando o argumento `"vline"`. Para colocar uma linha na horizontal é `"hline"`. Para ser um texto se utiliza o argumento `"text"`.
 
+```{r}
 iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "left", legend.text = element_text(face="italic"))+ geom_text(x = 2.5, y = 4, label = "Ponto importante", color = "red")+ annotate("vline", x = 2, xintercept = 2, linetype = "dashed", color = "blue")
 
 iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "left", legend.text = element_text(face="italic"))+ geom_text(x = 2.5, y = 4, label = "Ponto importante", color = "red")+annotate("text", x = 1, y = 3.5, label = "outro ponto", color = "blue")
@@ -502,6 +507,35 @@ linedraw<-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxpl
 void<-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c("lightblue","lightgreen","lightpink"), color="black")+labs(y="Comprimento de pétala", x="Espécies", title="Void")+theme_void()
 
 default+classic+dark+bw+minimal+gray+light+linedraw+void
+
+```
+
+# Unindo vários gráficos em uma imagem só
+
+Em na seção do histograma vimos a função `facet_grid` ou `facet_wrap`, para ter gráficos separados de acordo a uma característica do *data frame*. Porém como colocamos ggplots lado a lado de diferentes *data frame* para uma única imagem? Há algumas opções, aqui irei mostrar utlizando o pacote `patchwork`,
+
+1. Armazenar os ggplots em um objeto utilizando o comando `<-` ou `=`, como mostra o exemplo abaixo
+
+2. Escrever os nomes do objetos colocar `+` entre eles
+
+
+```{r}
+#Criando ggplots
+barra<-Escolaridade%>%mutate(Escolaridade=fct_relevel(Escolaridade,"Fundamental","Médio", "Graduação"))%>%ggplot(aes(x=Escolaridade))+geom_bar()+labs(y="Frequência", x="Escolaridade")
+polígono<-iris%>%ggplot(aes(x=Sepal.Length))+geom_freqpoly()+labs(y="Frequência",x="Comprimento de Sépala")
+boxplot<-iris%>%ggplot(aes(y=Sepal.Length, x=Species))+geom_boxplot()+labs(y="Comprimento de Sépala", x="Espécies")
+pontos<-iris%>%ggplot(aes(x=Sepal.Length,y=Sepal.Width, color=Species))+geom_point()+labs(x="Comprimento de Sépala", y="Largura de Sépala", color="Espécies")
+
+barra + polígono + boxplot + pontos
+
+
+```
+
+3. Também é possível utilizar diferêntes conformações utilizando elementos matemáticos, como `/` e `()`.
+
+```{r}
+
+(barra + polígono + boxplot)/ pontos
 
 ```
 
