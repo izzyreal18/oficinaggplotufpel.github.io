@@ -251,20 +251,35 @@ ggplot(iris,aes(x=Sepal.Length, y=Sepal.Width, color=Species, shape=Species))+ge
 
 # Gráfico de barras (média e desvio)
 
+Para fazer o gráfico da média com barras de desvio é um processo semenlhante ao gráfico de frequência, porém desta vez temos que summarizar `summarise` média, desvio padrão ou erro padrão. `mean=mean(Sepal.Length)` aqui foi calculado a média da variável `Sepel.Length` através da função `mean()` e armazenado na coluna `mean`. `sd=sd(Sepal.Length)` aqui foi calculado o desvio padrão através da função `sd()` e armazenado na coluna `sd`. `se=sd(Sepal.Length)/sqrt(length(Sepal.Length))` aqui foi calculado o erro padrão e armazenado na coluna `se`.
 
+Em `aes()` tem que se colocar que o eixo y é igual a média `y=mean` e colocar `geom_col` para gerar o gráfico de colunas. Para acrescenta as barras de erros utilizamos o comando `geom_errobar()`, dele colocaremo a função `aes()` e delimitaremos os limites inferiores e superiores da barra `aes(ymin=mean-sd,ymax=mean+sd)`. O `ymin` é para delimitar o limite inferior, onde é a média menos o desvio padrão `mean-sd`. O `ymax` é para delimitar o limite superior, onde é a média mais o desvio padrão `mean+sd`. O parâmetro `width=0.5` é para definir a largura da barra do desvio.
+
+**Obs.:** ao invés de utilizar o `sd` (desvio padrão), pode-se trocar por `se` para trabalhar com o erro padrão.
 
 ```{r,label="grafico de barras"}
 
 iris%>%group_by(Species)%>%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%ggplot(aes(x=Species, y=mean))+geom_col()+geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd), width=0.5)+labs(y="Comprimento da Sepala", x="Espécies")+theme_bw()+scale_y_continuous(limits=c(0,10))
 
+```
 
+O exemplo abaixo é uma opção utilizando o `geom_linerange` no lugar do `geom_errobar`.
+
+```{r}
 iris%>%group_by(Species)%>%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%ggplot(aes(x=Species, y=mean))+geom_col()+geom_linerange(aes(ymin=mean-sd,ymax=mean+sd))+labs(y="Comprimento da Sepala", x="Espécies")+theme_bw()+scale_y_continuous(limits=c(0,10))
+```
 
+O exemplo abaixo é uma opção utilizando o `geom_pointrange` no lugar do `geom_errobar`.
+
+ 
+```{r}
 iris%>%group_by(Species)%>%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%ggplot(aes(x=Species, y=mean))+geom_col()+geom_pointrange(aes(ymin=mean-sd,ymax=mean+sd))+labs(y="Comprimento da Sepala", x="Espécies")+theme_bw()+scale_y_continuous(limits=c(0,10))
+```
 
+O exemplo abaixo é sem a coluna, apenas o `geom_linerange`.
+
+```{r}
 iris%>%group_by(Species)%>%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%ggplot(aes(x=Species, y=mean))+geom_linerange(aes(ymin=mean-sd,ymax=mean+sd))+labs(y="Comprimento da Sepala", x="Espécies")+theme_bw()+scale_y_continuous(limits=c(0,10))
-
-
 ```
 
 # Alterando cores, fontes e temas 
@@ -404,7 +419,7 @@ iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(
 iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "left", legend.text = element_text(face="italic"))
 ```
 
-### Anotação me gráfico
+### Anotação em gráfico
 
 
 
@@ -421,8 +436,15 @@ iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(
 
 ## Temas
 
+O `ggplot2` por padrão dispõe de alguns temas para utilizar nos gráficos, adicionando `theme_`, aparece as sujestões disponíveis do pacote. Através do comando `theme()`, pode-se editar o tema ou criar temas novos.
+
+Abaixo está os temas disponíveis do pacote `ggplot2`.
+
 ```{r, label="Box-plot tema"}
 #| echo: true
+#| fig-width: 9
+#| fig-height: 12.5
+
 
 default<-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c("lightblue","lightgreen","lightpink"), color="black")+labs(y="Comprimento de pétala", x="Espécies", title="Default")
 
@@ -451,6 +473,7 @@ default+classic+dark+bw+minimal+gray+light+linedraw+void
 
 ## Mapas
 
+No `ggplot2` também é possível trabalhar com mapas. Para isso temos que instalar o pacote `raster` e `sf`.
 ```{r}
 #| echo: true
 #| message: false
@@ -465,22 +488,44 @@ library(raster)
 library(sf)
 ```
 
+Os dados referentes abaixo é a média da precipitação anual entre os anos 1970-2000 na cidade de Pelotas [@wordclim]. Os dados foram previamente recortados e trabalhados para esta oficina, aqui só realizaremos a plotagem do mapa pelo `ggplot`. 
+
 ```{r}
 #| warning: false
+
+# Importando dados
 prec<-raster("pelprec.tiff")
 
 pel<-read_sf("Pelotas/Pelotas.shp")
 
+# Convertendo raster para data frame para o ggplot processar o dado
 prec_df<-as.data.frame(prec, xy = TRUE, na.rm = TRUE)
 
-ggplot(prec_df,aes(x=x,y=y,fill=pelprec))+geom_raster()
+head(prec_df)
+```
 
+Para plotar o mapa é necessário definir os seguintes parâmetros em `aes()`. `x=x` para definir a Longitude, `y=y` para definir a Latitude, e `fill=pelprec` para definir o gradiente de preenchimento do mapa, que neste caso é precipitação em Pelotas. E para gerar o gráfico é só adicionar o `geom_raster()`.
+
+```{r}
+ggplot(prec_df,aes(x=x,y=y,fill=pelprec))+geom_raster()
+``` 
+
+Aqui plotamos o raster com a borda na volta (o shapefile).
+
+**Note:** que nesta situação colocamos o *data frame* e os `aes()` referentes do raster dentro do `geom_raster` e as informações referentes ao shapefil em `geom_sf`. Pois quando colocamos dentro de `ggplot()` indicamos que o *data frame* será global para as funções seguintes.
+
+**Obs.:** em `scale_fill_gradient` e `scale_fill_gardientn` definimos as cores do gradiente.
+
+```{r}
+# Cores padrão
 ggplot()+geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+geom_sf(data=pel,fill=NA, color="gray",linewidth=2, alpha=.01)+labs(title="Mapa da média anual da precipitação \n em Pelotas-RS entre 1970-2000", y="Latitude", x="Longitude", fill="Precipitação (mm)")+theme_bw()
 
 ggplot()+geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+geom_sf(data=pel,fill=NA, color="gray",linewidth=2, alpha=.01)+labs(title="Mapa da média anual da precipitação \n em Pelotas-RS entre 1970-2000", y="Latitude", x="Longitude", fill="Precipitação (mm)")+theme_bw()+scale_fill_gradient(low="gray",high="blue")
 
 ggplot()+geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+geom_sf(data=pel,fill=NA, color="gray",linewidth=2, alpha=.01)+labs(title="Mapa da média anual da precipitação \n em Pelotas-RS entre 1970-2000", y="Latitude", x="Longitude", fill="Precipitação (mm)")+theme_bw()+scale_fill_gradientn(colours = terrain.colors(10))
 ```
+
+Recomenda-se utilizar a paleta de cores `viridis` para visualmente adequado para pessoas daltonicas.
 
 ```{r}
 #| echo: true
@@ -499,6 +544,8 @@ ggplot()+geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+geom_sf(data=pel,fi
 ```
 
 ## Temas divertidos
+
+Além dos temas disponíveis pelo `ggplot` e temas que podem ser criados, a seguir há a demonstração de alguns temas disponíveis no pacote `ThemePark`. Nele contém temas inspirados na cultura pop, jogos e filmes.
 
 ```{r, label="theme park1"}
 #| echo: true
@@ -538,6 +585,8 @@ iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(
 
 ## Gráficos interativos
 
+Caso apenas o ggplot por si só não foi o suficiente. Temos uma forma de deixar os seus gráficos interativos através do pacote `plotly`, onde podemos passar o mouse e ver valores, dar zoom, entre outras coisas.
+
 ```{r, label="gráficos interativos1"}
 #| echo: true
 #| message: false
@@ -562,6 +611,8 @@ ggplotly(snes1)
 ```
 
 ## Gráficos animados
+
+Também é possível criar gráficos animados para uma apresentação, através do pacote `gganimate`.
 
 ```{r, label="gráficos interativos"}
 #| echo: true
