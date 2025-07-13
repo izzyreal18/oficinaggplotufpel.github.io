@@ -13,7 +13,7 @@ O `ggplot2` é um pacote de código aberto para a visualização gráfica de dad
 Ele aborda que visualização gráfica dos dados pode ser divida em componentes semânticos, como escalas e camadas.
 
 
-![ ](Ggplot2_hex_logo.svg.png){fig-width=50%, fig-aling="center"}
+![](Ggplot2_hex_logo.svg.png){fig-width=50px, fig-aling="center"}
 
 ## Por que usar o ggplot2?
 
@@ -282,7 +282,44 @@ O exemplo abaixo é sem a coluna, apenas o `geom_linerange`.
 iris%>%group_by(Species)%>%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%ggplot(aes(x=Species, y=mean))+geom_linerange(aes(ymin=mean-sd,ymax=mean+sd))+labs(y="Comprimento da Sepala", x="Espécies")+theme_bw()+scale_y_continuous(limits=c(0,10))
 ```
 
-# Alterando cores, fontes e temas 
+# Alterando escalas, cores, fontes e temas 
+
+##Ajustando escalas no ggplot
+
+Retornamos com o gráfico de barra com a média e as barras de desvio. Para ajustar a escala de algum elemento gráfico no `ggplot` o comando inicia `scale_[parâmetro]_[característica do parâmetro ou tipo de função aplicada]()`. No caso abaixo foi utilizado o `scale_y_continuous()`, já que ajustaremos a escala do eixo y, sendo ela uma variável contínua. Dentro da função colocaremos o seguinte agumento `limits=c(0,10)`, onde zero é o limite inferior e o 10 o limite superior.
+
+```{r,label="escala"}
+
+iris%>%group_by(Species)%>%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%ggplot(aes(x=Species, y=mean))+geom_col()+geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd), width=0.5)+labs(y="Comprimento da Sepala", x="Espécies")+theme_bw()+scale_y_continuous(limits=c(0,10))
+
+#exemplo com a escala maior
+iris%>%group_by(Species)%>%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%ggplot(aes(x=Species, y=mean))+geom_col()+geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd), width=0.5)+labs(y="Comprimento da Sepala", x="Espécies")+theme_bw()+scale_y_continuous(limits=c(0,20))
+
+
+```
+
+## Ordenando variáveis ordinais no ggplot
+
+
+Em um *data frame* podemos ter variáveis ordinais, que em uma visualização gráfica não faz sentido que elas não sejam apresentadas na ordem correta. Então usaremos o pacote `forcats` para isso. Aqui ire gerar um *data frame* hipotético da frequência da escolaridade dos entrevistados de uma pesquisa,
+
+Nesse primeiro modelo, note que a escolaridade não está seguindo a sequência correta.
+
+```{r}
+set.seed(123)
+Escolaridade<-c(rep("Graduação", 42), rep("Médio", 30), rep("Fundamental", 20))
+Escolaridade<-as.data.frame(Escolaridade)
+
+Escolaridade%>%ggplot(aes(x=Escolaridade))+geom_bar()+labs(y="Frequência", x="Escolaridade")
+```
+
+Nesse próximo isso é corrigido
+
+```{r}
+
+Escolaridade%>%mutate(Escolaridade=fct_relevel(Escolaridade,"Fundamental","Médio", "Graduação"))%>%ggplot(aes(x=Escolaridade))+geom_bar()+labs(y="Frequência", x="Escolaridade")
+```
+
 ## Mudando cores de preenchimento no ggplot
 
 Uma das formas de acrescentar cor ao gráfico é adicionando o argumento `fill` dentro da função `aes()`. Indicará ao ggplot que você quer que as cores de preenchimentos do `ggplot` mude de acordo com alguma variável de seu *data frame*.
