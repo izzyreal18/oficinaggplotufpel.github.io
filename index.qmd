@@ -284,7 +284,7 @@ iris%>%group_by(Species)%>%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length
 
 # Alterando escalas, cores, fontes e temas 
 
-##Ajustando escalas no ggplot
+## Ajustando escalas no ggplot
 
 Retornamos com o gráfico de barra com a média e as barras de desvio. Para ajustar a escala de algum elemento gráfico no `ggplot` o comando inicia `scale_[parâmetro]_[característica do parâmetro ou tipo de função aplicada]()`. No caso abaixo foi utilizado o `scale_y_continuous()`, já que ajustaremos a escala do eixo y, sendo ela uma variável contínua. Dentro da função colocaremos o seguinte agumento `limits=c(0,10)`, onde zero é o limite inferior e o 10 o limite superior.
 
