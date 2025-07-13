@@ -35,6 +35,13 @@
     "text": "options(repos = c(CRAN = \"https://cloud.r-project.org\"))\n\n\n#instalando pacote ggplot2\ninstall.packages(\"ggplot2\")\n\n#instalando dplyr, forcats e patchwork\ninstall.packages(\"dplyr\")\ninstall.packages(\"forcats\")\ninstall.packages(\"patchwork\")\n\nPara usar o ggplot2 em seus scripts tem que carrega-lo\n\n#Carregando o pacote ggplot2\nlibrary(ggplot2)\n\n#Carregando dplyr, forcats e patchwork\nlibrary(dplyr)\nlibrary(forcats)\nlibrary(patchwork)"
   },
   {
+    "objectID": "index.html#ajustando-escalas-no-ggplot",
+    "href": "index.html#ajustando-escalas-no-ggplot",
+    "title": "Introdução ao ggplot2",
+    "section": "Ajustando escalas no ggplot",
+    "text": "Ajustando escalas no ggplot\nRetornamos com o gráfico de barra com a média e as barras de desvio. Para ajustar a escala de algum elemento gráfico no ggplot o comando inicia scale_[parâmetro]_[característica do parâmetro ou tipo de função aplicada](). No caso abaixo foi utilizado o scale_y_continuous(), já que ajustaremos a escala do eixo y, sendo ela uma variável contínua. Dentro da função colocaremos o seguinte agumento limits=c(0,10), onde zero é o limite inferior e o 10 o limite superior.\n\niris%&gt;%group_by(Species)%&gt;%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%&gt;%ggplot(aes(x=Species, y=mean))+geom_col()+geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd), width=0.5)+labs(y=\"Comprimento da Sepala\", x=\"Espécies\")+theme_bw()+scale_y_continuous(limits=c(0,10))\n\n\n\n\n\n\n\n#exemplo com a escala maior\niris%&gt;%group_by(Species)%&gt;%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%&gt;%ggplot(aes(x=Species, y=mean))+geom_col()+geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd), width=0.5)+labs(y=\"Comprimento da Sepala\", x=\"Espécies\")+theme_bw()+scale_y_continuous(limits=c(0,20))"
+  },
+  {
     "objectID": "index.html#ordenando-variáveis-ordinais-no-ggplot",
     "href": "index.html#ordenando-variáveis-ordinais-no-ggplot",
     "title": "Introdução ao ggplot2",
