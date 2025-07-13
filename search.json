@@ -35,6 +35,13 @@
     "text": "options(repos = c(CRAN = \"https://cloud.r-project.org\"))\n\n\n#instalando pacote ggplot2\ninstall.packages(\"ggplot2\")\n\n#instalando dplyr, forcats e patchwork\ninstall.packages(\"dplyr\")\ninstall.packages(\"forcats\")\ninstall.packages(\"patchwork\")\n\nPara usar o ggplot2 em seus scripts tem que carrega-lo\n\n#Carregando o pacote ggplot2\nlibrary(ggplot2)\n\n#Carregando dplyr, forcats e patchwork\nlibrary(dplyr)\nlibrary(forcats)\nlibrary(patchwork)"
   },
   {
+    "objectID": "index.html#ordenando-variáveis-ordinais-no-ggplot",
+    "href": "index.html#ordenando-variáveis-ordinais-no-ggplot",
+    "title": "Introdução ao ggplot2",
+    "section": "Ordenando variáveis ordinais no ggplot",
+    "text": "Ordenando variáveis ordinais no ggplot\nEm um data frame podemos ter variáveis ordinais, que em uma visualização gráfica não faz sentido que elas não sejam apresentadas na ordem correta. Então usaremos o pacote forcats para isso. Aqui ire gerar um data frame hipotético da frequência da escolaridade dos entrevistados de uma pesquisa,\nNesse primeiro modelo, note que a escolaridade não está seguindo a sequência correta.\n\nset.seed(123)\nEscolaridade&lt;-c(rep(\"Graduação\", 42), rep(\"Médio\", 30), rep(\"Fundamental\", 20))\nEscolaridade&lt;-as.data.frame(Escolaridade)\n\nEscolaridade%&gt;%ggplot(aes(x=Escolaridade))+geom_bar()+labs(y=\"Frequência\", x=\"Escolaridade\")\n\n\n\n\n\n\n\n\nNesse próximo isso é corrigido\n\nEscolaridade%&gt;%mutate(Escolaridade=fct_relevel(Escolaridade,\"Fundamental\",\"Médio\", \"Graduação\"))%&gt;%ggplot(aes(x=Escolaridade))+geom_bar()+labs(y=\"Frequência\", x=\"Escolaridade\")"
+  },
+  {
     "objectID": "index.html#mudando-cores-de-preenchimento-no-ggplot",
     "href": "index.html#mudando-cores-de-preenchimento-no-ggplot",
     "title": "Introdução ao ggplot2",
