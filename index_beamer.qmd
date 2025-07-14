@@ -1,7 +1,16 @@
 ---
 title: "Introdução ao ggplot2"
-author: "Isadora Real"
-date: today
+#author:
+#  - "ANA RITA DE ASSUMPÇÃO MAZZINI"
+#  - "GISELDA MARIA PEREIRA"
+#  - "POLLYANE VIEIRA DA SILVA"
+#  - "ISADORA MOREIRA DA LUZ REAL"
+#  - "ANA LUIZA BARBOZA MERLIN"
+#  - "FERNANDO NEUGEBAUER REHBEIN DA CUNHA PENEDO"
+#  - "LUCAS DE AZEVEDO DE SOUZA"
+institute:
+  - UNIVERSIDADE FEDERAL DE PELOTAS
+  - INSTITUTO DE FÍSICA E MATEMÁTICA – IFM
 bibliography: ref.bib
 format:
   beamer:
@@ -11,7 +20,7 @@ format:
     keep-tex: true
     highlight-style: pygments
     header-includes: |
-      \input{tema.tex}
+      \input{tem2.tex}
 ---
 
 
@@ -31,7 +40,7 @@ Ele aborda que visualização gráfica dos dados pode ser divida em componentes 
 
 2. Alta diversidade de modelos de gráficos.
 
-3. Integração com outros pacotes do tidyverse, como por exemplo `dplyr` [@dplyr], `forcats` [@forcats] e o `plotly`[@plotly].
+3. Integração com outros pacotes do tidyverse, como por exemplo `dplyr` [@dplyr], `forcats` [@forcats] e o `plotly` [@plotly].
 
 4. Criação de gráficos a partir de camadas, podendo sobrepor diferentes gráficos.
 
@@ -383,7 +392,7 @@ iris%>%group_by(Species)%>%
   summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%ggplot(aes(x=Species, y=mean))+geom_col()+geom_pointrange(aes(ymin=mean-sd,ymax=mean+sd))+labs(y="Comprimento da Sepala", x="Espécies")+theme_bw()+scale_y_continuous(limits=c(0,10))
 ```
 
-O exemplo abaixo é sem a coluna, apenas o `geom_linerange`.
+---
 
 ```{r}
 iris%>%group_by(Species)%>%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%ggplot(aes(x=Species, y=mean))+geom_linerange(aes(ymin=mean-sd,ymax=mean+sd))+labs(y="Comprimento da Sepala", x="Espécies")+theme_bw()+scale_y_continuous(limits=c(0,10))
@@ -395,10 +404,26 @@ iris%>%group_by(Species)%>%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length
 
 ```{r,label="escala"}
 
-iris%>%group_by(Species)%>%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%ggplot(aes(x=Species, y=mean))+geom_col()+geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd), width=0.5)+labs(y="Comprimento da Sepala", x="Espécies")+theme_bw()+scale_y_continuous(limits=c(0,10))
+iris%>%group_by(Species)%>%
+  summarise(mean=mean(Sepal.Length), 
+            sd=sd(Sepal.Length),
+            se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%
+  ggplot(aes(x=Species, y=mean))+
+  geom_col()+
+  geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd), width=0.5)+
+  labs(y="Comprimento da Sepala", x="Espécies")+
+  theme_bw()+
+  scale_y_continuous(limits=c(0,10))
+```
 
+---
+
+```{r}
 #exemplo com a escala maior
-iris%>%group_by(Species)%>%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%ggplot(aes(x=Species, y=mean))+geom_col()+geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd), width=0.5)+labs(y="Comprimento da Sepala", x="Espécies")+theme_bw()+scale_y_continuous(limits=c(0,20))
+iris%>%group_by(Species)%>%
+  summarise(mean=mean(Sepal.Length),
+            sd=sd(Sepal.Length),
+            se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%ggplot(aes(x=Species, y=mean))+geom_col()+geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd), width=0.5)+labs(y="Comprimento da Sepala", x="Espécies")+theme_bw()+scale_y_continuous(limits=c(0,20))
 
 
 ```
@@ -409,14 +434,19 @@ iris%>%group_by(Species)%>%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length
 Escolaridade<-c(rep("Graduação", 42), rep("Médio", 30), rep("Fundamental", 20))
 Escolaridade<-as.data.frame(Escolaridade)
 
-Escolaridade%>%ggplot(aes(x=Escolaridade))+geom_bar()+labs(y="Frequência", x="Escolaridade")
+Escolaridade%>%ggplot(aes(x=Escolaridade))+
+  geom_bar()+
+  labs(y="Frequência", x="Escolaridade")
 ```
 
 ---
 
 ```{r}
 
-Escolaridade%>%mutate(Escolaridade=fct_relevel(Escolaridade,"Fundamental","Médio", "Graduação"))%>%ggplot(aes(x=Escolaridade))+geom_bar()+labs(y="Frequência", x="Escolaridade")
+Escolaridade%>%mutate(Escolaridade=fct_relevel(Escolaridade,"Fundamental","Médio", "Graduação"))%>%
+  ggplot(aes(x=Escolaridade))+
+  geom_bar()+
+  labs(y="Frequência", x="Escolaridade")
 ```
 
 ## Mudando cores de preenchimento no ggplot
@@ -424,7 +454,8 @@ Escolaridade%>%mutate(Escolaridade=fct_relevel(Escolaridade,"Fundamental","Médi
 ```{r, label="Box-plot1"}
 #| echo: true
 
-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot()
 
 ```
 
@@ -433,7 +464,8 @@ iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()
 ```{r, label="Box-plot2"}
 #| echo: true
 
-iris%>%ggplot(aes(x=Species, y=Petal.Length))+geom_boxplot(fill=c("lightpink","lightgreen","lightblue"))
+iris%>%ggplot(aes(x=Species, y=Petal.Length))+
+  geom_boxplot(fill=c("lightpink","lightgreen","lightblue"))
 
 ```
 
@@ -442,7 +474,8 @@ iris%>%ggplot(aes(x=Species, y=Petal.Length))+geom_boxplot(fill=c("lightpink","l
 ```{r, label="Box-plot3"}
 #| echo: true
 
-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+scale_fill_manual(values=c("#704c41","#41704f","#584170"))
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot()+scale_fill_manual(values=c("#704c41","#41704f","#584170"))
 
 ```
 
@@ -468,17 +501,21 @@ Os nomes dos eixos são alterados pela função labs, onde você indica qual ele
 - **shape** para alterar o título da legenda referente ao fator colocado no shape.
 - **size** para alterar o título da legenda referente ao fator colocado no size.
 
-```{r, label="Box-plot eixos"}
+---
 
+```{r, label="Box-plot eixos"}
 #| echo: true
 
-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c("lightblue","lightgreen","lightpink"), color="brown")+labs(y="Comprimento de pétala", x="Espécies", title="Comparação de comprimento de pétalas", subtitle = "Banco de dados iris")
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot(fill=c("lightblue","lightgreen","lightpink"), color="brown")+
+  labs(y="Comprimento de pétala",
+       x="Espécies",
+       title="Comparação de comprimento de pétalas",
+       subtitle = "Banco de dados iris")
 
 ```
 
 ### Alterando a fonte
-
-Para alterar o tipo fonte do gráficos é necessário usar o pacote `extrafont`. Abaixo estará os comandos para instalar o pacote e carrega-lo.
 
 ```{r}
 #| output: false
@@ -498,7 +535,6 @@ Aqui alteramos as fontes através do comando `theme()` este comando altera eleme
 - **family** é para definir se o tipo de fonte. Esse argumento pode ter variações de acordo com sistema operacional do computador. Em sistema windows pode-se utilizar `"TT Times New Roman"`, `"Arial"`, etc. Enquanto em sistemas Linux e MacOS estarão `"serif"`, `"mono"`, etc.
 - **size** é para definir se o tamanho da fonte.
 
-**Obs.:** esses elementos são importantes para garantir boa visualização gráfica e seguir padrões gráficos de publicações ou revistas.
 
 ```{r}
 iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies")+theme(text = element_text(face="bold", family="serif"))

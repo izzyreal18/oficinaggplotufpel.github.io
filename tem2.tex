@@ -1,0 +1,110 @@
+% ======================= CONFIGURAÇÕES DE ESTILO ===========================
+\definecolor{UFPELBlue}{RGB}{20, 49, 129}
+
+% Cores e fonte
+\setbeamercolor{headline}{bg=UFPELBlue}
+\setbeamercolor{frametitle}{bg=white, fg=UFPELBlue}
+\setbeamercolor{title}{fg=UFPELBlue}
+\usefonttheme{default}
+
+% Pacotes necessários
+\usepackage[absolute,overlay]{textpos}
+\usepackage{setspace}
+\usepackage{array}
+\usepackage{etoolbox}
+\usepackage{graphicx}
+
+% ======================= TEMPLATE DA PÁGINA DE TÍTULO ===========================
+
+\defbeamertemplate*{title page}{custom-title-page}{
+  \vbox to \textheight{
+    % Logo IFM
+    \begin{textblock*}{\textwidth}(0.2cm, 0.4cm)
+      \includegraphics[height=1cm]{logo_ifm.png}
+    \end{textblock*}
+
+    % Instituto
+    \begin{textblock*}{\textwidth}(1cm, 0.5cm)
+      {\usebeamerfont{institute}\tiny
+      \setlength{\baselineskip}{1.5pt}
+      \centering
+      \renewcommand{\arraystretch}{0.2}
+      \begin{tabular}{c}
+        \insertinstitute
+      \end{tabular}
+      \par}
+    \end{textblock*}
+
+    \vfill
+ % Define comando para substituir \and por \\ para autores no título
+\makeatletter
+\def\authorswithnewline{\def\and{\\}\insertauthor}
+\makeatother
+
+
+    \begin{center}
+      % Título
+      {\usebeamerfont{title}\usebeamercolor[fg]{title}\textbf{\inserttitle}\par}
+      \vskip0.8cm
+      
+     
+
+      % Autores um embaixo do outro (FORÇA)
+  {\usebeamerfont{author}\usebeamercolor[fg]{author}
+  \tiny
+    % LISTE OS AUTORES AQUI, UM POR UM, COM \\ NO FINAL DE CADA UM
+    ANA RITA DE ASSUMPÇÃO MAZZINI \\
+    GISELDA MARIA PEREIRA \\
+    POLLYANE VIEIRA DA SILVA \\
+    ISADORA MOREIRA DA LUZ REAL \\
+    ANA LUIZA BARBOZA MERLIN \\
+    FERNANDO NEUGEBAUER REHBEIN DA CUNHA PENEDO \\
+    LUCAS DE AZEVEDO DE SOUZA
+    \par
+  }
+      \vskip0.4cm
+
+      % Data
+      {\usebeamerfont{date}\insertdate\par}
+    \end{center}
+
+    \vfill
+
+    % Logos inferiores
+    \begin{textblock*}{\textwidth}(11.4cm, 8cm)
+      \includegraphics[height=1.2cm]{logo_ufpel_seal.png}
+    \end{textblock*}
+
+    \begin{textblock*}{\textwidth}(0.2cm, 8.4cm)
+      \includegraphics[height=0.8cm]{RStudio.png}
+    \end{textblock*}
+  }
+}
+% ======================= OUTROS AJUSTES ===========================
+
+% Frame title centralizado
+\setbeamertemplate{frametitle}{%
+  \begin{center}\textbf{\insertframetitle}\end{center}
+}
+
+% Barra azul superior em todos os frames
+\setbeamertemplate{headline}{%
+  \leavevmode
+  \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.5ex]{headline}
+    \end{beamercolorbox}%
+  }
+  % Logo R no canto superior direito
+  \begin{textblock*}{2cm}(0.88\paperwidth,0.4cm)
+    \includegraphics[height=1cm]{logo_r.png}
+  \end{textblock*}
+}
+
+% Barra azul inferior em todos os frames
+\setbeamertemplate{footline}{%
+  \leavevmode
+  \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.5ex]{headline}
+    \end{beamercolorbox}%
+  }
+}

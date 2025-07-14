@@ -1,0 +1,86 @@
+\definecolor{UFPELBlue}{RGB}{20, 49, 129}
+
+% Cores e fonte
+\setbeamercolor{headline}{bg=UFPELBlue}
+\setbeamercolor{frametitle}{bg=white, fg=UFPELBlue}
+\setbeamercolor{title}{fg=UFPELBlue}
+\usefonttheme{default}
+
+\usepackage[absolute,overlay]{textpos}
+\usepackage{setspace}
+\usepackage{array}
+%\usepackage{authblk}
+\usepackage{etoolbox}
+\usepackage{graphicx}
+
+
+% --- TEMPLATE DA PÁGINA DE TÍTULO ---
+% --- TEMPLATE DA PÁGINA DE TÍTULO ---
+\defbeamertemplate*{title page}{custom-title-page}{
+  \vbox to \textheight{
+    % -- Logo IFM (esquerda superior) --
+    \begin{textblock*}{\textwidth}(0.2cm, 0.4cm)
+      \includegraphics[height=1cm]{logo_ifm.png}
+    \end{textblock*}
+
+    % -- Institute ao lado do IFM e centralizado verticalmente --
+    \begin{textblock*}{\textwidth}(1cm, 0.5cm)
+      {\usebeamerfont{institute}\footnotesize % Fonte menor para o instituto
+      {
+        \setlength{\baselineskip}{1.5pt} % Espaçamento entre linhas menor para o instituto
+        \centering
+        \insertinstitute
+        \par
+      }}
+    \end{textblock*}
+
+    \vfill % Espaço vertical
+
+    % -- Conteúdo Central --
+    \begin{center}
+      % Título
+      {\usebeamerfont{title}\usebeamercolor[fg]{title}\textbf{\inserttitle}\par}
+      \vskip0.8cm
+% Autores
+      % Autores (ajustado para ser compatível com authblk)
+       % Autores em tabular
+    {\large
+    \renewcommand{\arraystretch}{0.9}
+    \begin{tabular}{c}
+      \insertauthor
+    \end{tabular}
+    \par} % This brace should close the outer { for author font
+        \vskip0.4cm
+        % Data
+        {\usebeamerfont{date}\insertdate\par}
+    \end{center}
+    \vfill % Espaço vertical
+
+
+    % -- Logo UFPEL (inferior direito) --
+    \begin{textblock*}{\textwidth}(11.4cm, 8cm)
+      \includegraphics[height=1.2cm]{logo_ufpel_seal.png}
+    \end{textblock*}
+    
+    \begin{textblock*}{\textwidth}(0.2cm, 8.4cm)
+      \includegraphics[height=0.8cm]{RStudio.png}
+    \end{textblock*}
+  }
+}
+
+
+
+\setbeamertemplate{frametitle}{\begin{center}\textbf{\insertframetitle}\end{center}}
+
+% Barra azul em cima em todos os frames
+\setbeamertemplate{headline}{%
+  \leavevmode
+  \hbox{\begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.5ex]{headline}\end{beamercolorbox}}%
+  % Logo no canto superior direito
+  \begin{textblock*}{2cm}(0.88\paperwidth,0.4cm)
+    \includegraphics[height=1cm]{logo_r.png}
+  \end{textblock*}
+}
+
+% Barra azul no rodapé em todos os frames
+\setbeamertemplate{footline}{\leavevmode\hbox{\begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.5ex]{headline}\end{beamercolorbox}}}

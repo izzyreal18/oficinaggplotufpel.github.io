@@ -42,6 +42,40 @@
 \usepackage[absolute,overlay]{textpos}
 \usepackage{tikz}
 
+% --- TEMPLATE DA PÁGINA DE TÍTULO ---
+% Este template recria a capa vista no PDF
+\defbeamertemplate*{title page}{custom-title-page}{
+  \vbox to \textheight{
+    % -- Logos Superiores --
+    \begin{textblock*}{\textwidth}(0.8cm, 1cm) % Logo IFM (esquerda)
+        \includegraphics[height=1.5cm]{logo_ifm.png}
+    \end{textblock*}
+    \begin{textblock*}{\textwidth}(10.5cm, 1cm) % Logo R (direita)
+        \includegraphics[height=1.5cm]{logo_r.png}
+    \end{textblock*}
+
+    \vfill % Espaço vertical
+
+    % -- Conteúdo Central --
+    \begin{center}
+      % Logo central
+      \includegraphics[height=3cm]{logo_ufpel_seal.png}
+      \vskip1.5cm
+      % Título
+      {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}
+      \vskip0.8cm
+      % Autores
+      {\usebeamerfont{author}\insertauthor\par}
+      \vskip0.4cm
+      % Instituto/Data
+      {\usebeamerfont{institute}\insertinstitute\par}
+      {\usebeamerfont{date}\insertdate\par}
+    \end{center}
+
+    \vfill % Espaço vertical
+  }
+}
+
 % Barra azul como footline
 \setbeamertemplate{footline}{%
     \leavevmode%
