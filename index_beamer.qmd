@@ -564,16 +564,12 @@ iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(
 
 ```
 
-## Temas
-
-O `ggplot2` por padrão dispõe de alguns temas para utilizar nos gráficos, adicionando `theme_`, aparece as sujestões disponíveis do pacote. Através do comando `theme()`, pode-se editar o tema ou criar temas novos.
-
-Abaixo está os temas disponíveis do pacote `ggplot2`.
+## Temas (`theme_*`)
 
 ```{r, label="Box-plot tema"}
 #| echo: false
-#| fig-width: 9
-#| fig-height: 12.5
+#| fig-width: 11
+#| fig-height: 7
 
 
 default<-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c("lightblue","lightgreen","lightpink"), color="black")+labs(y="Comprimento de pétala", x="Espécies", title="Default")
@@ -598,14 +594,7 @@ default+classic+dark+bw+minimal+gray+light+linedraw+void
 
 ```
 
-# Unindo vários gráficos em uma imagem só
-
-Em na seção do histograma vimos a função `facet_grid` ou `facet_wrap`, para ter gráficos separados de acordo a uma característica do *data frame*. Porém como colocamos ggplots lado a lado de diferentes *data frame* para uma única imagem? Há algumas opções, aqui irei mostrar utlizando o pacote `patchwork`,
-
-1. Armazenar os ggplots em um objeto utilizando o comando `<-` ou `=`, como mostra o exemplo abaixo
-
-2. Escrever os nomes do objetos colocar `+` entre eles
-
+## Unindo vários gráficos em uma imagem só
 
 ```{r}
 #Criando ggplots
