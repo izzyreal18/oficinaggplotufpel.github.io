@@ -110,5 +110,187 @@
     "title": "Introdução ao ggplot2",
     "section": "Ajustando escalas no ggplot",
     "text": "Ajustando escalas no ggplot\nRetornamos com o gráfico de barra com a média e as barras de desvio. Para ajustar a escala de algum elemento gráfico no ggplot o comando inicia scale_[parâmetro]_[característica do parâmetro ou tipo de função aplicada](). No caso abaixo foi utilizado o scale_y_continuous(), já que ajustaremos a escala do eixo y, sendo ela uma variável contínua. Dentro da função colocaremos o seguinte agumento limits=c(0,10), onde zero é o limite inferior e o 10 o limite superior.\n\niris%&gt;%group_by(Species)%&gt;%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%&gt;%ggplot(aes(x=Species, y=mean))+geom_col()+geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd), width=0.5)+labs(y=\"Comprimento da Sepala\", x=\"Espécies\")+theme_bw()+scale_y_continuous(limits=c(0,10))\n\n\n\n\n\n\n\n#exemplo com a escala maior\niris%&gt;%group_by(Species)%&gt;%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%&gt;%ggplot(aes(x=Species, y=mean))+geom_col()+geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd), width=0.5)+labs(y=\"Comprimento da Sepala\", x=\"Espécies\")+theme_bw()+scale_y_continuous(limits=c(0,20))"
+  },
+  {
+    "objectID": "index_beamer.html",
+    "href": "index_beamer.html",
+    "title": "Introdução ao ggplot2",
+    "section": "",
+    "text": "O ggplot2 é um pacote de código aberto para a visualização gráfica de dados para a linguagem de programação R. Foi criada por Hadley Wickham em 2005 (Wickham 2016), sendo uma implementação do livro Grammar Graphics de Leland Wilkison também lançado em 2005 (Wilkinson 2011).\nEle aborda que visualização gráfica dos dados pode ser divida em componentes semânticos, como escalas e camadas."
+  },
+  {
+    "objectID": "index_beamer.html#por-que-usar-o-ggplot2",
+    "href": "index_beamer.html#por-que-usar-o-ggplot2",
+    "title": "Introdução ao ggplot2",
+    "section": "Por que usar o ggplot2?",
+    "text": "Por que usar o ggplot2?\n\nAlta costumização gráfica.\nAlta diversidade de modelos de gráficos.\nIntegração com outros pacotes do tidyverse, como por exemplo dplyr (Wickham et al. 2023), forcats (Wickham 2023) e o plotly(Sievert 2020).\nCriação de gráficos a partir de camadas, podendo sobrepor diferentes gráficos."
+  },
+  {
+    "objectID": "index_beamer.html#como-instalar-o-ggplot2",
+    "href": "index_beamer.html#como-instalar-o-ggplot2",
+    "title": "Introdução ao ggplot2",
+    "section": "Como instalar o ggplot2?",
+    "text": "Como instalar o ggplot2?\n\n#instalando pacote ggplot2\ninstall.packages(\"ggplot2\")\n\n#instalando dplyr, forcats e patchwork\ninstall.packages(\"dplyr\")\ninstall.packages(\"forcats\")\ninstall.packages(\"patchwork\")\n\n\nPara usar o ggplot2 em seus scripts tem que carrega-lo\n\n#Carregando o pacote ggplot2\nlibrary(ggplot2)\n\n#Carregando dplyr, forcats e patchwork\nlibrary(dplyr)\nlibrary(forcats)\nlibrary(patchwork)"
+  },
+  {
+    "objectID": "index_beamer.html#ajustando-escalas-no-ggplot",
+    "href": "index_beamer.html#ajustando-escalas-no-ggplot",
+    "title": "Introdução ao ggplot2",
+    "section": "Ajustando escalas no ggplot",
+    "text": "Ajustando escalas no ggplot\nRetornamos com o gráfico de barra com a média e as barras de desvio. Para ajustar a escala de algum elemento gráfico no ggplot o comando inicia scale_[parâmetro]_[característica do parâmetro ou tipo de função aplicada](). No caso abaixo foi utilizado o scale_y_continuous(), já que ajustaremos a escala do eixo y, sendo ela uma variável contínua. Dentro da função colocaremos o seguinte agumento limits=c(0,10), onde zero é o limite inferior e o 10 o limite superior.\n\niris%&gt;%group_by(Species)%&gt;%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%&gt;%ggplot(aes(x=Species, y=mean))+geom_col()+geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd), width=0.5)+labs(y=\"Comprimento da Sepala\", x=\"Espécies\")+theme_bw()+scale_y_continuous(limits=c(0,10))\n\n\n\n\n\n\n\n#exemplo com a escala maior\niris%&gt;%group_by(Species)%&gt;%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%&gt;%ggplot(aes(x=Species, y=mean))+geom_col()+geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd), width=0.5)+labs(y=\"Comprimento da Sepala\", x=\"Espécies\")+theme_bw()+scale_y_continuous(limits=c(0,20))"
+  },
+  {
+    "objectID": "index_beamer.html#ordenando-variáveis-ordinais-no-ggplot",
+    "href": "index_beamer.html#ordenando-variáveis-ordinais-no-ggplot",
+    "title": "Introdução ao ggplot2",
+    "section": "Ordenando variáveis ordinais no ggplot",
+    "text": "Ordenando variáveis ordinais no ggplot\nEm um data frame podemos ter variáveis ordinais, que em uma visualização gráfica não faz sentido que elas não sejam apresentadas na ordem correta. Então usaremos o pacote forcats para isso. Aqui ire gerar um data frame hipotético da frequência da escolaridade dos entrevistados de uma pesquisa,\nNesse primeiro modelo, note que a escolaridade não está seguindo a sequência correta. Já que o R por padrão ordena por ordem alfabética.\n\nEscolaridade&lt;-c(rep(\"Graduação\", 42), rep(\"Médio\", 30), rep(\"Fundamental\", 20))\nEscolaridade&lt;-as.data.frame(Escolaridade)\n\nEscolaridade%&gt;%ggplot(aes(x=Escolaridade))+geom_bar()+labs(y=\"Frequência\", x=\"Escolaridade\")\n\n\n\n\n\n\n\n\nNesse próximo isso é corrigido pelo comando mutate(Escolaridade=fct_relevel(Escolaridade,\"Fundamental\",\"Médio\", \"Graduação\")). A função mutate() serve para fazer alterações no data frame, como mudar nome, ordem, características, entre outros. Dentro dela colocamos o argumento Escolaridade=fct_relevel(Escolaridade,\"Fundamental\",\"Médio\",\"Graduação\"), o fct_relevel() é a função que atua na reordenação, dentro dela colocamos Escolaridade pois é a que queremos ordenar, depois colocamos qual é a ordem que queremos \"Fundamental\", \"Médio\", Graduação\", e toda essa alteração será armazenado em Escolaridade.\n\nEscolaridade%&gt;%mutate(Escolaridade=fct_relevel(Escolaridade,\"Fundamental\",\"Médio\", \"Graduação\"))%&gt;%ggplot(aes(x=Escolaridade))+geom_bar()+labs(y=\"Frequência\", x=\"Escolaridade\")"
+  },
+  {
+    "objectID": "index_beamer.html#mudando-cores-de-preenchimento-no-ggplot",
+    "href": "index_beamer.html#mudando-cores-de-preenchimento-no-ggplot",
+    "title": "Introdução ao ggplot2",
+    "section": "Mudando cores de preenchimento no ggplot",
+    "text": "Mudando cores de preenchimento no ggplot\nUma das formas de acrescentar cor ao gráfico é adicionando o argumento fill dentro da função aes(). Indicará ao ggplot que você quer que as cores de preenchimentos do ggplot mude de acordo com alguma variável de seu data frame.\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()\n\n\n\n\n\n\n\n\nHá várias maneiras de fazer isso, irei demonstrar algumas ao longo da oficina.\nPor exemplo na linha de código abaixo foi acrescentado o argumento fill dentro da função geom_boxplot().Nesse argumento usei a função de contatenar (c()), para denominar as três cores desejadas para o gráfico. Note que os nomes das cores estão escritos entre aspas ““. Ao invés de colocar nome de cores em inglês, pode-se colocar o código RGB hexadecimal da cor, como #4287f5.\nAtenção se queremos que as cores sejam diferenciadas de acordo com algum fator, ou variável nominal de nosso data.frame, temos que indicar dentro do aes(). Como fill para mudar o preenchimento, colour para mudar o contorno, e shape para mudar formato (caso esteja trabalhando com gráficos possuem pontos).\nNote: quando colocamos as cores escolhidas dentro da forma geométrica (geom_), não será gerado legenda.\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length))+geom_boxplot(fill=c(\"lightpink\",\"lightgreen\",\"lightblue\"))\n\n\n\n\n\n\n\n\nA outra forma é delimitar através da função scale_fill_manual(), esse comando serve para alterar os parâmetros de fill. Nele foi utilizado values = c() para concatenar as cores escolhidas.\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+scale_fill_manual(values=c(\"#704c41\",\"#41704f\",\"#584170\"))"
+  },
+  {
+    "objectID": "index_beamer.html#mudando-cores-de-contorno-no-ggplot",
+    "href": "index_beamer.html#mudando-cores-de-contorno-no-ggplot",
+    "title": "Introdução ao ggplot2",
+    "section": "Mudando cores de contorno no ggplot",
+    "text": "Mudando cores de contorno no ggplot\nO mesmo processo poderia ser feito igual ao fill, porém utilizando o comando color. Esse paramêtro também pode ser utilizado para diferenciar algunciar algum fator do data frame, apenas colocando dentro do aes(color=\"coluna do data.frame\"). Nesse caso foi colocado dentro da função geom_boxplot(), e coloquei o contorno do boxplot na cor marrom.\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(\"lightblue\",\"lightgreen\",\"lightpink\"), color=\"brown\")"
+  },
+  {
+    "objectID": "index_beamer.html#alterando-elementos-textuais-no-ggplot",
+    "href": "index_beamer.html#alterando-elementos-textuais-no-ggplot",
+    "title": "Introdução ao ggplot2",
+    "section": "Alterando elementos textuais no ggplot",
+    "text": "Alterando elementos textuais no ggplot\nOs nomes dos eixos são alterados pela função labs, onde você indica qual elemento gráfico você quer renomear. Lembre-se: o nome que você quer renomear tem que estar entre aspas ” “.\n\ny para alterar o título do eixo y.\nx para alterar o título do eixo x.\ntitle para alterar o título ou acrescentar um título.\nsubtitle para alterar o subtítulo ou acrescentar um subtítulo.\nfill para alterar o título da legenda referente ao fator colocado no fill.\ncolor para alterar o título da legenda referente ao fator colocado no color.\nshape para alterar o título da legenda referente ao fator colocado no shape.\nsize para alterar o título da legenda referente ao fator colocado no size.\n\n\n#| echo: true\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(\"lightblue\",\"lightgreen\",\"lightpink\"), color=\"brown\")+labs(y=\"Comprimento de pétala\", x=\"Espécies\", title=\"Comparação de comprimento de pétalas\", subtitle = \"Banco de dados iris\")\n\n\n\n\n\n\n\n\n\nAlterando a fonte\nPara alterar o tipo fonte do gráficos é necessário usar o pacote extrafont. Abaixo estará os comandos para instalar o pacote e carrega-lo.\n\n# Instalando o pacote extrafont\ninstall.packages(\"extrafont\")\n\n#Carregando o pacote extrafont\nlibrary(extrafont)\n\n#Carregando as fontes presentes no computador\nloadfonts(device=\"all\")\n\nAqui alteramos as fontes através do comando theme() este comando altera elementos temáticos do gráfico, como por exemplo fontes, tamanhos, cor de fundo, entre outros. Neste exemplo colocamons o argumento text = element_text(). Dentro dele vai alguns argumentos:\n\nface é para definir se a fonte estará em itálico (\"italic\"), negrito (\"bold\") ou ambos (\"italic.bold\")\nfamily é para definir se o tipo de fonte. Esse argumento pode ter variações de acordo com sistema operacional do computador. Em sistema windows pode-se utilizar \"TT Times New Roman\", \"Arial\", etc. Enquanto em sistemas Linux e MacOS estarão \"serif\", \"mono\", etc.\nsize é para definir se o tamanho da fonte.\n\nObs.: esses elementos são importantes para garantir boa visualização gráfica e seguir padrões gráficos de publicações ou revistas.\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y=\"Comprimento de pétala\", x=\"Espécies\")+theme(text = element_text(face=\"bold\", family=\"serif\"))\n\n\n\n\n\n\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y=\"Comprimento de pétala\", x=\"Espécies\")+theme(text = element_text(face = \"bold.italic\", family=\"mono\", size=16))\n\n\n\n\n\n\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y=\"Comprimento de pétala\", x=\"Espécies\")+theme(text = element_text(face=\"italic\"))\n\n\n\n\n\n\n\n\nAs vezes é necessário colocar nomes em itálico, como por exemplo nomes de espécies que estão no eixo x. Com isso dentro de theme() colocaremos o arguemento axis.text.x = element_text(face=\"italic\") se referindo que estaremos trabalhando com o texto presente na escala do eixo x. Caso fosse no eixo y seria axis.text.y. Essa alteração também pode ser aplicada à outros parâmetros, como fill e color. Trabalhando assim, podemos alterar a fonte apenas daquele parâmetro.\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y=\"Comprimento de pétala\", x=\"Espécies\")+theme(axis.text.x = element_text(face=\"italic\"))\n\n\n\n\n\n\n\n\nA seguir há o exemplo de deixar o título em negrito com maior destaque, utilizando o argumento plot.title = element_text(face=\"bold\")\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y=\"Comprimento de pétala\", x=\"Espécies\", fill=\"Espécies\", title=\"Aqui é o título\")+theme(axis.text.x = element_text(face=\"italic\"), plot.title = element_text(face=\"bold\"))\n\n\n\n\n\n\n\n\n\n\nManipulação da legenda\nCaso queremos tirar a legenda ou alterar a posição da legenda, utilizaremos o argumento legend.position =:\n\n“none” para tirar a legenda\n“top” para a legenda ficar em cima\n“bottom” para a legenda ficar em baixo\n“left” para a legenda ficar na esquerda\n“right” para a legenda ficar na direita\n\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y=\"Comprimento de pétala\", x=\"Espécies\", fill=\"Espécies\", title=\"Aqui é o título\")+theme(axis.text.x = element_text(face=\"italic\"), plot.title = element_text(face=\"bold\"), legend.position = \"none\")\n\n\n\n\n\n\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y=\"Comprimento de pétala\", x=\"Espécies\", fill=\"Espécies\", title=\"Aqui é o título\")+theme(axis.text.x = element_text(face=\"italic\"), plot.title = element_text(face=\"bold\"), legend.position = \"top\")\n\n\n\n\n\n\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y=\"Comprimento de pétala\", x=\"Espécies\", fill=\"Espécies\", title=\"Aqui é o título\")+theme(axis.text.x = element_text(face=\"italic\"), plot.title = element_text(face=\"bold\"), legend.position = \"bottom\")\n\n\n\n\n\n\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y=\"Comprimento de pétala\", x=\"Espécies\", fill=\"Espécies\", title=\"Aqui é o título\")+theme(axis.text.x = element_text(face=\"italic\"), plot.title = element_text(face=\"bold\"), legend.position = \"left\", legend.text = element_text(face=\"italic\"))\n\n\n\n\n\n\n\n\n\n\nAnotação em gráfico\nTambém é possível fazer anotações em gráficos no ggplot2, como colocar linhas e anotações para destacar pontos interessantes.\nNo primeiro exemplo colocamos o geom_text para adicionar o texto. Os argumentos x e y são para delimitar onde vai ficar o nosso texto, label é para definir o que vai estar no texto (nunca se esqueça de colocar entre aspas \" \").\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y=\"Comprimento de pétala\", x=\"Espécies\", fill=\"Espécies\", title=\"Aqui é o título\")+theme(axis.text.x = element_text(face=\"italic\"), plot.title = element_text(face=\"bold\"), legend.position = \"left\", legend.text = element_text(face=\"italic\"))+ geom_text(x = 2.5, y = 4, label = \"Ponto importante\", color = \"red\", face=\"bold\")\n\nWarning in geom_text(x = 2.5, y = 4, label = \"Ponto importante\", color = \"red\",\n: Ignoring unknown parameters: `face`\n\n\n\n\n\n\n\n\n\nAqui é um exemplo utilizando annotate, nele além de adicionar texto, você pode adicionar linhas. Como nesse caso colocamos uma linha vertical no gráfico utilizando o argumento \"vline\". Para colocar uma linha na horizontal é \"hline\". Para ser um texto se utiliza o argumento \"text\".\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y=\"Comprimento de pétala\", x=\"Espécies\", fill=\"Espécies\", title=\"Aqui é o título\")+theme(axis.text.x = element_text(face=\"italic\"), plot.title = element_text(face=\"bold\"), legend.position = \"left\", legend.text = element_text(face=\"italic\"))+ geom_text(x = 2.5, y = 4, label = \"Ponto importante\", color = \"red\")+ annotate(\"vline\", x = 2, xintercept = 2, linetype = \"dashed\", color = \"blue\")\n\nWarning: `geom` must not be \"vline\".\nℹ Please use `geom_vline()` directly instead.\n\n\nWarning in annotate(\"vline\", x = 2, xintercept = 2, linetype = \"dashed\", :\nIgnoring unknown aesthetics: x\n\n\n\n\n\n\n\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y=\"Comprimento de pétala\", x=\"Espécies\", fill=\"Espécies\", title=\"Aqui é o título\")+theme(axis.text.x = element_text(face=\"italic\"), plot.title = element_text(face=\"bold\"), legend.position = \"left\", legend.text = element_text(face=\"italic\"))+ geom_text(x = 2.5, y = 4, label = \"Ponto importante\", color = \"red\")+annotate(\"text\", x = 1, y = 3.5, label = \"outro ponto\", color = \"blue\")"
+  },
+  {
+    "objectID": "index_beamer.html#temas",
+    "href": "index_beamer.html#temas",
+    "title": "Introdução ao ggplot2",
+    "section": "Temas",
+    "text": "Temas\nO ggplot2 por padrão dispõe de alguns temas para utilizar nos gráficos, adicionando theme_, aparece as sujestões disponíveis do pacote. Através do comando theme(), pode-se editar o tema ou criar temas novos.\nAbaixo está os temas disponíveis do pacote ggplot2.\n\ndefault&lt;-iris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(\"lightblue\",\"lightgreen\",\"lightpink\"), color=\"black\")+labs(y=\"Comprimento de pétala\", x=\"Espécies\", title=\"Default\")\n\nclassic&lt;-iris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(\"lightblue\",\"lightgreen\",\"lightpink\"), color=\"black\")+labs(y=\"Comprimento de pétala\", x=\"Espécies\", title=\"Classic\")+theme_classic()\n\ndark&lt;-iris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(\"lightblue\",\"lightgreen\",\"lightpink\"), color=\"black\")+labs(y=\"Comprimento de pétala\", x=\"Espécies\", title=\"Dark\")+theme_dark()\n\nbw&lt;-iris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(\"lightblue\",\"lightgreen\",\"lightpink\"), color=\"black\")+labs(y=\"Comprimento de pétala\", x=\"Espécies\", title=\"bw\")+theme_bw()\n\nminimal&lt;-iris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(\"lightblue\",\"lightgreen\",\"lightpink\"), color=\"black\")+labs(y=\"Comprimento de pétala\", x=\"Espécies\", title=\"Minimal\")+theme_minimal()\n\ngray&lt;-iris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(\"lightblue\",\"lightgreen\",\"lightpink\"), color=\"black\")+labs(y=\"Comprimento de pétala\", x=\"Espécies\", title=\"Gray\")+theme_gray()\n\nlight&lt;-iris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(\"lightblue\",\"lightgreen\",\"lightpink\"), color=\"black\")+labs(y=\"Comprimento de pétala\", x=\"Espécies\", title=\"Light\")+theme_light()\n\nlinedraw&lt;-iris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(\"lightblue\",\"lightgreen\",\"lightpink\"), color=\"black\")+labs(y=\"Comprimento de pétala\", x=\"Espécies\", title=\"Linedraw\")+theme_linedraw()\n\nvoid&lt;-iris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(\"lightblue\",\"lightgreen\",\"lightpink\"), color=\"black\")+labs(y=\"Comprimento de pétala\", x=\"Espécies\", title=\"Void\")+theme_void()\n\ndefault+classic+dark+bw+minimal+gray+light+linedraw+void"
+  },
+  {
+    "objectID": "index_beamer.html#mapas",
+    "href": "index_beamer.html#mapas",
+    "title": "Introdução ao ggplot2",
+    "section": "Mapas",
+    "text": "Mapas\n\n#instalando o pacote raster e sf\ninstall.packages(\"raster\")\ninstall.packages(\"sf\")\n\n#carregando o pacote raster e sf\nlibrary(raster)\nlibrary(sf)\n\n\n\n# Importando dados\nprec&lt;-raster(\"pelprec.tiff\")\n\npel&lt;-read_sf(\"Pelotas/Pelotas.shp\")\n\n# Convertendo raster para data frame para o ggplot processar o dado\nprec_df&lt;-as.data.frame(prec, xy = TRUE, na.rm = TRUE)\n\nhead(prec_df)\n\n           x         y pelprec\n14 -52.49583 -31.32917     120\n15 -52.48750 -31.32917     121\n16 -52.47917 -31.32917     121\n17 -52.47083 -31.32917     120\n18 -52.46250 -31.32917     120\n19 -52.45417 -31.32917     120\n\n\n\n\nggplot(prec_df,aes(x=x,y=y,fill=pelprec))+geom_raster()\n\n\n\n\n\n\n\n\n\n\n# Cores padrão\nggplot()+geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+geom_sf(data=pel,fill=NA, color=\"gray\",linewidth=2, alpha=.01)+labs(title=\"Mapa da média anual da precipitação \\n em Pelotas-RS entre 1970-2000\", y=\"Latitude\", x=\"Longitude\", fill=\"Precipitação (mm)\")+theme_bw()\n\n\n\n\n\n\n\nggplot()+geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+geom_sf(data=pel,fill=NA, color=\"gray\",linewidth=2, alpha=.01)+labs(title=\"Mapa da média anual da precipitação \\n em Pelotas-RS entre 1970-2000\", y=\"Latitude\", x=\"Longitude\", fill=\"Precipitação (mm)\")+theme_bw()+scale_fill_gradient(low=\"gray\",high=\"blue\")\n\n\n\n\n\n\n\nggplot()+geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+geom_sf(data=pel,fill=NA, color=\"gray\",linewidth=2, alpha=.01)+labs(title=\"Mapa da média anual da precipitação \\n em Pelotas-RS entre 1970-2000\", y=\"Latitude\", x=\"Longitude\", fill=\"Precipitação (mm)\")+theme_bw()+scale_fill_gradientn(colours = terrain.colors(10))\n\n\n\n\n\n\n\n\n\n\n#intalando pacote viridis\ninstall.packages(\"viridis\")\n#carregando pacote viridis\nlibrary(viridis)\n\n\n\nggplot()+geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+geom_sf(data=pel,fill=NA, color=\"gray\",linewidth=2, alpha=.01)+labs(title=\"Mapa da média anual da precipitação \\n em Pelotas-RS entre 1970-2000\", y=\"Latitude\", x=\"Longitude\", fill=\"Precipitação (mm)\")+theme_bw()+scale_fill_viridis()"
+  },
+  {
+    "objectID": "index_beamer.html#temas-divertidos",
+    "href": "index_beamer.html#temas-divertidos",
+    "title": "Introdução ao ggplot2",
+    "section": "Temas divertidos",
+    "text": "Temas divertidos\n\ninstall.packages(\"remotes\")\nremotes::install_github(\"MatthewBJane/ThemePark\")\nlibrary(ThemePark)\n\n\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(lordoftherings_theme_colors[\"light\"],lordoftherings_theme_colors[\"medium\"],lordoftherings_theme_colors[\"dark\"]))+labs(y=\"Comprimento de pétala\", x=\"Espécies\", title= \"Tema Senhor dos Anéis\")+theme_lordoftherings()\n\n\n\n\n\n\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(barbie_theme_colors[\"light\"],barbie_theme_colors[\"medium\"],barbie_theme_colors[\"dark\"]))+labs(y=\"Comprimento de pétala\", x=\"Espécies\", title= \"Tema Barbie\")+theme_barbie()\n\n\n\n\n\n\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(simpsons_theme_colors[\"light\"],simpsons_theme_colors[\"medium\"],simpsons_theme_colors[\"dark\"]))+labs(y=\"Comprimento de pétala\", x=\"Espécies\", title= \"Tema Simpsons\")+theme_simpsons()\n\n\n\n\n\n\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(friends_theme_colors[\"light\"],friends_theme_colors[\"medium\"],friends_theme_colors[\"dark\"]))+labs(y=\"Comprimento de pétala\", x=\"Espécies\", title= \"Tema Friends\")+theme_friends()\n\n\n\n\n\n\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(starwars_theme_colors[\"light\"],starwars_theme_colors[\"medium\"],starwars_theme_colors[\"dark\"]))+labs(y=\"Comprimento de pétala\", x=\"Espécies\", title= \"Tema Star wars\")+theme_starwars()"
+  },
+  {
+    "objectID": "index_beamer.html#gráficos-interativos",
+    "href": "index_beamer.html#gráficos-interativos",
+    "title": "Título da Apresentação",
+    "section": "Gráficos interativos",
+    "text": "Gráficos interativos\nCaso apenas o ggplot por si só não foi o suficiente. Temos uma forma de deixar os seus gráficos interativos através do pacote plotly, onde podemos passar o mouse e ver valores, dar zoom, entre outras coisas.\n\n#instalando plotly\ninstall.packages(\"plotly\")\n#carregando plotly\nlibrary(plotly)\n\n\ndefault&lt;-iris%&gt;%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(\"lightblue\",\"lightgreen\",\"lightpink\"), color=\"black\")+labs(y=\"Comprimento de pétala\", x=\"Espécies\", title=\"Default\")\n\nggplotly(default)\n\n\n\n\nsnes1&lt;-ggplot()+geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+geom_sf(data=pel,fill=NA, color=\"gray\",linewidth=2, alpha=.01)+labs(title=\"Mapa da média anual da precipitação \\n em Pelotas-RS entre 1970-2000\", y=\"Latitude\", x=\"Longitude\", fill=\"Precipitação (mm)\")+theme_bw()+scale_fill_snes_b()\n\nggplotly(snes1)"
+  },
+  {
+    "objectID": "index_beamer.html#gráficos-animados",
+    "href": "index_beamer.html#gráficos-animados",
+    "title": "Título da Apresentação",
+    "section": "Gráficos animados",
+    "text": "Gráficos animados\nTambém é possível criar gráficos animados para uma apresentação, através do pacote gganimate.\n\n#instalando pacotes: gganimate,gapminder,gifski, av e magick\ninstall.packages(\"gganimate\")\ninstall.packages(\"gapminder\")\ninstall.packages(\"gifski\")\ninstall.packages(\"av\")\ninstall.packages(\"magick\")\n\n#carregand os pacotes gganimate, gapminder, av, gifski e magick\nlibrary(gganimate)\nlibrary(gapminder)\nlibrary(av)\nlibrary(gifski)\nlibrary(magick)\n\n\ndata(\"gapminder\")\n\nhead(gapminder)\n\n# A tibble: 6 × 6\n  country     continent  year lifeExp      pop gdpPercap\n  &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;\n1 Afghanistan Asia       1952    28.8  8425333      779.\n2 Afghanistan Asia       1957    30.3  9240934      821.\n3 Afghanistan Asia       1962    32.0 10267083      853.\n4 Afghanistan Asia       1967    34.0 11537966      836.\n5 Afghanistan Asia       1972    36.1 13079460      740.\n6 Afghanistan Asia       1977    38.4 14880372      786.\n\n\n\nggplot(gapminder,aes(x=gdpPercap,y=lifeExp,color=country,size=pop))+geom_point(alpha=.7, show.legend = FALSE)+scale_colour_manual(values=country_colors)+facet_wrap(~continent)+scale_size(range=c(2,12))+scale_x_log10() + labs(title = 'Year: {frame_time}', x = 'GDP per capita', y = 'life expectancy') +\n  transition_time(year) +\n  ease_aes('linear')+theme_light()"
+  },
+  {
+    "objectID": "index_beamer.html#introdução",
+    "href": "index_beamer.html#introdução",
+    "title": "Introdução ao ggplot2",
+    "section": "",
+    "text": "O ggplot2 é um pacote de código aberto para a visualização gráfica de dados para a linguagem de programação R. Foi criada por Hadley Wickham em 2005 (Wickham 2016), sendo uma implementação do livro Grammar Graphics de Leland Wilkison também lançado em 2005 (Wilkinson 2011).\nEle aborda que visualização gráfica dos dados pode ser divida em componentes semânticos, como escalas e camadas."
+  },
+  {
+    "objectID": "index_beamer.html#banco-de-dados-iris",
+    "href": "index_beamer.html#banco-de-dados-iris",
+    "title": "Introdução ao ggplot2",
+    "section": "Banco de dados iris",
+    "text": "Banco de dados iris\nPara essa oficina será utilizado bancos de dados iris.\niris - é referente tamanho de pételas e sepalas de 3 espécies do gênero Iris do trabalho de Fisher em 1936 (Iris setosa,Iris versicolor e Iris virginica)\n\ndata(iris)\n\n\n\n\n\n\n\n\n\n\nSepal.Length\nSepal.Width\nPetal.Length\nPetal.Width\nSpecies\n\n\n\n\n5.1\n3.5\n1.4\n0.2\nsetosa\n\n\n4.9\n3.0\n1.4\n0.2\nsetosa\n\n\n4.7\n3.2\n1.3\n0.2\nsetosa\n\n\n4.6\n3.1\n1.5\n0.2\nsetosa"
+  },
+  {
+    "objectID": "index_beamer.html#box-plot",
+    "href": "index_beamer.html#box-plot",
+    "title": "Introdução ao ggplot2",
+    "section": "Box-plot",
+    "text": "Box-plot\n\niris%&gt;%ggplot(aes(x=Species, y=Petal.Length))+\n  geom_boxplot()"
+  },
+  {
+    "objectID": "index_beamer.html#gráfico-violino",
+    "href": "index_beamer.html#gráfico-violino",
+    "title": "Introdução ao ggplot2",
+    "section": "Gráfico violino",
+    "text": "Gráfico violino\n\nggplot(iris, aes(x=Species,y=Sepal.Width, fill=Species))+\n  geom_violin()"
+  },
+  {
+    "objectID": "index_beamer.html#histograma",
+    "href": "index_beamer.html#histograma",
+    "title": "Introdução ao ggplot2",
+    "section": "Histograma",
+    "text": "Histograma\n\nggplot(iris,aes(x=Sepal.Width))+\n  geom_histogram(bins=10, color=\"black\",\n                 fill=\"white\")+\n  labs(y=\"Frequência\", x=\"Largura de Sépala\")\n\n\n\n\n\n\n\n\n\n\nggplot(iris,aes(x=Sepal.Width))+\n  geom_histogram(bins=11, color=\"black\",\n                 fill=\"white\")+\n  labs(y=\"Frequência\", x=\"Largura de Sépala\")+\n  scale_x_continuous(n.breaks = 11)"
+  },
+  {
+    "objectID": "index_beamer.html#polígono",
+    "href": "index_beamer.html#polígono",
+    "title": "Introdução ao ggplot2",
+    "section": "Polígono",
+    "text": "Polígono\n\nggplot(iris,aes(x=Sepal.Width))+\n  geom_freqpoly(bins=11, color=\"black\")+\n  labs(y=\"Frequência\", x=\"Largura de Sépala\")+\n  scale_x_continuous(n.breaks = 11)\n\n\n\n\n\n\n\n\n\n\nggplot(iris,aes(x=Sepal.Width))+\n  labs(y=\"Frequência\", x=\"Largura de Sépala\")+\n  scale_x_continuous(n.breaks = 11)+\n  geom_histogram(bins=11, color=\"black\",\n                 fill=\"white\")+\n  geom_freqpoly(bins=11, color=\"blue\")\n\n\n\n\n\n\n\n\n\n\nggplot(iris,aes(x=Sepal.Width))+\n  labs(y=\"Frequência\", x=\"Largura de Sépala\")+\n  scale_x_continuous(n.breaks = 11)+\n  geom_histogram(bins=11, color=\"black\",\n                 fill=\"white\")+\n  geom_freqpoly(bins=11, color=\"blue\")+\n  facet_grid(~Species)\n\n\n\n\n\n\n\n\n\n\nggplot(iris,aes(x=Sepal.Width))+\n  labs(y=\"Frequência\", x=\"Largura de Sépala\")+\n  scale_x_continuous(n.breaks = 11)+\n  geom_histogram(bins=11, color=\"black\",\n                 fill=\"white\")+\n  geom_freqpoly(bins=11, color=\"blue\")+\n  facet_grid(Species~.)"
+  },
+  {
+    "objectID": "index_beamer.html#gráfico-de-densidade",
+    "href": "index_beamer.html#gráfico-de-densidade",
+    "title": "Introdução ao ggplot2",
+    "section": "Gráfico de densidade",
+    "text": "Gráfico de densidade\n\nggplot(iris,aes(x=Sepal.Width))+\n  geom_density(color=\"black\", fill=\"white\")+\n  labs(y=\"Frequência\", x=\"Largura de Sépala\")"
+  },
+  {
+    "objectID": "index_beamer.html#gráfico-de-barras-de-frequência",
+    "href": "index_beamer.html#gráfico-de-barras-de-frequência",
+    "title": "Introdução ao ggplot2",
+    "section": "Gráfico de barras de frequência",
+    "text": "Gráfico de barras de frequência\n\niris%&gt;%ggplot(aes(x=Species))+\n  geom_bar()\n\n\n\n\n\n\n\n\n\n\niris%&gt;%group_by(Species)%&gt;%\n  summarise(count=n())%&gt;%\n  ggplot(aes(x=Species, fill=Species, y=count))+\n  geom_col(color=\"black\")"
+  },
+  {
+    "objectID": "index_beamer.html#gráfico-de-pizza",
+    "href": "index_beamer.html#gráfico-de-pizza",
+    "title": "Introdução ao ggplot2",
+    "section": "Gráfico de pizza",
+    "text": "Gráfico de pizza\n\niris%&gt;%group_by(Species)%&gt;%\n  summarise(count=n()/150*100)%&gt;%\n  ggplot(aes(x=\" \", fill=Species, y=count))+\n  geom_col(color=\"black\")+\n  coord_polar(theta=\"y\")+\n  theme_void()\n\n\n\n\n\n\n\n\n\n\niris%&gt;%group_by(Species)%&gt;%\n  summarise(count=round(n()/150*100, 2))%&gt;%\n  ggplot(aes(x=\" \", fill=Species, y=count))+\n  geom_col(color=\"black\")+\n  coord_polar(theta=\"y\")+\n  geom_label(aes(label = count),\n             position = position_stack(vjust = 0.5),\n             show.legend = FALSE)+\n  theme_void()"
+  },
+  {
+    "objectID": "index_beamer.html#gráfico-de-pontos",
+    "href": "index_beamer.html#gráfico-de-pontos",
+    "title": "Introdução ao ggplot2",
+    "section": "Gráfico de pontos",
+    "text": "Gráfico de pontos\n\nggplot(iris,aes(x=Sepal.Length, y=Sepal.Width))+\n  geom_point()\n\n\n\n\n\n\n\n\n\n\nggplot(iris,aes(x=Sepal.Length, y=Sepal.Width,\n                color=Species, shape=Species))+\n  geom_point()\n\n\n\n\n\n\n\n\n\n\nggplot(iris,aes(x=Sepal.Length, y=Sepal.Width,\n                color=Species, shape=Species))+\n  geom_point()+\n  geom_smooth(se=FALSE, method=\"lm\")\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n\n\n\n\n\n\n\nggplot(iris,aes(x=Sepal.Length, y=Sepal.Width, color=Species,\n                shape=Species))+\n  geom_point()+\n  geom_smooth(se=FALSE, method=\"lm\")+\n  coord_flip()\n\n`geom_smooth()` using formula = 'y ~ x'"
+  },
+  {
+    "objectID": "index_beamer.html#gráfico-de-barras-média-e-desvio",
+    "href": "index_beamer.html#gráfico-de-barras-média-e-desvio",
+    "title": "Introdução ao ggplot2",
+    "section": "Gráfico de barras (média e desvio)",
+    "text": "Gráfico de barras (média e desvio)\n\niris%&gt;%group_by(Species)%&gt;%\n  summarise(mean=mean(Sepal.Length),\n            sd=sd(Sepal.Length),\n            se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%&gt;%\n  ggplot(aes(x=Species, y=mean))+\n  geom_col()+\n  geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd), width=0.5)+\n  labs(y=\"Comprimento da Sepala\", x=\"Espécies\")+\n  theme_bw()+\n  scale_y_continuous(limits=c(0,10))\n\n\n\n\n\n\n\n\n\n\niris%&gt;%group_by(Species)%&gt;%\n  summarise(mean=mean(Sepal.Length),\n            sd=sd(Sepal.Length),\n            se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%&gt;%\n  ggplot(aes(x=Species, y=mean))+\n  geom_col()+\n  geom_linerange(aes(ymin=mean-sd,ymax=mean+sd))+\n  labs(y=\"Comprimento da Sepala\", x=\"Espécies\")+\n  theme_bw()+\n  scale_y_continuous(limits=c(0,10))\n\n\n\n\n\n\n\n\n\n\niris%&gt;%group_by(Species)%&gt;%\n  summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%&gt;%ggplot(aes(x=Species, y=mean))+geom_col()+geom_pointrange(aes(ymin=mean-sd,ymax=mean+sd))+labs(y=\"Comprimento da Sepala\", x=\"Espécies\")+theme_bw()+scale_y_continuous(limits=c(0,10))\n\n\n\n\n\n\n\n\nO exemplo abaixo é sem a coluna, apenas o geom_linerange.\n\niris%&gt;%group_by(Species)%&gt;%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%&gt;%ggplot(aes(x=Species, y=mean))+geom_linerange(aes(ymin=mean-sd,ymax=mean+sd))+labs(y=\"Comprimento da Sepala\", x=\"Espécies\")+theme_bw()+scale_y_continuous(limits=c(0,10))"
+  },
+  {
+    "objectID": "index_beamer.html#extra",
+    "href": "index_beamer.html#extra",
+    "title": "Introdução ao ggplot2",
+    "section": "Extra",
+    "text": "Extra"
+  },
+  {
+    "objectID": "index_beamer.html#referências",
+    "href": "index_beamer.html#referências",
+    "title": "Introdução ao ggplot2",
+    "section": "Referências",
+    "text": "Referências\n\n\nSievert, Carson. 2020. Interactive Web-Based Data Visualization with r, Plotly, and Shiny. Chapman; Hall/CRC. https://plotly-r.com.\n\n\nWickham, Hadley. 2016. Ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York. https://ggplot2.tidyverse.org.\n\n\n———. 2023. Forcats: Tools for Working with Categorical Variables (Factors). https://forcats.tidyverse.org/.\n\n\nWickham, Hadley, Romain François, Lionel Henry, Kirill Müller, and Davis Vaughan. 2023. Dplyr: A Grammar of Data Manipulation. https://dplyr.tidyverse.org.\n\n\nWilkinson, Leland. 2011. “The Grammar of Graphics.” In Handbook of Computational Statistics: Concepts and Methods, 375–414. Springer."
   }
 ]

@@ -18,7 +18,7 @@ jobs:
         run: |
               sudo apt-get update
               sudo apt-get install -y \
-              libgdal-dev libproj-dev libgeos-dev \
+              libgdal-dev libproj-dev libgeos-dev v8-devel\
               libavfilter-dev libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev ffmpeg \
               libudunits2-dev \
               libmagick++-dev

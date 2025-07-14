@@ -1,0 +1,141 @@
+/* --------- Global --------- */
+body {
+    background-color: #ffffff;
+    color: #222222;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-size: 1.1em;
+}
+
+/* styles.css */
+
+/* Define a fonte menor para o conteúdo de uma coluna */
+.coluna-fonte-pequena {
+  font-size: 8px; /* 80% do tamanho da fonte padrão do slide */
+  /* Você também pode usar px, pt, ou até mesmo porcentagens diretas */
+  /* font-size: 14px; */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #003366; /* azul escuro */
+    font-weight: bold;
+    margin-top: 3em;
+}
+
+strong {
+    font-weight: 700;
+}
+
+em {
+    color: #555555;
+}
+
+a {
+    color: #003366;
+    text-decoration: none;
+    border-bottom: 1px dotted #003366;
+}
+
+a:hover {
+    color: #0055aa;
+    border-bottom: 1px solid #0055aa;
+}
+
+/* --------- Lists --------- */
+ul, ol {
+    margin-left: 2em;
+}
+
+/* --------- Tables --------- */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0;
+}
+
+table, th, td {
+    border: 1px solid #dddddd;
+}
+
+th, td {
+    padding: 0.5em;
+    text-align: left;
+}
+
+th {
+    background-color: #f0f0f0;
+    color: #003366;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* --------- Code Blocks --------- */
+code {
+    background-color: #f4f4f4;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.2em;
+}
+
+pre code {
+    display: block;
+    padding: 1em;
+    overflow-x: auto;
+}
+
+/* --------- Blockquotes --------- */
+blockquote {
+    border-left: 4px solid #003366;
+    background-color: #f9f9f9;
+    padding: 0.5em 1em;
+    margin: 1em 0;
+    color: #444444;
+}
+
+/* --------- RevealJS Specific --------- */
+.reveal section {
+    text-align: left;
+    padding: 0 1em;
+}
+
+.reveal .slides {
+    background-color: #ffffff;
+}
+
+.reveal h1, .reveal h2, .reveal h3 {
+    color: #003366;
+}
+
+.reveal strong {
+    color: #000000;
+}
+
+/* --------- Buttons --------- */
+.button, button, input[type="submit"], input[type="button"] {
+    background-color: #003366;
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button:hover, button:hover, input[type="submit"]:hover, input[type="button"]:hover {
+    background-color: #0055aa;
+}
+/* Add logo in top right corner globally without manual insertion */
+.reveal:after {
+    content: 'Ggplot2_hex_logo.svg.png'; /* replace with your logo path */
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 100px;
+    height: auto;
+    z-index: 9999;
+}
+
+

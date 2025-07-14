@@ -1,0 +1,72 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TEMPLATE BEAMER BASEADO NO PDF DA OFICINA EXPERIMENTAL
+% CRIADO POR GEMINI (VERSÃO CORRIGIDA)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\documentclass{beamer}
+
+% --- PACOTES BÁSICOS ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{xcolor}
+\usepackage[absolute,overlay]{textpos} % para posicionamento do logo
+
+% -------------------------------------
+% Pacotes para código
+\usepackage{listings}
+
+
+% --- TEMA E CORES ---
+% Usamos um tema base e personalizamos as cores e templates.
+\usetheme{default}
+
+% --- CORES INSTITUCIONAIS ---
+\definecolor{UFPELBlue}{RGB}{20, 49, 129}
+
+% --- CONFIGURAÇÃO DE CORES DO BEAMER ---
+\setbeamercolor{palette primary}{bg=UFPELBlue, fg=white}
+\setbeamercolor{frametitle}{bg=UFPELBlue, fg=white}
+\setbeamercolor{title}{fg=UFPELBlue}
+\setbeamercolor{structure}{fg=UFPELBlue}
+
+% --- FONTES ---
+\usefonttheme{default}
+\setbeamerfont{title}{size=\large, series=\bfseries}
+\setbeamerfont{frametitle}{size=\large, series=\bfseries}
+\setbeamerfont{author}{size=\small}
+\setbeamerfont{institute}{size=\small}
+
+% --- PACOTES PARA POSICIONAMENTO DO LOGO E BARRA ---
+\usepackage[absolute,overlay]{textpos}
+\usepackage{tikz}
+
+% Barra azul como footline
+\setbeamertemplate{footline}{%
+    \leavevmode%
+    \hbox{%
+        \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.5ex]{frametitle}
+        \end{beamercolorbox}%
+    }%
+}
+
+% --- TEMPLATE DO TÍTULO DO FRAME ---
+\defbeamertemplate*{frametitle}{custom-frametitle}{%
+  % Barra azul no topo
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth, ht=2.5ex, dp=1ex]{frametitle}
+  \end{beamercolorbox}
+
+  % Título centralizado abaixo da barra azul
+  \vspace{0.2cm}
+  \begin{center}
+    {\usebeamercolor[fg]{title}\usebeamerfont{frametitle}\insertframetitle}
+  \end{center}
+  \vspace{0.2cm}
+
+  % Logo do R no canto superior direito, fixo
+  \begin{textblock*}{2cm}(0.88\paperwidth,0.1cm)
+    \includegraphics[height=1cm]{logo_r.png} % Substitua pelo caminho correto
+  \end{textblock*}
+}
