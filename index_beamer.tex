@@ -195,6 +195,7 @@
 \usepackage{anyfontsize}
 \usepackage{multirow}
 \input{tem2.tex}
+\AtBeginEnvironment{quote}{\small}
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
@@ -249,8 +250,6 @@
 \title{Introdução ao ggplot2}
 \author{}
 \date{}
-\institute{UNIVERSIDADE FEDERAL DE PELOTAS \and INSTITUTO DE FÍSICA E
-MATEMÁTICA -- IFM}
 
 \begin{document}
 \frame{\titlepage}
@@ -291,33 +290,41 @@ componentes semânticos, como escalas e camadas.
 
 \begin{frame}[fragile]{Como instalar o ggplot2?}
 \phantomsection\label{como-instalar-o-ggplot2}
+\begin{columns}[T]
+\begin{column}{0.4\linewidth}
+\textbf{Instalando pacotes}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\#instalando pacote ggplot2}
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
 
-\CommentTok{\#instalando dplyr, forcats e patchwork}
+\CommentTok{\#instalando dplyr, forcats }
+\CommentTok{\# e patchwork}
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{)}
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"forcats"}\NormalTok{)}
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"patchwork"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-\end{frame}
+\end{column}
 
-\begin{frame}[fragile]
-Para usar o \texttt{ggplot2} em seus scripts tem que carrega-lo
+\begin{column}{0.4\linewidth}
+\textbf{Carregando pacotes}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\#Carregando o pacote ggplot2}
 \FunctionTok{library}\NormalTok{(ggplot2)}
 
-\CommentTok{\#Carregando dplyr, forcats e patchwork}
+\CommentTok{\#Carregando dplyr, forcats}
+\CommentTok{\#e patchwork}
 \FunctionTok{library}\NormalTok{(dplyr)}
 \FunctionTok{library}\NormalTok{(forcats)}
 \FunctionTok{library}\NormalTok{(patchwork)}
 \end{Highlighting}
 \end{Shaded}
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{Banco de dados \emph{iris}}
@@ -357,10 +364,8 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
   \FunctionTok{geom\_boxplot}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
-\end{frame}
 
-\begin{frame}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/Box-plot simplesx-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/Box-plot simples1-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]{Gráfico violino}
@@ -603,7 +608,9 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
   \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{limits=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
+\end{frame}
 
+\begin{frame}
 \pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/grafico de barras-1.pdf}}
 \end{frame}
 
@@ -622,44 +629,133 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
   \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{limits=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
+\end{frame}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-14-1.pdf}}
+\begin{frame}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-15-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{group\_by}\NormalTok{(Species)}\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean=}\FunctionTok{mean}\NormalTok{(Sepal.Length), }\AttributeTok{sd=}\FunctionTok{sd}\NormalTok{(Sepal.Length),}\AttributeTok{se=}\FunctionTok{sd}\NormalTok{(Sepal.Length)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{length}\NormalTok{(Sepal.Length)))}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{mean))}\SpecialCharTok{+}\FunctionTok{geom\_col}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{geom\_pointrange}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin=}\NormalTok{mean}\SpecialCharTok{{-}}\NormalTok{sd,}\AttributeTok{ymax=}\NormalTok{mean}\SpecialCharTok{+}\NormalTok{sd))}\SpecialCharTok{+}\FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento da Sepala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{theme\_bw}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{limits=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{))}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean=}\FunctionTok{mean}\NormalTok{(Sepal.Length), }\AttributeTok{sd=}\FunctionTok{sd}\NormalTok{(Sepal.Length),}\AttributeTok{se=}\FunctionTok{sd}\NormalTok{(Sepal.Length)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{length}\NormalTok{(Sepal.Length)))}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{mean))}\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{geom\_pointrange}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin=}\NormalTok{mean}\SpecialCharTok{{-}}\NormalTok{sd,}\AttributeTok{ymax=}\NormalTok{mean}\SpecialCharTok{+}\NormalTok{sd))}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento da Sepala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{limits=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
-
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-15-1.pdf}}
-\end{frame}
-
-\begin{frame}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-16-1.pdf}}
-\end{frame}
-
-\section{Alterando escalas, cores, fontes e
-temas}\label{alterando-escalas-cores-fontes-e-temas}
-
-\begin{frame}{Ajustando escalas no ggplot}
-\phantomsection\label{ajustando-escalas-no-ggplot}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/escala-1.pdf}}
 \end{frame}
 
 \begin{frame}
 \pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-17-1.pdf}}
 \end{frame}
 
-\begin{frame}{Ordenando variáveis ordinais no ggplot}
-\phantomsection\label{ordenando-variuxe1veis-ordinais-no-ggplot}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-18-1.pdf}}
+\begin{frame}[fragile]
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{group\_by}\NormalTok{(Species)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean=}\FunctionTok{mean}\NormalTok{(Sepal.Length), }\AttributeTok{sd=}\FunctionTok{sd}\NormalTok{(Sepal.Length),}\AttributeTok{se=}\FunctionTok{sd}\NormalTok{(Sepal.Length)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{length}\NormalTok{(Sepal.Length)))}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{mean))}\SpecialCharTok{+}
+  \FunctionTok{geom\_linerange}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin=}\NormalTok{mean}\SpecialCharTok{{-}}\NormalTok{sd,}\AttributeTok{ymax=}\NormalTok{mean}\SpecialCharTok{+}\NormalTok{sd))}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento da Sepala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{limits=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 \end{frame}
 
 \begin{frame}
 \pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-19-1.pdf}}
+\end{frame}
+
+\section{Alterando escalas, cores, fontes e
+temas}\label{alterando-escalas-cores-fontes-e-temas}
+
+\begin{frame}[fragile]{Ajustando escalas no ggplot}
+\phantomsection\label{ajustando-escalas-no-ggplot}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{group\_by}\NormalTok{(Species)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean=}\FunctionTok{mean}\NormalTok{(Sepal.Length), }
+            \AttributeTok{sd=}\FunctionTok{sd}\NormalTok{(Sepal.Length),}
+            \AttributeTok{se=}\FunctionTok{sd}\NormalTok{(Sepal.Length)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{length}\NormalTok{(Sepal.Length)))}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{mean))}\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{geom\_errorbar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin=}\NormalTok{mean}\SpecialCharTok{{-}}\NormalTok{sd,}\AttributeTok{ymax=}\NormalTok{mean}\SpecialCharTok{+}\NormalTok{sd), }\AttributeTok{width=}\FloatTok{0.5}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento da Sepala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{limits=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/escala1-1.pdf}}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#exemplo com a escala maior}
+\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{group\_by}\NormalTok{(Species)}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{mean=}\FunctionTok{mean}\NormalTok{(Sepal.Length),}
+            \AttributeTok{sd=}\FunctionTok{sd}\NormalTok{(Sepal.Length),}
+            \AttributeTok{se=}\FunctionTok{sd}\NormalTok{(Sepal.Length)}\SpecialCharTok{/}\FunctionTok{sqrt}\NormalTok{(}\FunctionTok{length}\NormalTok{(Sepal.Length)))}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{mean))}\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{geom\_errorbar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin=}\NormalTok{mean}\SpecialCharTok{{-}}\NormalTok{sd,}\AttributeTok{ymax=}\NormalTok{mean}\SpecialCharTok{+}\NormalTok{sd), }\AttributeTok{width=}\FloatTok{0.5}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento da Sepala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{limits=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{20}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-21-1.pdf}}
+\end{frame}
+
+\begin{frame}[fragile]{Ordenando variáveis ordinais no ggplot}
+\phantomsection\label{ordenando-variuxe1veis-ordinais-no-ggplot}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Escolaridade}\OtherTok{\textless{}{-}}\FunctionTok{c}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\StringTok{"Graduação"}\NormalTok{, }\DecValTok{42}\NormalTok{),}
+                \FunctionTok{rep}\NormalTok{(}\StringTok{"Médio"}\NormalTok{, }\DecValTok{30}\NormalTok{),}
+                \FunctionTok{rep}\NormalTok{(}\StringTok{"Fundamental"}\NormalTok{, }\DecValTok{20}\NormalTok{))}
+
+\NormalTok{Escolaridade}\OtherTok{\textless{}{-}}\FunctionTok{as.data.frame}\NormalTok{(Escolaridade)}
+
+\NormalTok{Escolaridade}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Escolaridade))}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Frequência"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Escolaridade"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-23-1.pdf}}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Escolaridade}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{Escolaridade=}\FunctionTok{fct\_relevel}\NormalTok{(Escolaridade,}
+                                               \StringTok{"Fundamental"}\NormalTok{,}
+                                               \StringTok{"Médio"}\NormalTok{,}
+                                               \StringTok{"Graduação"}\NormalTok{))}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Escolaridade))}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Frequência"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Escolaridade"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-25-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]{Mudando cores de preenchimento no ggplot}
@@ -689,7 +785,8 @@ temas}\label{alterando-escalas-cores-fontes-e-temas}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}
-  \FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values=}\FunctionTok{c}\NormalTok{(}\StringTok{"\#704c41"}\NormalTok{,}\StringTok{"\#41704f"}\NormalTok{,}\StringTok{"\#584170"}\NormalTok{))}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values=}\FunctionTok{c}\NormalTok{(}\StringTok{"\#704c41"}\NormalTok{,}\StringTok{"\#41704f"}\NormalTok{,}\StringTok{"\#584170"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -700,7 +797,9 @@ temas}\label{alterando-escalas-cores-fontes-e-temas}
 \phantomsection\label{mudando-cores-de-contorno-no-ggplot}
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}\FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{c}\NormalTok{(}\StringTok{"lightblue"}\NormalTok{,}\StringTok{"lightgreen"}\NormalTok{,}\StringTok{"lightpink"}\NormalTok{), }\AttributeTok{color=}\StringTok{"brown"}\NormalTok{)}
+\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{c}\NormalTok{(}\StringTok{"lightblue"}\NormalTok{,}\StringTok{"lightgreen"}\NormalTok{,}\StringTok{"lightpink"}\NormalTok{),}
+               \AttributeTok{color=}\StringTok{"brown"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -743,7 +842,8 @@ renomear tem que estar entre aspas \textbf{'' ``}.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}
-  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{c}\NormalTok{(}\StringTok{"lightblue"}\NormalTok{,}\StringTok{"lightgreen"}\NormalTok{,}\StringTok{"lightpink"}\NormalTok{), }\AttributeTok{color=}\StringTok{"brown"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{c}\NormalTok{(}\StringTok{"lightblue"}\NormalTok{,}\StringTok{"lightgreen"}\NormalTok{,}\StringTok{"lightpink"}\NormalTok{),}
+               \AttributeTok{color=}\StringTok{"brown"}\NormalTok{)}\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{,}
        \AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{,}
        \AttributeTok{title=}\StringTok{"Comparação de comprimento de pétalas"}\NormalTok{,}
@@ -752,9 +852,25 @@ renomear tem que estar entre aspas \textbf{'' ``}.
 \end{Shaded}
 
 \pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/Box-plot eixos-1.pdf}}
+\end{frame}
 
-\begin{block}{Alterando a fonte}
+\begin{frame}[fragile]{Alterando a fonte}
 \phantomsection\label{alterando-a-fonte}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Instalando o pacote extrafont}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"extrafont"}\NormalTok{)}
+
+\CommentTok{\#Carregando o pacote extrafont}
+\FunctionTok{library}\NormalTok{(extrafont)}
+
+\CommentTok{\#Carregando as fontes presentes no computador}
+\FunctionTok{loadfonts}\NormalTok{(}\AttributeTok{device=}\StringTok{"all"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]
 Aqui alteramos as fontes através do comando \texttt{theme()} este
 comando altera elementos temáticos do gráfico, como por exemplo fontes,
 tamanhos, cor de fundo, entre outros. Neste exemplo colocamons o
@@ -776,32 +892,78 @@ argumentos:
 \item
   \textbf{size} é para definir se o tamanho da fonte.
 \end{itemize}
+\end{frame}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-21-1.pdf}}
+\begin{frame}[fragile]
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"bold"}\NormalTok{,}
+                            \AttributeTok{family=}\StringTok{"serif"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-21-2.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-27-1.pdf}}
+\end{frame}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-21-3.pdf}}
+\begin{frame}[fragile]
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold.italic"}\NormalTok{,}
+                            \AttributeTok{family=}\StringTok{"mono"}\NormalTok{, }\AttributeTok{size=}\DecValTok{16}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 
-As vezes é necessário colocar nomes em itálico, como por exemplo nomes
-de espécies que estão no eixo x. Com isso dentro de \texttt{theme()}
-colocaremos o arguemento
-\texttt{axis.text.x\ =\ element\_text(face="italic")} se referindo que
-estaremos trabalhando com o texto presente na escala do eixo x. Caso
-fosse no eixo y seria \texttt{axis.text.y}. Essa alteração também pode
-ser aplicada à outros parâmetros, como \texttt{fill} e \texttt{color}.
-Trabalhando assim, podemos alterar a fonte apenas daquele parâmetro.
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-28-1.pdf}}
+\end{frame}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-22-1.pdf}}
+\begin{frame}[fragile]
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"italic"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 
-A seguir há o exemplo de deixar o título em negrito com maior destaque,
-utilizando o argumento
-\texttt{plot.title\ =\ element\_text(face="bold")}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-29-1.pdf}}
+\end{frame}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-23-1.pdf}}
-\end{block}
+\begin{frame}[fragile]
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"italic"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 
-\begin{block}{Manipulação da legenda}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-30-1.pdf}}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{, }\AttributeTok{fill=}\StringTok{"Espécies"}\NormalTok{,}
+       \AttributeTok{title=}\StringTok{"Aqui é o título"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"italic"}\NormalTok{), }
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"bold"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-31-1.pdf}}
+\end{frame}
+
+\begin{frame}[fragile]{Manipulação da legenda}
 \phantomsection\label{manipulauxe7uxe3o-da-legenda}
 Caso queremos tirar a legenda ou alterar a posição da legenda,
 utilizaremos o argumento \texttt{legend.position\ =}:
@@ -818,38 +980,139 @@ utilizaremos o argumento \texttt{legend.position\ =}:
 \item
   \textbf{``right''} para a legenda ficar na direita
 \end{itemize}
+\end{frame}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-24-1.pdf}}
+\begin{frame}[fragile]
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{, }\AttributeTok{fill=}\StringTok{"Espécies"}\NormalTok{,}
+       \AttributeTok{title=}\StringTok{"Aqui é o título"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"italic"}\NormalTok{),}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-24-2.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-32-1.pdf}}
+\end{frame}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-24-3.pdf}}
+\begin{frame}[fragile]
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{, }\AttributeTok{fill=}\StringTok{"Espécies"}\NormalTok{,}
+       \AttributeTok{title=}\StringTok{"Aqui é o título"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"italic"}\NormalTok{),}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{legend.position =} \StringTok{"top"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-24-4.pdf}}
-\end{block}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-33-1.pdf}}
+\end{frame}
 
-\begin{block}{Anotação em gráfico}
+\begin{frame}[fragile]
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{, }\AttributeTok{fill=}\StringTok{"Espécies"}\NormalTok{,}
+       \AttributeTok{title=}\StringTok{"Aqui é o título"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"italic"}\NormalTok{),}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-34-1.pdf}}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{, }\AttributeTok{fill=}\StringTok{"Espécies"}\NormalTok{,}
+       \AttributeTok{title=}\StringTok{"Aqui é o título"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"italic"}\NormalTok{),}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{legend.position =} \StringTok{"left"}\NormalTok{,}
+        \AttributeTok{legend.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"italic"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-35-1.pdf}}
+\end{frame}
+
+\begin{frame}[fragile]{Anotação em gráfico}
 \phantomsection\label{anotauxe7uxe3o-em-gruxe1fico}
-Também é possível fazer anotações em gráficos no ggplot2, como colocar
-linhas e anotações para destacar pontos interessantes.
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{, }\AttributeTok{fill=}\StringTok{"Espécies"}\NormalTok{,}
+       \AttributeTok{title=}\StringTok{"Aqui é o título"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"italic"}\NormalTok{),}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{legend.position =} \StringTok{"left"}\NormalTok{,}
+        \AttributeTok{legend.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"italic"}\NormalTok{))}\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\AttributeTok{x =} \FloatTok{2.5}\NormalTok{, }\AttributeTok{y =} \DecValTok{4}\NormalTok{, }\AttributeTok{label =} \StringTok{"Ponto importante"}\NormalTok{,}
+            \AttributeTok{color =} \StringTok{"red"}\NormalTok{, }\AttributeTok{face=}\StringTok{"bold"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
 
-No primeiro exemplo colocamos o \texttt{geom\_text} para adicionar o
-texto. Os argumentos \texttt{x} e \texttt{y} são para delimitar onde vai
-ficar o nosso texto, \texttt{label} é para definir o que vai estar no
-texto (nunca se esqueça de colocar entre aspas \texttt{"\ "}).
+\begin{frame}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-37-1.pdf}}
+\end{frame}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-25-1.pdf}}
+\begin{frame}[fragile]
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{, }\AttributeTok{fill=}\StringTok{"Espécies"}\NormalTok{,}
+       \AttributeTok{title=}\StringTok{"Aqui é o título"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"italic"}\NormalTok{), }
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"bold"}\NormalTok{), }
+        \AttributeTok{legend.position =} \StringTok{"left"}\NormalTok{, }
+        \AttributeTok{legend.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"italic"}\NormalTok{))}\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\AttributeTok{x =} \FloatTok{2.5}\NormalTok{, }\AttributeTok{y =} \DecValTok{4}\NormalTok{, }\AttributeTok{label =} \StringTok{"Ponto importante"}\NormalTok{,}
+            \AttributeTok{color =} \StringTok{"red"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{annotate}\NormalTok{(}\StringTok{"vline"}\NormalTok{, }\AttributeTok{x =} \DecValTok{2}\NormalTok{, }\AttributeTok{xintercept =} \DecValTok{2}\NormalTok{, }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{,}
+           \AttributeTok{color =} \StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
 
-Aqui é um exemplo utilizando \texttt{annotate}, nele além de adicionar
-texto, você pode adicionar linhas. Como nesse caso colocamos uma linha
-vertical no gráfico utilizando o argumento \texttt{"vline"}. Para
-colocar uma linha na horizontal é \texttt{"hline"}. Para ser um texto se
-utiliza o argumento \texttt{"text"}.
+\begin{frame}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-39-1.pdf}}
+\end{frame}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-26-1.pdf}}
+\begin{frame}[fragile]
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{, }\AttributeTok{fill=}\StringTok{"Espécies"}\NormalTok{,}
+       \AttributeTok{title=}\StringTok{"Aqui é o título"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"italic"}\NormalTok{),}
+        \AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"bold"}\NormalTok{),}
+        \AttributeTok{legend.position =} \StringTok{"left"}\NormalTok{,}
+        \AttributeTok{legend.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face=}\StringTok{"italic"}\NormalTok{))}\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\AttributeTok{x =} \FloatTok{2.5}\NormalTok{, }\AttributeTok{y =} \DecValTok{4}\NormalTok{, }\AttributeTok{label =} \StringTok{"Ponto importante"}\NormalTok{,}
+            \AttributeTok{color =} \StringTok{"red"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{annotate}\NormalTok{(}\StringTok{"text"}\NormalTok{, }\AttributeTok{x =} \DecValTok{1}\NormalTok{, }\AttributeTok{y =} \FloatTok{3.5}\NormalTok{, }\AttributeTok{label =} \StringTok{"outro ponto"}\NormalTok{,}
+           \AttributeTok{color =} \StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-26-2.pdf}}
-\end{block}
+\begin{frame}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-41-1.pdf}}
 \end{frame}
 
 \begin{frame}{Temas (\texttt{theme\_*})}
@@ -859,8 +1122,50 @@ utiliza o argumento \texttt{"text"}.
 
 \begin{frame}[fragile]{Unindo vários gráficos em uma imagem só}
 \phantomsection\label{unindo-vuxe1rios-gruxe1ficos-em-uma-imagem-suxf3}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-27-1.pdf}}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Criando ggplots}
+\NormalTok{barra}\OtherTok{\textless{}{-}}\NormalTok{Escolaridade}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Escolaridade=}\FunctionTok{fct\_relevel}\NormalTok{(Escolaridade,}\StringTok{"Fundamental"}\NormalTok{,}\StringTok{"Médio"}\NormalTok{, }\StringTok{"Graduação"}\NormalTok{))}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Escolaridade))}\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Frequência"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Escolaridade"}\NormalTok{)}
 
+\NormalTok{polígono}\OtherTok{\textless{}{-}}\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Sepal.Length))}\SpecialCharTok{+}
+  \FunctionTok{geom\_freqpoly}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Frequência"}\NormalTok{,}\AttributeTok{x=}\StringTok{"Comprimento de Sépala"}\NormalTok{)}
+
+\NormalTok{boxplot}\OtherTok{\textless{}{-}}\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y=}\NormalTok{Sepal.Length, }\AttributeTok{x=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de Sépala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pontos}\OtherTok{\textless{}{-}}\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Sepal.Length,}\AttributeTok{y=}\NormalTok{Sepal.Width, }\AttributeTok{color=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{"Comprimento de Sépala"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Largura de Sépala"}\NormalTok{, }\AttributeTok{color=}\StringTok{"Espécies"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{barra }\SpecialCharTok{+}\NormalTok{ polígono }\SpecialCharTok{+}\NormalTok{ boxplot }\SpecialCharTok{+}\NormalTok{ pontos}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-44-1.pdf}}
+\end{frame}
+
+\begin{frame}[fragile]
 \begin{enumerate}
 \setcounter{enumi}{2}
 \tightlist
@@ -869,7 +1174,7 @@ utiliza o argumento \texttt{"text"}.
   elementos matemáticos, como \texttt{/} e \texttt{()}.
 \end{enumerate}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-28-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-45-1.pdf}}
 \end{frame}
 
 \section{Extra}\label{extra}
@@ -918,53 +1223,102 @@ utiliza o argumento \texttt{"text"}.
 \begin{frame}[fragile]
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(prec\_df,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x,}\AttributeTok{y=}\NormalTok{y,}\AttributeTok{fill=}\NormalTok{pelprec))}\SpecialCharTok{+}\FunctionTok{geom\_raster}\NormalTok{()}
+\FunctionTok{ggplot}\NormalTok{(prec\_df,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x,}\AttributeTok{y=}\NormalTok{y,}\AttributeTok{fill=}\NormalTok{pelprec))}\SpecialCharTok{+}
+  \FunctionTok{geom\_raster}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-31-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-48-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# Cores padrão}
-\FunctionTok{ggplot}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{geom\_raster}\NormalTok{(}\AttributeTok{data=}\NormalTok{prec\_df,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x,}\AttributeTok{y=}\NormalTok{y,}\AttributeTok{fill=}\NormalTok{pelprec))}\SpecialCharTok{+}\FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{data=}\NormalTok{pel,}\AttributeTok{fill=}\ConstantTok{NA}\NormalTok{, }\AttributeTok{color=}\StringTok{"gray"}\NormalTok{,}\AttributeTok{linewidth=}\DecValTok{2}\NormalTok{, }\AttributeTok{alpha=}\NormalTok{.}\DecValTok{01}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Mapa da média anual da precipitação }\SpecialCharTok{\textbackslash{}n}\StringTok{ em Pelotas{-}RS entre 1970{-}2000"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Latitude"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Longitude"}\NormalTok{, }\AttributeTok{fill=}\StringTok{"Precipitação (mm)"}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{theme\_bw}\NormalTok{()}
+\FunctionTok{ggplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{geom\_raster}\NormalTok{(}\AttributeTok{data=}\NormalTok{prec\_df,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x,}\AttributeTok{y=}\NormalTok{y,}\AttributeTok{fill=}\NormalTok{pelprec))}\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{data=}\NormalTok{pel,}\AttributeTok{fill=}\ConstantTok{NA}\NormalTok{, }\AttributeTok{color=}\StringTok{"gray"}\NormalTok{,}\AttributeTok{linewidth=}\DecValTok{2}\NormalTok{, }\AttributeTok{alpha=}\NormalTok{.}\DecValTok{01}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Mapa da média anual da precipitação }\SpecialCharTok{\textbackslash{}n}
+\StringTok{       em Pelotas{-}RS entre 1970{-}2000"}\NormalTok{,}
+       \AttributeTok{y=}\StringTok{"Latitude"}\NormalTok{,}
+       \AttributeTok{x=}\StringTok{"Longitude"}\NormalTok{,}
+       \AttributeTok{fill=}\StringTok{"Precipitação (mm)"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+\end{frame}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-32-1.pdf}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{geom\_raster}\NormalTok{(}\AttributeTok{data=}\NormalTok{prec\_df,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x,}\AttributeTok{y=}\NormalTok{y,}\AttributeTok{fill=}\NormalTok{pelprec))}\SpecialCharTok{+}\FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{data=}\NormalTok{pel,}\AttributeTok{fill=}\ConstantTok{NA}\NormalTok{, }\AttributeTok{color=}\StringTok{"gray"}\NormalTok{,}\AttributeTok{linewidth=}\DecValTok{2}\NormalTok{, }\AttributeTok{alpha=}\NormalTok{.}\DecValTok{01}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Mapa da média anual da precipitação }\SpecialCharTok{\textbackslash{}n}\StringTok{ em Pelotas{-}RS entre 1970{-}2000"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Latitude"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Longitude"}\NormalTok{, }\AttributeTok{fill=}\StringTok{"Precipitação (mm)"}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{theme\_bw}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{scale\_fill\_gradient}\NormalTok{(}\AttributeTok{low=}\StringTok{"gray"}\NormalTok{,}\AttributeTok{high=}\StringTok{"blue"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-32-2.pdf}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{geom\_raster}\NormalTok{(}\AttributeTok{data=}\NormalTok{prec\_df,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x,}\AttributeTok{y=}\NormalTok{y,}\AttributeTok{fill=}\NormalTok{pelprec))}\SpecialCharTok{+}\FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{data=}\NormalTok{pel,}\AttributeTok{fill=}\ConstantTok{NA}\NormalTok{, }\AttributeTok{color=}\StringTok{"gray"}\NormalTok{,}\AttributeTok{linewidth=}\DecValTok{2}\NormalTok{, }\AttributeTok{alpha=}\NormalTok{.}\DecValTok{01}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Mapa da média anual da precipitação }\SpecialCharTok{\textbackslash{}n}\StringTok{ em Pelotas{-}RS entre 1970{-}2000"}\NormalTok{, }\AttributeTok{y=}\StringTok{"Latitude"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Longitude"}\NormalTok{, }\AttributeTok{fill=}\StringTok{"Precipitação (mm)"}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{theme\_bw}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{scale\_fill\_gradientn}\NormalTok{(}\AttributeTok{colours =} \FunctionTok{terrain.colors}\NormalTok{(}\DecValTok{10}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-32-3.pdf}}
+\begin{frame}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-50-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{geom\_raster}\NormalTok{(}\AttributeTok{data=}\NormalTok{prec\_df,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x,}\AttributeTok{y=}\NormalTok{y,}\AttributeTok{fill=}\NormalTok{pelprec))}\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{data=}\NormalTok{pel,}\AttributeTok{fill=}\ConstantTok{NA}\NormalTok{, }\AttributeTok{color=}\StringTok{"gray"}\NormalTok{,}\AttributeTok{linewidth=}\DecValTok{2}\NormalTok{, }\AttributeTok{alpha=}\NormalTok{.}\DecValTok{01}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Mapa da média anual da precipitação }\SpecialCharTok{\textbackslash{}n}\StringTok{ }
+\StringTok{       em Pelotas{-}RS entre 1970{-}2000"}\NormalTok{,}
+       \AttributeTok{y=}\StringTok{"Latitude"}\NormalTok{,}
+       \AttributeTok{x=}\StringTok{"Longitude"}\NormalTok{,}
+       \AttributeTok{fill=}\StringTok{"Precipitação (mm)"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_gradient}\NormalTok{(}\AttributeTok{low=}\StringTok{"gray"}\NormalTok{,}\AttributeTok{high=}\StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-52-1.pdf}}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{geom\_raster}\NormalTok{(}\AttributeTok{data=}\NormalTok{prec\_df,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x,}\AttributeTok{y=}\NormalTok{y,}\AttributeTok{fill=}\NormalTok{pelprec))}\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{data=}\NormalTok{pel,}\AttributeTok{fill=}\ConstantTok{NA}\NormalTok{, }\AttributeTok{color=}\StringTok{"gray"}\NormalTok{,}\AttributeTok{linewidth=}\DecValTok{2}\NormalTok{, }\AttributeTok{alpha=}\NormalTok{.}\DecValTok{01}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Mapa da média anual da precipitação }\SpecialCharTok{\textbackslash{}n}
+\StringTok{       em Pelotas{-}RS entre 1970{-}2000"}\NormalTok{,}
+       \AttributeTok{y=}\StringTok{"Latitude"}\NormalTok{,}
+       \AttributeTok{x=}\StringTok{"Longitude"}\NormalTok{,}
+       \AttributeTok{fill=}\StringTok{"Precipitação (mm)"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_gradientn}\NormalTok{(}\AttributeTok{colours =} \FunctionTok{terrain.colors}\NormalTok{(}\DecValTok{10}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-54-1.pdf}}
+\end{frame}
+
+\begin{frame}[fragile]{Paleta de cores para daltônicos}
+\phantomsection\label{paleta-de-cores-para-daltuxf4nicos}
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\#intalando pacote viridis}
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"viridis"}\NormalTok{)}
 \CommentTok{\#carregando pacote viridis}
 \FunctionTok{library}\NormalTok{(viridis)}
+
+\FunctionTok{ggplot}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{geom\_raster}\NormalTok{(}\AttributeTok{data=}\NormalTok{prec\_df,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x,}\AttributeTok{y=}\NormalTok{y,}\AttributeTok{fill=}\NormalTok{pelprec))}\SpecialCharTok{+}
+  \FunctionTok{geom\_sf}\NormalTok{(}\AttributeTok{data=}\NormalTok{pel,}\AttributeTok{fill=}\ConstantTok{NA}\NormalTok{, }\AttributeTok{color=}\StringTok{"gray"}\NormalTok{,}\AttributeTok{linewidth=}\DecValTok{2}\NormalTok{, }\AttributeTok{alpha=}\NormalTok{.}\DecValTok{01}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Mapa da média anual da precipitação }\SpecialCharTok{\textbackslash{}n}
+\StringTok{       em Pelotas{-}RS entre 1970{-}2000"}\NormalTok{,}
+       \AttributeTok{y=}\StringTok{"Latitude"}\NormalTok{,}
+       \AttributeTok{x=}\StringTok{"Longitude"}\NormalTok{,}
+       \AttributeTok{fill=}\StringTok{"Precipitação (mm)"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_viridis}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 \end{frame}
 
 \begin{frame}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-34-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-56-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]{Temas divertidos}
@@ -974,50 +1328,90 @@ utiliza o argumento \texttt{"text"}.
 \FunctionTok{install.packages}\NormalTok{(}\StringTok{"remotes"}\NormalTok{)}
 \NormalTok{remotes}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"MatthewBJane/ThemePark"}\NormalTok{)}
 \FunctionTok{library}\NormalTok{(ThemePark)}
+
+\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{c}\NormalTok{(lordoftherings\_theme\_colors[}\StringTok{"light"}\NormalTok{],}
+\NormalTok{                      lordoftherings\_theme\_colors[}\StringTok{"medium"}\NormalTok{],}
+\NormalTok{                      lordoftherings\_theme\_colors[}\StringTok{"dark"}\NormalTok{]))}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{,}
+       \AttributeTok{title=} \StringTok{"Tema Senhor dos Anéis"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_lordoftherings}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+\end{frame}
+
+\begin{frame}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-57-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}\FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{c}\NormalTok{(lordoftherings\_theme\_colors[}\StringTok{"light"}\NormalTok{],lordoftherings\_theme\_colors[}\StringTok{"medium"}\NormalTok{],lordoftherings\_theme\_colors[}\StringTok{"dark"}\NormalTok{]))}\SpecialCharTok{+}\FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{, }\AttributeTok{title=} \StringTok{"Tema Senhor dos Anéis"}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{theme\_lordoftherings}\NormalTok{()}
+\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{c}\NormalTok{(barbie\_theme\_colors[}\StringTok{"light"}\NormalTok{],}
+\NormalTok{                      barbie\_theme\_colors[}\StringTok{"medium"}\NormalTok{],}
+\NormalTok{                      barbie\_theme\_colors[}\StringTok{"dark"}\NormalTok{]))}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{,}
+       \AttributeTok{title=} \StringTok{"Tema Barbie"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_barbie}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+\end{frame}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/theme park-1.pdf}}
+\begin{frame}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-59-1.pdf}}
+\end{frame}
 
+\begin{frame}[fragile]
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}\FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{c}\NormalTok{(barbie\_theme\_colors[}\StringTok{"light"}\NormalTok{],barbie\_theme\_colors[}\StringTok{"medium"}\NormalTok{],barbie\_theme\_colors[}\StringTok{"dark"}\NormalTok{]))}\SpecialCharTok{+}\FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{, }\AttributeTok{title=} \StringTok{"Tema Barbie"}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{theme\_barbie}\NormalTok{()}
+\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{c}\NormalTok{(simpsons\_theme\_colors[}\StringTok{"light"}\NormalTok{],}
+\NormalTok{                      simpsons\_theme\_colors[}\StringTok{"medium"}\NormalTok{],}
+\NormalTok{                      simpsons\_theme\_colors[}\StringTok{"dark"}\NormalTok{]))}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{, }\AttributeTok{title=} \StringTok{"Tema Simpsons"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_simpsons}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+\end{frame}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/theme park-2.pdf}}
+\begin{frame}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-61-1.pdf}}
+\end{frame}
 
+\begin{frame}[fragile]
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}\FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{c}\NormalTok{(simpsons\_theme\_colors[}\StringTok{"light"}\NormalTok{],simpsons\_theme\_colors[}\StringTok{"medium"}\NormalTok{],simpsons\_theme\_colors[}\StringTok{"dark"}\NormalTok{]))}\SpecialCharTok{+}\FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{, }\AttributeTok{title=} \StringTok{"Tema Simpsons"}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{theme\_simpsons}\NormalTok{()}
+\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{c}\NormalTok{(friends\_theme\_colors[}\StringTok{"light"}\NormalTok{],}
+\NormalTok{                      friends\_theme\_colors[}\StringTok{"medium"}\NormalTok{],}
+\NormalTok{                      friends\_theme\_colors[}\StringTok{"dark"}\NormalTok{]))}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{, }\AttributeTok{title=} \StringTok{"Tema Friends"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_friends}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+\end{frame}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/theme park-3.pdf}}
+\begin{frame}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-63-1.pdf}}
+\end{frame}
 
+\begin{frame}[fragile]
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}\FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{c}\NormalTok{(friends\_theme\_colors[}\StringTok{"light"}\NormalTok{],friends\_theme\_colors[}\StringTok{"medium"}\NormalTok{],friends\_theme\_colors[}\StringTok{"dark"}\NormalTok{]))}\SpecialCharTok{+}\FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{, }\AttributeTok{title=} \StringTok{"Tema Friends"}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{theme\_friends}\NormalTok{()}
+\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{c}\NormalTok{(starwars\_theme\_colors[}\StringTok{"light"}\NormalTok{],}
+\NormalTok{                      starwars\_theme\_colors[}\StringTok{"medium"}\NormalTok{],}
+\NormalTok{                      starwars\_theme\_colors[}\StringTok{"dark"}\NormalTok{]))}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{,}
+       \AttributeTok{title=} \StringTok{"Tema Star wars"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{theme\_starwars}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
+\end{frame}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/theme park-4.pdf}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{Petal.Length, }\AttributeTok{fill=}\NormalTok{Species))}\SpecialCharTok{+}\FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{c}\NormalTok{(starwars\_theme\_colors[}\StringTok{"light"}\NormalTok{],starwars\_theme\_colors[}\StringTok{"medium"}\NormalTok{],starwars\_theme\_colors[}\StringTok{"dark"}\NormalTok{]))}\SpecialCharTok{+}\FunctionTok{labs}\NormalTok{(}\AttributeTok{y=}\StringTok{"Comprimento de pétala"}\NormalTok{, }\AttributeTok{x=}\StringTok{"Espécies"}\NormalTok{, }\AttributeTok{title=} \StringTok{"Tema Star wars"}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{theme\_starwars}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/theme park-5.pdf}}
+\begin{frame}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-65-1.pdf}}
 \end{frame}
 
 \begin{frame}{Referências}
@@ -1049,6 +1443,16 @@ Wilkinson, Leland. 2011. {``The Grammar of Graphics.''} In
 375--414. Springer.
 
 \end{CSLReferences}
+\end{frame}
+
+\section{Agrdeço atenção!}\label{agrdeuxe7o-atenuxe7uxe3o}
+
+\begin{frame}{Agrdeço atenção!}
+\textbf{Para mais informções}
+\url{https://ggplot2.tidyverse.org/reference/index.html}
+
+\textbf{Documentação desta oficina com maior detalhe}
+\url{https://izzyreal18.github.io/oficinaggplotufpel.github.io/}
 \end{frame}
 
 

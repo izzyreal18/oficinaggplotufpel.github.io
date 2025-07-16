@@ -8,9 +8,9 @@ title: "Introdução ao ggplot2"
 #  - "ANA LUIZA BARBOZA MERLIN"
 #  - "FERNANDO NEUGEBAUER REHBEIN DA CUNHA PENEDO"
 #  - "LUCAS DE AZEVEDO DE SOUZA"
-institute:
-  - UNIVERSIDADE FEDERAL DE PELOTAS
-  - INSTITUTO DE FÍSICA E MATEMÁTICA – IFM
+#institute:
+#  - UNIVERSIDADE FEDERAL DE PELOTAS
+#  - INSTITUTO DE FÍSICA E MATEMÁTICA – IFM
 bibliography: ref.bib
 format:
   beamer:
@@ -21,6 +21,7 @@ format:
     highlight-style: pygments
     header-includes: |
       \input{tem2.tex}
+      \AtBeginEnvironment{quote}{\small}
 ---
 
 
@@ -48,6 +49,11 @@ Ele aborda que visualização gráfica dos dados pode ser divida em componentes 
 
 ## Como instalar o ggplot2?
 
+:::: {.columns}
+
+:::: {.column width="40%"}
+
+**Instalando pacotes**
 
 ```{r,label="cran"}
 #| echo: false
@@ -63,15 +69,17 @@ options(repos = c(CRAN = "https://cloud.r-project.org"))
 #instalando pacote ggplot2
 install.packages("ggplot2")
 
-#instalando dplyr, forcats e patchwork
+#instalando dplyr, forcats 
+# e patchwork
 install.packages("dplyr")
 install.packages("forcats")
 install.packages("patchwork")
 ```
+::::
 
----
+::::{.column width="40%"}
 
-Para usar o `ggplot2` em seus scripts tem que carrega-lo
+**Carregando pacotes**
 
 ```{r, label="carregando pacotes"}
 #| echo: true
@@ -82,13 +90,15 @@ Para usar o `ggplot2` em seus scripts tem que carrega-lo
 #Carregando o pacote ggplot2
 library(ggplot2)
 
-#Carregando dplyr, forcats e patchwork
+#Carregando dplyr, forcats
+#e patchwork
 library(dplyr)
 library(forcats)
 library(patchwork)
 ```
+::::
 
----
+::::
 
 ## Banco de dados *iris*
 
@@ -115,29 +125,15 @@ gt(head(iris,4)) |>
 
 ## Box-plot
 
-
-
-
 ```{r,label="Box-plot simples1"}
 #| echo: true
-#| output: false
+#| output: true
+#| fig-height: 6
 
 iris%>%ggplot(aes(x=Species, y=Petal.Length))+
   geom_boxplot()
 
 ```
-
----
-
-```{r,label="Box-plot simplesx"}
-#| echo: false
-
-iris%>%ggplot(aes(x=Species, y=Petal.Length))+
-  geom_boxplot()
-
-```
-
----
 
 ## Gráfico violino
 
@@ -347,11 +343,11 @@ ggplot(iris,aes(x=Sepal.Length, y=Sepal.Width, color=Species,
 
 ## Gráfico de barras (média e desvio)
 
-```{r,label="grafico de barras"}
+
+
+```{r,label="grafico de barras22"}
 #| echo: true
-#| fig-height: 5
-#| font-size: 0.02em
-#| 
+#| output: false
 iris%>%group_by(Species)%>%
   summarise(mean=mean(Sepal.Length),
             sd=sd(Sepal.Length),
@@ -367,9 +363,45 @@ iris%>%group_by(Species)%>%
 
 ---
 
+```{r,label="grafico de barras"}
+#| echo: false
+iris%>%group_by(Species)%>%
+  summarise(mean=mean(Sepal.Length),
+            sd=sd(Sepal.Length),
+            se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%
+  ggplot(aes(x=Species, y=mean))+
+  geom_col()+
+  geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd), width=0.5)+
+  labs(y="Comprimento da Sepala", x="Espécies")+
+  theme_bw()+
+  scale_y_continuous(limits=c(0,10))
+
+```
+
+
+
+---
+
 ```{r}
 #| echo: true
-#| fig-height: 5
+#| output: false
+iris%>%group_by(Species)%>%
+  summarise(mean=mean(Sepal.Length),
+            sd=sd(Sepal.Length),
+            se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%
+  ggplot(aes(x=Species, y=mean))+
+  geom_col()+
+  geom_linerange(aes(ymin=mean-sd,ymax=mean+sd))+
+  labs(y="Comprimento da Sepala", x="Espécies")+
+  theme_bw()+
+  scale_y_continuous(limits=c(0,10))
+```
+
+---
+
+
+```{r}
+#| echo: false
 iris%>%group_by(Species)%>%
   summarise(mean=mean(Sepal.Length),
             sd=sd(Sepal.Length),
@@ -387,15 +419,58 @@ iris%>%group_by(Species)%>%
  
 ```{r}
 #| echo: true
-#| fig-height: 5
+#| output: false
 iris%>%group_by(Species)%>%
-  summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%ggplot(aes(x=Species, y=mean))+geom_col()+geom_pointrange(aes(ymin=mean-sd,ymax=mean+sd))+labs(y="Comprimento da Sepala", x="Espécies")+theme_bw()+scale_y_continuous(limits=c(0,10))
+  summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%
+  ggplot(aes(x=Species, y=mean))+
+  geom_col()+
+  geom_pointrange(aes(ymin=mean-sd,ymax=mean+sd))+
+  labs(y="Comprimento da Sepala", x="Espécies")+
+  theme_bw()+
+  scale_y_continuous(limits=c(0,10))
 ```
 
 ---
 
 ```{r}
-iris%>%group_by(Species)%>%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%ggplot(aes(x=Species, y=mean))+geom_linerange(aes(ymin=mean-sd,ymax=mean+sd))+labs(y="Comprimento da Sepala", x="Espécies")+theme_bw()+scale_y_continuous(limits=c(0,10))
+#| echo: false
+#| output: true
+iris%>%group_by(Species)%>%
+  summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%
+  ggplot(aes(x=Species, y=mean))+
+  geom_col()+
+  geom_pointrange(aes(ymin=mean-sd,ymax=mean+sd))+
+  labs(y="Comprimento da Sepala", x="Espécies")+
+  theme_bw()+
+  scale_y_continuous(limits=c(0,10))
+```
+
+---
+
+```{r}
+#| echo: true
+#| output: false
+iris%>%group_by(Species)%>%
+  summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%
+  ggplot(aes(x=Species, y=mean))+
+  geom_linerange(aes(ymin=mean-sd,ymax=mean+sd))+
+  labs(y="Comprimento da Sepala", x="Espécies")+
+  theme_bw()+
+  scale_y_continuous(limits=c(0,10))
+```
+
+---
+
+```{r}
+#| echo: false
+#| output: true
+iris%>%group_by(Species)%>%
+  summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length),se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%
+  ggplot(aes(x=Species, y=mean))+
+  geom_linerange(aes(ymin=mean-sd,ymax=mean+sd))+
+  labs(y="Comprimento da Sepala", x="Espécies")+
+  theme_bw()+
+  scale_y_continuous(limits=c(0,10))
 ```
 
 # Alterando escalas, cores, fontes e temas 
@@ -403,7 +478,8 @@ iris%>%group_by(Species)%>%summarise(mean=mean(Sepal.Length), sd=sd(Sepal.Length
 ## Ajustando escalas no ggplot
 
 ```{r,label="escala"}
-
+#| echo: true
+#| output: false
 iris%>%group_by(Species)%>%
   summarise(mean=mean(Sepal.Length), 
             sd=sd(Sepal.Length),
@@ -418,7 +494,48 @@ iris%>%group_by(Species)%>%
 
 ---
 
+
+```{r,label="escala1"}
+#| echo: false
+#| output: true
+iris%>%group_by(Species)%>%
+  summarise(mean=mean(Sepal.Length), 
+            sd=sd(Sepal.Length),
+            se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%
+  ggplot(aes(x=Species, y=mean))+
+  geom_col()+
+  geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd), width=0.5)+
+  labs(y="Comprimento da Sepala", x="Espécies")+
+  theme_bw()+
+  scale_y_continuous(limits=c(0,10))
+```
+
+---
+
+
 ```{r}
+#| echo: true
+#| output: false
+#exemplo com a escala maior
+iris%>%group_by(Species)%>%
+  summarise(mean=mean(Sepal.Length),
+            sd=sd(Sepal.Length),
+            se=sd(Sepal.Length)/sqrt(length(Sepal.Length)))%>%
+  ggplot(aes(x=Species, y=mean))+
+  geom_col()+
+  geom_errorbar(aes(ymin=mean-sd,ymax=mean+sd), width=0.5)+
+  labs(y="Comprimento da Sepala", x="Espécies")+
+  theme_bw()+
+  scale_y_continuous(limits=c(0,20))
+
+
+```
+
+---
+
+```{r}
+#| echo: false
+#| output: true
 #exemplo com a escala maior
 iris%>%group_by(Species)%>%
   summarise(mean=mean(Sepal.Length),
@@ -428,9 +545,28 @@ iris%>%group_by(Species)%>%
 
 ```
 
+
 ## Ordenando variáveis ordinais no ggplot
 
 ```{r}
+#| echo: true
+#| output: false
+Escolaridade<-c(rep("Graduação", 42),
+                rep("Médio", 30),
+                rep("Fundamental", 20))
+
+Escolaridade<-as.data.frame(Escolaridade)
+
+Escolaridade%>%ggplot(aes(x=Escolaridade))+
+  geom_bar()+
+  labs(y="Frequência", x="Escolaridade")
+```
+
+---
+
+```{r}
+#| echo: false
+#| output: true
 Escolaridade<-c(rep("Graduação", 42), rep("Médio", 30), rep("Fundamental", 20))
 Escolaridade<-as.data.frame(Escolaridade)
 
@@ -442,12 +578,30 @@ Escolaridade%>%ggplot(aes(x=Escolaridade))+
 ---
 
 ```{r}
+#| echo: true
+#| output: false
+Escolaridade%>%mutate(Escolaridade=fct_relevel(Escolaridade,
+                                               "Fundamental",
+                                               "Médio",
+                                               "Graduação"))%>%
+  ggplot(aes(x=Escolaridade))+
+  geom_bar()+
+  labs(y="Frequência", x="Escolaridade")
+```
 
+---
+
+```{r}
+#| echo: false
+#| output: true
 Escolaridade%>%mutate(Escolaridade=fct_relevel(Escolaridade,"Fundamental","Médio", "Graduação"))%>%
   ggplot(aes(x=Escolaridade))+
   geom_bar()+
   labs(y="Frequência", x="Escolaridade")
 ```
+
+---
+
 
 ## Mudando cores de preenchimento no ggplot
 
@@ -473,9 +627,10 @@ iris%>%ggplot(aes(x=Species, y=Petal.Length))+
 
 ```{r, label="Box-plot3"}
 #| echo: true
-
+#| fig-height: 6
 iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
-  geom_boxplot()+scale_fill_manual(values=c("#704c41","#41704f","#584170"))
+  geom_boxplot()+
+  scale_fill_manual(values=c("#704c41","#41704f","#584170"))
 
 ```
 
@@ -483,8 +638,10 @@ iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
 
 ```{r, label="Box-plot4"}
 #| echo: true
-
-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c("lightblue","lightgreen","lightpink"), color="brown")
+#| fig-height: 5
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot(fill=c("lightblue","lightgreen","lightpink"),
+               color="brown")
 
 ```
 
@@ -505,9 +662,10 @@ Os nomes dos eixos são alterados pela função labs, onde você indica qual ele
 
 ```{r, label="Box-plot eixos"}
 #| echo: true
-
+#| fig-height: 4
 iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
-  geom_boxplot(fill=c("lightblue","lightgreen","lightpink"), color="brown")+
+  geom_boxplot(fill=c("lightblue","lightgreen","lightpink"),
+               color="brown")+
   labs(y="Comprimento de pétala",
        x="Espécies",
        title="Comparação de comprimento de pétalas",
@@ -515,9 +673,10 @@ iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
 
 ```
 
-### Alterando a fonte
+## Alterando a fonte
 
 ```{r}
+#| echo: true
 #| output: false
 # Instalando o pacote extrafont
 install.packages("extrafont")
@@ -529,34 +688,75 @@ library(extrafont)
 loadfonts(device="all")
 ```
 
+---
+
 Aqui alteramos as fontes através do comando `theme()` este comando altera elementos temáticos do gráfico, como por exemplo fontes, tamanhos, cor de fundo, entre outros. Neste exemplo colocamons o  argumento `text = element_text()`. Dentro dele vai alguns argumentos:
 
 - **face** é para definir se a fonte estará em itálico (`"italic"`), negrito (`"bold"`) ou ambos (`"italic.bold"`)
 - **family** é para definir se o tipo de fonte. Esse argumento pode ter variações de acordo com sistema operacional do computador. Em sistema windows pode-se utilizar `"TT Times New Roman"`, `"Arial"`, etc. Enquanto em sistemas Linux e MacOS estarão `"serif"`, `"mono"`, etc.
 - **size** é para definir se o tamanho da fonte.
 
+---
 
 ```{r}
-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies")+theme(text = element_text(face="bold", family="serif"))
-
-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies")+theme(text = element_text(face = "bold.italic", family="mono", size=16))
-
-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies")+theme(text = element_text(face="italic"))
+#| echo: true
+#| fig-height: 5
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot()+
+  labs(y="Comprimento de pétala", x="Espécies")+
+  theme(text = element_text(face="bold",
+                            family="serif"))
 ```
 
-As vezes é necessário colocar nomes em itálico, como por exemplo nomes de espécies que estão no eixo x. Com isso dentro de `theme()` colocaremos o arguemento `axis.text.x = element_text(face="italic")` se referindo que estaremos trabalhando com o texto presente na escala do eixo x. Caso fosse no eixo y seria `axis.text.y`. Essa alteração também pode ser aplicada à outros parâmetros, como  `fill` e `color`. Trabalhando assim, podemos alterar a fonte apenas daquele parâmetro.
+---
 
 ```{r}
-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies")+theme(axis.text.x = element_text(face="italic"))
-``` 
-
-A seguir há o exemplo de deixar o título em negrito com maior destaque, utilizando o argumento `plot.title = element_text(face="bold")`
-
-```{r}
-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"))
+#| echo: true
+#| fig-height: 6
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot()+
+  labs(y="Comprimento de pétala", x="Espécies")+
+  theme(text = element_text(face = "bold.italic",
+                            family="mono", size=16))
 ```
 
-### Manipulação da legenda
+---
+
+```{r}
+#| echo: true
+#| fig-height: 6
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot()+
+  labs(y="Comprimento de pétala", x="Espécies")+
+  theme(text = element_text(face="italic"))
+```
+
+---
+
+```{r}
+#| echo: true
+#| fig-height: 6
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot()+
+  labs(y="Comprimento de pétala", x="Espécies")+
+  theme(axis.text.x = element_text(face="italic"))
+```
+
+---
+
+```{r}
+#| echo: true
+#| fig-height: 4
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot()+
+  labs(y="Comprimento de pétala", x="Espécies", fill="Espécies",
+       title="Aqui é o título")+
+  theme(axis.text.x = element_text(face="italic"), 
+        plot.title = element_text(face="bold"))
+```
+
+## Manipulação da legenda
 
 Caso queremos tirar a legenda ou alterar a posição da legenda, utilizaremos o argumento `legend.position =`:
 
@@ -570,35 +770,172 @@ Caso queremos tirar a legenda ou alterar a posição da legenda, utilizaremos o 
 
 - **"right"** para a legenda ficar na direita
 
-```{r}
-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "none")
-
-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "top")
-
-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "bottom")
-
-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "left", legend.text = element_text(face="italic"))
-```
-
-### Anotação em gráfico
-
-Também é possível fazer anotações em gráficos no ggplot2, como colocar linhas  e anotações para destacar pontos interessantes.
-
-No primeiro exemplo colocamos o `geom_text` para adicionar o texto. Os argumentos `x` e `y` são para delimitar onde vai ficar o nosso texto, `label` é para definir o que vai estar no texto (nunca se esqueça de colocar entre aspas `" "`). 
+---
 
 ```{r}
-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "left", legend.text = element_text(face="italic"))+ geom_text(x = 2.5, y = 4, label = "Ponto importante", color = "red", face="bold")
+#| echo: true
+#| fig-height: 4
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot()+
+  labs(y="Comprimento de pétala", x="Espécies", fill="Espécies",
+       title="Aqui é o título")+
+  theme(axis.text.x = element_text(face="italic"),
+        plot.title = element_text(face="bold"),
+        legend.position = "none")
 ```
 
-Aqui é um exemplo utilizando `annotate`, nele além de adicionar texto, você pode adicionar linhas. Como nesse caso colocamos uma linha vertical no gráfico utilizando o argumento `"vline"`. Para colocar uma linha na horizontal é `"hline"`. Para ser um texto se utiliza o argumento `"text"`.
+---
 
 ```{r}
-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "left", legend.text = element_text(face="italic"))+ geom_text(x = 2.5, y = 4, label = "Ponto importante", color = "red")+ annotate("vline", x = 2, xintercept = 2, linetype = "dashed", color = "blue")
-
-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot()+labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+theme(axis.text.x = element_text(face="italic"), plot.title = element_text(face="bold"), legend.position = "left", legend.text = element_text(face="italic"))+ geom_text(x = 2.5, y = 4, label = "Ponto importante", color = "red")+annotate("text", x = 1, y = 3.5, label = "outro ponto", color = "blue")
-
-
+#| echo: true
+#| fig-height: 4
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot()+
+  labs(y="Comprimento de pétala", x="Espécies", fill="Espécies",
+       title="Aqui é o título")+
+  theme(axis.text.x = element_text(face="italic"),
+        plot.title = element_text(face="bold"),
+        legend.position = "top")
 ```
+
+---
+
+```{r}
+#| echo: true
+#| fig-height: 4
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot()+
+  labs(y="Comprimento de pétala", x="Espécies", fill="Espécies",
+       title="Aqui é o título")+
+  theme(axis.text.x = element_text(face="italic"),
+        plot.title = element_text(face="bold"),
+        legend.position = "bottom")
+```
+
+---
+
+```{r}
+#| echo: true
+#| fig-height: 4
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot()+
+  labs(y="Comprimento de pétala", x="Espécies", fill="Espécies",
+       title="Aqui é o título")+
+  theme(axis.text.x = element_text(face="italic"),
+        plot.title = element_text(face="bold"),
+        legend.position = "left",
+        legend.text = element_text(face="italic"))
+```
+
+## Anotação em gráfico
+
+```{r}
+#| echo: true
+#| output: false
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot()+
+  labs(y="Comprimento de pétala", x="Espécies", fill="Espécies",
+       title="Aqui é o título")+
+  theme(axis.text.x = element_text(face="italic"),
+        plot.title = element_text(face="bold"),
+        legend.position = "left",
+        legend.text = element_text(face="italic"))+
+  geom_text(x = 2.5, y = 4, label = "Ponto importante",
+            color = "red", face="bold")
+```
+
+---
+
+```{r}
+#| echo: false
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot()+
+  labs(y="Comprimento de pétala", x="Espécies", fill="Espécies",
+       title="Aqui é o título")+
+  theme(axis.text.x = element_text(face="italic"),
+        plot.title = element_text(face="bold"),
+        legend.position = "left",
+        legend.text = element_text(face="italic"))+
+  geom_text(x = 2.5, y = 4, label = "Ponto importante",
+            color = "red", face="bold")
+```
+
+---
+
+```{r}
+#| echo: true
+#| output: false
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot()+
+  labs(y="Comprimento de pétala", x="Espécies", fill="Espécies",
+       title="Aqui é o título")+
+  theme(axis.text.x = element_text(face="italic"), 
+        plot.title = element_text(face="bold"), 
+        legend.position = "left", 
+        legend.text = element_text(face="italic"))+
+  geom_text(x = 2.5, y = 4, label = "Ponto importante",
+            color = "red")+
+  annotate("vline", x = 2, xintercept = 2, linetype = "dashed",
+           color = "blue")
+```
+
+---
+
+
+```{r}
+#| echo: false
+#| output: true
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot()+
+  labs(y="Comprimento de pétala", x="Espécies", fill="Espécies", title="Aqui é o título")+
+  theme(axis.text.x = element_text(face="italic"), 
+        plot.title = element_text(face="bold"), 
+        legend.position = "left", 
+        legend.text = element_text(face="italic"))+
+  geom_text(x = 2.5, y = 4, label = "Ponto importante", color = "red")+
+  annotate("vline", x = 2, xintercept = 2, linetype = "dashed", color = "blue")
+```
+
+---
+
+
+```{r}
+#| echo: true
+#| output: false
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot()+
+  labs(y="Comprimento de pétala", x="Espécies", fill="Espécies",
+       title="Aqui é o título")+
+  theme(axis.text.x = element_text(face="italic"),
+        plot.title = element_text(face="bold"),
+        legend.position = "left",
+        legend.text = element_text(face="italic"))+
+  geom_text(x = 2.5, y = 4, label = "Ponto importante",
+            color = "red")+
+  annotate("text", x = 1, y = 3.5, label = "outro ponto",
+           color = "blue")
+```
+
+---
+
+
+```{r}
+#| echo: false
+#| output: true
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot()+
+  labs(y="Comprimento de pétala", x="Espécies", fill="Espécies",
+       title="Aqui é o título")+
+  theme(axis.text.x = element_text(face="italic"),
+        plot.title = element_text(face="bold"),
+        legend.position = "left",
+        legend.text = element_text(face="italic"))+
+  geom_text(x = 2.5, y = 4, label = "Ponto importante",
+            color = "red")+
+  annotate("text", x = 1, y = 3.5, label = "outro ponto",
+           color = "blue")
+```
+
 
 ## Temas (`theme_*`)
 
@@ -633,16 +970,47 @@ default+classic+dark+bw+minimal+gray+light+linedraw+void
 ## Unindo vários gráficos em uma imagem só
 
 ```{r}
+#| echo: true
 #Criando ggplots
-barra<-Escolaridade%>%mutate(Escolaridade=fct_relevel(Escolaridade,"Fundamental","Médio", "Graduação"))%>%ggplot(aes(x=Escolaridade))+geom_bar()+labs(y="Frequência", x="Escolaridade")
-polígono<-iris%>%ggplot(aes(x=Sepal.Length))+geom_freqpoly()+labs(y="Frequência",x="Comprimento de Sépala")
-boxplot<-iris%>%ggplot(aes(y=Sepal.Length, x=Species))+geom_boxplot()+labs(y="Comprimento de Sépala", x="Espécies")
-pontos<-iris%>%ggplot(aes(x=Sepal.Length,y=Sepal.Width, color=Species))+geom_point()+labs(x="Comprimento de Sépala", y="Largura de Sépala", color="Espécies")
+barra<-Escolaridade%>%
+  mutate(Escolaridade=fct_relevel(Escolaridade,"Fundamental","Médio", "Graduação"))%>%
+  ggplot(aes(x=Escolaridade))+
+  geom_bar()+
+  labs(y="Frequência", x="Escolaridade")
+
+polígono<-iris%>%
+  ggplot(aes(x=Sepal.Length))+
+  geom_freqpoly()+
+  labs(y="Frequência",x="Comprimento de Sépala")
+
+boxplot<-iris%>%
+  ggplot(aes(y=Sepal.Length, x=Species))+
+  geom_boxplot()+
+  labs(y="Comprimento de Sépala", x="Espécies")
+```
+
+---
+
+
+```{r} 
+#| echo: true
+pontos<-iris%>%
+  ggplot(aes(x=Sepal.Length,y=Sepal.Width, color=Species))+
+  geom_point()+
+  labs(x="Comprimento de Sépala", y="Largura de Sépala", color="Espécies")
+```
+
+---
+
+```{r}
+#| echo: true
+#| warning: false
 
 barra + polígono + boxplot + pontos
 
-
 ```
+
+---
 
 3. Também é possível utilizar diferêntes conformações utilizando elementos matemáticos, como `/` e `()`.
 
@@ -692,22 +1060,116 @@ head(prec_df)
 
 ```{r}
 #| echo: true
-ggplot(prec_df,aes(x=x,y=y,fill=pelprec))+geom_raster()
+ggplot(prec_df,aes(x=x,y=y,fill=pelprec))+
+  geom_raster()
 ``` 
 
 ---
 
 ```{r}
 #| echo: true
+#| output: false
 # Cores padrão
-ggplot()+geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+geom_sf(data=pel,fill=NA, color="gray",linewidth=2, alpha=.01)+labs(title="Mapa da média anual da precipitação \n em Pelotas-RS entre 1970-2000", y="Latitude", x="Longitude", fill="Precipitação (mm)")+theme_bw()
-
-ggplot()+geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+geom_sf(data=pel,fill=NA, color="gray",linewidth=2, alpha=.01)+labs(title="Mapa da média anual da precipitação \n em Pelotas-RS entre 1970-2000", y="Latitude", x="Longitude", fill="Precipitação (mm)")+theme_bw()+scale_fill_gradient(low="gray",high="blue")
-
-ggplot()+geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+geom_sf(data=pel,fill=NA, color="gray",linewidth=2, alpha=.01)+labs(title="Mapa da média anual da precipitação \n em Pelotas-RS entre 1970-2000", y="Latitude", x="Longitude", fill="Precipitação (mm)")+theme_bw()+scale_fill_gradientn(colours = terrain.colors(10))
+ggplot()+
+  geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+
+  geom_sf(data=pel,fill=NA, color="gray",linewidth=2, alpha=.01)+
+  labs(title="Mapa da média anual da precipitação \n
+       em Pelotas-RS entre 1970-2000",
+       y="Latitude",
+       x="Longitude",
+       fill="Precipitação (mm)")+
+  theme_bw()
 ```
 
 ---
+
+
+```{r}
+#| echo: false
+
+# Cores padrão
+ggplot()+
+  geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+
+  geom_sf(data=pel,fill=NA, color="gray",linewidth=2, alpha=.01)+
+  labs(title="Mapa da média anual da precipitação \n
+       em Pelotas-RS entre 1970-2000",
+       y="Latitude",
+       x="Longitude",
+       fill="Precipitação (mm)")+
+  theme_bw()
+```
+
+---
+
+```{r}
+#| echo: true
+#| output: false
+ggplot()+
+  geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+
+  geom_sf(data=pel,fill=NA, color="gray",linewidth=2, alpha=.01)+
+  labs(title="Mapa da média anual da precipitação \n 
+       em Pelotas-RS entre 1970-2000",
+       y="Latitude",
+       x="Longitude",
+       fill="Precipitação (mm)")+
+  theme_bw()+
+  scale_fill_gradient(low="gray",high="blue")
+```
+
+---
+
+
+```{r}
+#| echo: false
+#| output: true
+ggplot()+
+  geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+
+  geom_sf(data=pel,fill=NA, color="gray",linewidth=2, alpha=.01)+
+  labs(title="Mapa da média anual da precipitação \n 
+       em Pelotas-RS entre 1970-2000",
+       y="Latitude",
+       x="Longitude",
+       fill="Precipitação (mm)")+
+  theme_bw()+
+  scale_fill_gradient(low="gray",high="blue")
+```
+
+---
+
+```{r}
+#| echo: true
+#| output: false
+ggplot()+
+  geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+
+  geom_sf(data=pel,fill=NA, color="gray",linewidth=2, alpha=.01)+
+  labs(title="Mapa da média anual da precipitação \n
+       em Pelotas-RS entre 1970-2000",
+       y="Latitude",
+       x="Longitude",
+       fill="Precipitação (mm)")+
+  theme_bw()+
+  scale_fill_gradientn(colours = terrain.colors(10))
+```
+
+---
+
+```{r}
+#| echo: false
+ggplot()+
+  geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+
+  geom_sf(data=pel,fill=NA, color="gray",linewidth=2, alpha=.01)+
+  labs(title="Mapa da média anual da precipitação \n
+       em Pelotas-RS entre 1970-2000",
+       y="Latitude",
+       x="Longitude",
+       fill="Precipitação (mm)")+
+  theme_bw()+
+  scale_fill_gradientn(colours = terrain.colors(10))
+```
+
+---
+
+## Paleta de cores para daltônicos
 
 ```{r}
 #| echo: true
@@ -717,12 +1179,35 @@ ggplot()+geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+geom_sf(data=pel,fi
 install.packages("viridis")
 #carregando pacote viridis
 library(viridis)
+
+ggplot()+
+  geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+
+  geom_sf(data=pel,fill=NA, color="gray",linewidth=2, alpha=.01)+
+  labs(title="Mapa da média anual da precipitação \n
+       em Pelotas-RS entre 1970-2000",
+       y="Latitude",
+       x="Longitude",
+       fill="Precipitação (mm)")+
+  theme_bw()+
+  scale_fill_viridis()
+
+
 ```
+
 
 ---
 
 ```{r}
-ggplot()+geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+geom_sf(data=pel,fill=NA, color="gray",linewidth=2, alpha=.01)+labs(title="Mapa da média anual da precipitação \n em Pelotas-RS entre 1970-2000", y="Latitude", x="Longitude", fill="Precipitação (mm)")+theme_bw()+scale_fill_viridis()
+ggplot()+
+  geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+
+  geom_sf(data=pel,fill=NA, color="gray",linewidth=2, alpha=.01)+
+  labs(title="Mapa da média anual da precipitação \n
+       em Pelotas-RS entre 1970-2000",
+       y="Latitude",
+       x="Longitude",
+       fill="Precipitação (mm)")+
+  theme_bw()+
+  scale_fill_viridis()
 
 
 ```
@@ -735,24 +1220,143 @@ ggplot()+geom_raster(data=prec_df,aes(x=x,y=y,fill=pelprec))+geom_sf(data=pel,fi
 install.packages("remotes")
 remotes::install_github("MatthewBJane/ThemePark")
 library(ThemePark)
+
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot(fill=c(lordoftherings_theme_colors["light"],
+                      lordoftherings_theme_colors["medium"],
+                      lordoftherings_theme_colors["dark"]))+
+  labs(y="Comprimento de pétala", x="Espécies",
+       title= "Tema Senhor dos Anéis")+
+  theme_lordoftherings()
+
 ```
 
 ---
 
-```{r, label="theme park"}
-#| echo: true
-
-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(lordoftherings_theme_colors["light"],lordoftherings_theme_colors["medium"],lordoftherings_theme_colors["dark"]))+labs(y="Comprimento de pétala", x="Espécies", title= "Tema Senhor dos Anéis")+theme_lordoftherings()
-
-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(barbie_theme_colors["light"],barbie_theme_colors["medium"],barbie_theme_colors["dark"]))+labs(y="Comprimento de pétala", x="Espécies", title= "Tema Barbie")+theme_barbie()
-
-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(simpsons_theme_colors["light"],simpsons_theme_colors["medium"],simpsons_theme_colors["dark"]))+labs(y="Comprimento de pétala", x="Espécies", title= "Tema Simpsons")+theme_simpsons()
-
-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(friends_theme_colors["light"],friends_theme_colors["medium"],friends_theme_colors["dark"]))+labs(y="Comprimento de pétala", x="Espécies", title= "Tema Friends")+theme_friends()
-
-iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(starwars_theme_colors["light"],starwars_theme_colors["medium"],starwars_theme_colors["dark"]))+labs(y="Comprimento de pétala", x="Espécies", title= "Tema Star wars")+theme_starwars()
+```{r}
+#| echo: false
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot(fill=c(lordoftherings_theme_colors["light"],
+                      lordoftherings_theme_colors["medium"],
+                      lordoftherings_theme_colors["dark"]))+
+  labs(y="Comprimento de pétala", x="Espécies",
+       title= "Tema Senhor dos Anéis")+
+  theme_lordoftherings()
 
 ```
+
+--- 
+
+```{r}
+#| echo: true
+#| output: false
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot(fill=c(barbie_theme_colors["light"],
+                      barbie_theme_colors["medium"],
+                      barbie_theme_colors["dark"]))+
+  labs(y="Comprimento de pétala", x="Espécies",
+       title= "Tema Barbie")+
+  theme_barbie()
+```
+
+---
+
+```{r}
+#| echo: false
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot(fill=c(barbie_theme_colors["light"],
+                      barbie_theme_colors["medium"],
+                      barbie_theme_colors["dark"]))+
+  labs(y="Comprimento de pétala", x="Espécies",
+       title= "Tema Barbie")+
+  theme_barbie()
+```
+
+---
+
+```{r}
+#| echo: true
+#| output: false
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot(fill=c(simpsons_theme_colors["light"],
+                      simpsons_theme_colors["medium"],
+                      simpsons_theme_colors["dark"]))+
+  labs(y="Comprimento de pétala", x="Espécies", title= "Tema Simpsons")+
+  theme_simpsons()
+```
+
+---
+
+```{r}
+#| echo: false
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot(fill=c(simpsons_theme_colors["light"],
+                      simpsons_theme_colors["medium"],
+                      simpsons_theme_colors["dark"]))+
+  labs(y="Comprimento de pétala", x="Espécies", title= "Tema Simpsons")+
+  theme_simpsons()
+```
+
+---
+
+```{r}
+#| echo: true
+#| output: false
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot(fill=c(friends_theme_colors["light"],
+                      friends_theme_colors["medium"],
+                      friends_theme_colors["dark"]))+
+  labs(y="Comprimento de pétala", x="Espécies", title= "Tema Friends")+
+  theme_friends()
+```
+
+---
+
+```{r}
+#| echo: false
+#| output: true
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot(fill=c(friends_theme_colors["light"],
+                      friends_theme_colors["medium"],
+                      friends_theme_colors["dark"]))+
+  labs(y="Comprimento de pétala", x="Espécies", title= "Tema Friends")+
+  theme_friends()
+```
+
+---
+
+
+```{r}
+#| echo: true
+#| output: false
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot(fill=c(starwars_theme_colors["light"],
+                      starwars_theme_colors["medium"],
+                      starwars_theme_colors["dark"]))+
+  labs(y="Comprimento de pétala", x="Espécies",
+       title= "Tema Star wars")+
+  theme_starwars()
+
+```
+
+---
+
+```{r}
+#| echo: false
+#| output: true
+iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+
+  geom_boxplot(fill=c(starwars_theme_colors["light"],
+                      starwars_theme_colors["medium"],
+                      starwars_theme_colors["dark"]))+
+  labs(y="Comprimento de pétala", x="Espécies",
+       title= "Tema Star wars")+
+  theme_starwars()
+
+```
+
+---
+
+
 
 
 ## Referências
@@ -760,3 +1364,11 @@ iris%>%ggplot(aes(x=Species, y=Petal.Length, fill=Species))+geom_boxplot(fill=c(
 :::{#refs}
 
 :::
+
+# Agrdeço  atenção!
+
+**Para mais informções**
+<https://ggplot2.tidyverse.org/reference/index.html>
+
+**Documentação desta oficina com maior detalhe**
+<https://izzyreal18.github.io/oficinaggplotufpel.github.io/>
