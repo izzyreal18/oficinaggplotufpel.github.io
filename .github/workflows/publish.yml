@@ -13,11 +13,7 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-        
-        # Add this new step here
-      - name: Install TinyTeX
-        run: quarto install tinytex --update-path --no-prompt
-
+       
       - name: Install system dependencies for terra and av
         run: |
               sudo apt-get update
@@ -29,6 +25,10 @@ jobs:
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
+        
+         # Add this new step here
+      - name: Install TinyTeX
+        run: quarto install tinytex --update-path --no-prompt
 
       - name: Install R
         uses: r-lib/actions/setup-r@v2
