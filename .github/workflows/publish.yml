@@ -28,7 +28,7 @@ jobs:
         
          # Add this new step here
       - name: Install TinyTeX
-        run: quarto install tinytex --update-path --no-prompt
+        run: quarto install tinytex 
 
       - name: Install R
         uses: r-lib/actions/setup-r@v2
