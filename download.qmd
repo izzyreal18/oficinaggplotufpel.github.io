@@ -19,7 +19,7 @@ format: html
 
 [Shapefile da cidade de Pelotas](<https://github.com/izzyreal18/oficinaggplotufpel.github.io/raw/refs/heads/main/Pelotas.zip>)
 
-[Script completo em R]()
+[Script completo em R](<https://github.com/izzyreal18/oficinaggplotufpel.github.io/raw/refs/heads/main/script.zip>)
 
-[Apresentação PDF]()
+[Apresentação PDF](<https://github.com/izzyreal18/oficinaggplotufpel.github.io/raw/refs/heads/main/apresenta%C3%A7%C3%A3o.zip>)
 
