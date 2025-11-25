@@ -1,5 +1,5 @@
 ---
-title: "Introdução ao ggplot2"
+title: "Explorando o pacote ggplot2 do R"
 author: "Isadora Real"
 bibliography: ref.bib
 csl: abnt.csl
@@ -13,7 +13,7 @@ O `ggplot2` é um pacote de código aberto para a visualização gráfica de dad
 Ele aborda que visualização gráfica dos dados pode ser divida em componentes semânticos, como escalas e camadas.
 
 
-![](Ggplot2_hex_logo.svg.png){fig-width=50px, fig-aling="center"}
+![](Ggplot2_hex_logo.svg.png){fig-width=10px, fig-aling="center"}
 
 ## Por que usar o ggplot2?
 
@@ -67,7 +67,7 @@ library(patchwork)
 
 Para essa oficina será utilizado bancos de dados **iris**.
 
-**iris** - é referente tamanho de pételas e sepalas de 3 espécies do gênero *Iris* do trabalho de Fisher em 1936 (*Iris setosa*,*Iris versicolor* e *Iris virginica*)
+**iris** - é referente tamanho de pételas e sépalas de 3 espécies do gênero *Iris* do trabalho de Fisher em 1936 (*Iris setosa*,*Iris versicolor* e *Iris virginica*)
 
 ```{r, label="carregando banco de dados"}
 #| echo: true
@@ -130,7 +130,7 @@ ggplot(iris,aes(x=Sepal.Width))+geom_histogram(bins=11, color="black", fill="whi
 
 ```
 
-# Polígono
+# Polígono de frequência
 
 O polígono de frequência é semelhante ao histograma, mas neste caso utilizaremos o comando `geom_freqpoly()`.
 
@@ -203,7 +203,7 @@ Esse gráfico pode ser gerado com o `geom_col`. Porém nele é necessário reali
 iris%>%group_by(Species)%>%summarise(count=n())%>%ggplot(aes(x=Species, fill=Species, y=count))+geom_col(color="black")
 ```
 
-# Gráfico de pizza
+# Gráfico de setores
 
 Para o gráfico de pizza, iremos seguir uma linha de código semelhante que a anterior, porém para calcular porcentagem em `summarise` colocaremos `count=n()/150*100`, onde 150 é o total de observações do *data frame*. Neste caso o eixo x idicaremos com vazio `x= " "`. Para transformar o gráfico de barras em pizza adicionaresmo a função `coord_polar(theta="y")`. O `theme_void()` foi utilizado para remover o fundo do gráfico. Para colocar o números indicando a porcentagem utilizaremos o `geom_label(aes(label=count), position=position_stack(vjust=0.5), show.legend=FALSE)`. O `geom_label`é um comando que se utiliza de variáveis de um *data frame* para colocar "rótulos" no gráfico. Definimos dentro de `aes()` que o nosso `label` é `count`. No argumento `position=position_stack(vjust=0.5)`, definimos que a posição do nosso label será ajustada verticalmente por `vjust=0.5` na metade da altura da "fatia".
 
@@ -215,7 +215,7 @@ iris%>%group_by(Species)%>%summarise(count=n()/150*100)%>%ggplot(aes(x=" ", fill
 
 iris%>%group_by(Species)%>%summarise(count=round(n()/150*100, 2))%>%ggplot(aes(x=" ", fill=Species, y=count))+geom_col(color="black")+coord_polar(theta="y")+ geom_label(aes(label = count),
              position = position_stack(vjust = 0.5),
-             show.legend = FALSE)+theme_void()
+             show.legend = FALSE, size=11)+theme_void()
 
 ```
 
