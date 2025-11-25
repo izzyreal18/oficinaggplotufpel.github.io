@@ -205,7 +205,7 @@ iris%>%group_by(Species)%>%summarise(count=n())%>%ggplot(aes(x=Species, fill=Spe
 
 # Gráfico de setores
 
-Para o gráfico de pizza, iremos seguir uma linha de código semelhante que a anterior, porém para calcular porcentagem em `summarise` colocaremos `count=n()/150*100`, onde 150 é o total de observações do *data frame*. Neste caso o eixo x idicaremos com vazio `x= " "`. Para transformar o gráfico de barras em pizza adicionaresmo a função `coord_polar(theta="y")`. O `theme_void()` foi utilizado para remover o fundo do gráfico. Para colocar o números indicando a porcentagem utilizaremos o `geom_label(aes(label=count), position=position_stack(vjust=0.5), show.legend=FALSE)`. O `geom_label`é um comando que se utiliza de variáveis de um *data frame* para colocar "rótulos" no gráfico. Definimos dentro de `aes()` que o nosso `label` é `count`. No argumento `position=position_stack(vjust=0.5)`, definimos que a posição do nosso label será ajustada verticalmente por `vjust=0.5` na metade da altura da "fatia".
+Para o gráfico de setores ou de  pizza, iremos seguir uma linha de código semelhante que a anterior, porém para calcular porcentagem em `summarise` colocaremos `count=n()/150*100`, onde 150 é o total de observações do *data frame*. Neste caso o eixo x idicaremos com vazio `x= " "`. Para transformar o gráfico de barras em setores adicionaremos a função `coord_polar(theta="y")`. O `theme_void()` foi utilizado para remover o fundo do gráfico. Para colocar o números indicando a porcentagem utilizaremos o `geom_label(aes(label=count), position=position_stack(vjust=0.5), show.legend=FALSE)`. O `geom_label`é um comando que se utiliza de variáveis de um *data frame* para colocar "rótulos" no gráfico. Definimos dentro de `aes()` que o nosso `label` é `count`. No argumento `position=position_stack(vjust=0.5)`, definimos que a posição do nosso label será ajustada verticalmente por `vjust=0.5` na metade da altura da "fatia".
 
 **Note:** que no segundo gráfico fizemos um ajuste em `count` onde utlizamos o comando `round(n()/150*100, 2)`, para arrendondar o valor do calculo da porcentagem para duas casas decimais.
 
@@ -215,7 +215,7 @@ iris%>%group_by(Species)%>%summarise(count=n()/150*100)%>%ggplot(aes(x=" ", fill
 
 iris%>%group_by(Species)%>%summarise(count=round(n()/150*100, 2))%>%ggplot(aes(x=" ", fill=Species, y=count))+geom_col(color="black")+coord_polar(theta="y")+ geom_label(aes(label = paste0(count, "%")),
              position = position_stack(vjust = 0.5),
-             show.legend = FALSE, size=11)+theme_void()
+             show.legend = FALSE, size=5)+theme_void()
 
 ```
 
