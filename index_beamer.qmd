@@ -114,7 +114,7 @@ data(iris)
 ::: {.text-center}
 ```{r}
 #| echo: false
-#install.packages("gt")
+install.packages("gt")
 library(gt)
 gt(head(iris,4)) |>
   tab_options(
