@@ -15,11 +15,7 @@ format: html
 
 # Baixando arquivos da oficina
 
-[Raster da média anual da precipitação em Pelotas entre 1970-2000](<https://github.com/izzyreal18/oficinaggplotufpel.github.io/raw/refs/heads/main/pelprec.tiff>)
+[Arquivos da oficina](<https://drive.google.com/drive/folders/1vzKuhDx6nuXkZvJuImCoqjtfCplspp24?usp=drive_link>)
 
-[Shapefile da cidade de Pelotas](<https://github.com/izzyreal18/oficinaggplotufpel.github.io/raw/refs/heads/main/Pelotas.zip>)
 
-[Script completo em R](<https://github.com/izzyreal18/oficinaggplotufpel.github.io/raw/refs/heads/main/script.zip>)
-
-[Apresentação PDF](<https://github.com/izzyreal18/oficinaggplotufpel.github.io/raw/refs/heads/main/apresenta%C3%A7%C3%A3o.zip>)
 
