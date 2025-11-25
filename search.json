@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "download.html",
-    "href": "download.html",
-    "title": "Downloads",
-    "section": "",
-    "text": "Baixando o R e RStudio\nWindows: https://cloud.r-project.org/bin/windows/base/\nMacOS: https://cloud.r-project.org/bin/macosx/big-sur-arm64/base/R-4.5.1-arm64.pkg\nLinux: https://cloud.r-project.org\n\nBaixando RStudio: https://posit.co/download/rstudio-desktop/\n\n\n\nBaixando arquivos da oficina\nRaster da média anual da precipitação em Pelotas entre 1970-2000\nShapefile da cidade de Pelotas\nScript completo em R\nApresentação PDF"
-  },
-  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
@@ -103,5 +96,12 @@
     "title": "Introdução ao ggplot2",
     "section": "Gráficos animados",
     "text": "Gráficos animados\nTambém é possível criar gráficos animados para uma apresentação, através do pacote gganimate.\n\n#instalando pacotes: gganimate,gapminder,gifski, av e magick\ninstall.packages(\"gganimate\")\ninstall.packages(\"gapminder\")\ninstall.packages(\"gifski\")\ninstall.packages(\"av\")\ninstall.packages(\"magick\")\n\n#carregand os pacotes gganimate, gapminder, av, gifski e magick\nlibrary(gganimate)\nlibrary(gapminder)\nlibrary(av)\nlibrary(gifski)\nlibrary(magick)\n\n\ndata(\"gapminder\")\n\nhead(gapminder)\n\n# A tibble: 6 × 6\n  country     continent  year lifeExp      pop gdpPercap\n  &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;\n1 Afghanistan Asia       1952    28.8  8425333      779.\n2 Afghanistan Asia       1957    30.3  9240934      821.\n3 Afghanistan Asia       1962    32.0 10267083      853.\n4 Afghanistan Asia       1967    34.0 11537966      836.\n5 Afghanistan Asia       1972    36.1 13079460      740.\n6 Afghanistan Asia       1977    38.4 14880372      786.\n\n\n\nggplot(gapminder,aes(x=gdpPercap,y=lifeExp,color=country,size=pop))+geom_point(alpha=.7, show.legend = FALSE)+scale_colour_manual(values=country_colors)+facet_wrap(~continent)+scale_size(range=c(2,12))+scale_x_log10() + labs(title = 'Year: {frame_time}', x = 'GDP per capita', y = 'life expectancy') +\n  transition_time(year) +\n  ease_aes('linear')+theme_light()"
+  },
+  {
+    "objectID": "download.html",
+    "href": "download.html",
+    "title": "Downloads",
+    "section": "",
+    "text": "Baixando o R e RStudio\nWindows: https://cloud.r-project.org/bin/windows/base/\nMacOS: https://cloud.r-project.org/bin/macosx/big-sur-arm64/base/R-4.5.1-arm64.pkg\nLinux: https://cloud.r-project.org\n\nBaixando RStudio: https://posit.co/download/rstudio-desktop/\n\n\n\nBaixando arquivos da oficina\nRaster da média anual da precipitação em Pelotas entre 1970-2000\nShapefile da cidade de Pelotas\nScript completo em R\nApresentação PDF"
   }
 ]
