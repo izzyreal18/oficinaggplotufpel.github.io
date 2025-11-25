@@ -242,12 +242,12 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={Introdução ao ggplot2},
+  pdftitle={Explorando o pacote ggplot2 do R},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 
-\title{Introdução ao ggplot2}
+\title{Explorando o pacote ggplot2 do R}
 \author{}
 \date{}
 
@@ -331,7 +331,7 @@ componentes semânticos, como escalas e camadas.
 \phantomsection\label{banco-de-dados-iris}
 Para essa oficina será utilizado bancos de dados \textbf{iris}.
 
-\textbf{iris} - é referente tamanho de pételas e sepalas de 3 espécies
+\textbf{iris} - é referente tamanho de pételas e sépalas de 3 espécies
 do gênero \emph{Iris} do trabalho de Fisher em 1936 (\emph{Iris
 setosa},\emph{Iris versicolor} e \emph{Iris virginica})
 
@@ -408,8 +408,8 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
 \pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-2-1.pdf}}
 \end{frame}
 
-\begin{frame}[fragile]{Polígono}
-\phantomsection\label{poluxedgono}
+\begin{frame}[fragile]{Polígono de frequências}
+\phantomsection\label{poluxedgono-de-frequuxeancias}
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(iris,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Sepal.Width))}\SpecialCharTok{+}
@@ -507,8 +507,8 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
 \pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-7-1.pdf}}
 \end{frame}
 
-\begin{frame}[fragile]{Gráfico de pizza}
-\phantomsection\label{gruxe1fico-de-pizza}
+\begin{frame}[fragile]{Gráfico de setores}
+\phantomsection\label{gruxe1fico-de-setores}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{group\_by}\NormalTok{(Species)}\SpecialCharTok{\%\textgreater{}\%}
@@ -529,11 +529,10 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
 \NormalTok{iris}\SpecialCharTok{\%\textgreater{}\%}\FunctionTok{group\_by}\NormalTok{(Species)}\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{summarise}\NormalTok{(}\AttributeTok{count=}\FunctionTok{round}\NormalTok{(}\FunctionTok{n}\NormalTok{()}\SpecialCharTok{/}\DecValTok{150}\SpecialCharTok{*}\DecValTok{100}\NormalTok{, }\DecValTok{2}\NormalTok{))}\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\StringTok{" "}\NormalTok{, }\AttributeTok{fill=}\NormalTok{Species, }\AttributeTok{y=}\NormalTok{count))}\SpecialCharTok{+}
-  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{color=}\StringTok{"black"}\NormalTok{)}\SpecialCharTok{+}
-  \FunctionTok{coord\_polar}\NormalTok{(}\AttributeTok{theta=}\StringTok{"y"}\NormalTok{)}\SpecialCharTok{+}
-  \FunctionTok{geom\_label}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ count),}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{color=}\StringTok{"black"}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{coord\_polar}\NormalTok{(}\AttributeTok{theta=}\StringTok{"y"}\NormalTok{)}\SpecialCharTok{+} 
+  \FunctionTok{geom\_label}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{paste0}\NormalTok{(count, }\StringTok{"\%"}\NormalTok{)),}
              \AttributeTok{position =} \FunctionTok{position\_stack}\NormalTok{(}\AttributeTok{vjust =} \FloatTok{0.5}\NormalTok{),}
-             \AttributeTok{show.legend =} \ConstantTok{FALSE}\NormalTok{)}\SpecialCharTok{+}
+             \AttributeTok{show.legend =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{size=}\DecValTok{3}\NormalTok{)}\SpecialCharTok{+}
   \FunctionTok{theme\_void}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -541,8 +540,8 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
 \pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-9-1.pdf}}
 \end{frame}
 
-\begin{frame}[fragile]{Gráfico de pontos}
-\phantomsection\label{gruxe1fico-de-pontos}
+\begin{frame}[fragile]{Diagrama de pontos}
+\phantomsection\label{diagrama-de-pontos}
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(iris,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Sepal.Length, }\AttributeTok{y=}\NormalTok{Sepal.Width))}\SpecialCharTok{+}

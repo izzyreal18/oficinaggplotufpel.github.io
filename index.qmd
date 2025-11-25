@@ -219,7 +219,7 @@ iris%>%group_by(Species)%>%summarise(count=round(n()/150*100, 2))%>%ggplot(aes(x
 
 ```
 
-# Gráfico de pontos
+# Diagrama de pontos
 
 Para realizar gráficos de pontos é necessário indicar o eixo x e y em `aes()` e adicionar a função `geom_point()`
 
