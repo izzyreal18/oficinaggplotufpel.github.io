@@ -81,7 +81,7 @@ iris%>%group_by(Species)%>%
   ggplot(aes(x=Species, fill=Species, y=count))+
   geom_col(color="black")
 
-## Gráfico de pizza
+## Gráfico de setores
 iris%>%group_by(Species)%>%
   summarise(count=n()/150*100)%>%
   ggplot(aes(x=" ", fill=Species, y=count))+
@@ -91,13 +91,13 @@ iris%>%group_by(Species)%>%
 iris%>%group_by(Species)%>%
   summarise(count=round(n()/150*100, 2))%>%
   ggplot(aes(x=" ", fill=Species, y=count))+
-  geom_col(color="black")+
-  coord_polar(theta="y")+
-  geom_label(aes(label = count),
+  geom_col(color="black")+coord_polar(theta="y")+ 
+  geom_label(aes(label = paste0(count, "%")),
              position = position_stack(vjust = 0.5),
-             show.legend = FALSE)+theme_void()
+             show.legend = FALSE, size=3)+
+  theme_void()
 
-## Gráfico de pontos
+## Diagrama de pontos
 ggplot(iris,aes(x=Sepal.Length, y=Sepal.Width))+
   geom_point()
 

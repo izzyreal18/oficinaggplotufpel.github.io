@@ -342,7 +342,7 @@ setosa},\emph{Iris versicolor} e \emph{Iris virginica})
 \end{Shaded}
 
 \begin{table}
-\fontsize{7.5pt}{9.0pt}\selectfont
+\fontsize{8.0pt}{9.0pt}\selectfont
 \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}rrrrc}
 \toprule
 Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\ 
@@ -405,7 +405,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-2-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-3-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]{Polígono de frequências}
@@ -434,7 +434,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-3-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-4-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -450,7 +450,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-4-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-5-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -466,7 +466,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-5-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-6-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]{Gráfico de densidade}
@@ -479,7 +479,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-6-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-7-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]{Gráfico de barras de frequência}
@@ -504,7 +504,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-7-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-8-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]{Gráfico de setores}
@@ -520,7 +520,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-8-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-9-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -537,7 +537,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-9-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-10-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]{Diagrama de pontos}
@@ -545,18 +545,6 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(iris,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Sepal.Length, }\AttributeTok{y=}\NormalTok{Sepal.Width))}\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-10-1.pdf}}
-\end{frame}
-
-\begin{frame}[fragile]
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(iris,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Sepal.Length, }\AttributeTok{y=}\NormalTok{Sepal.Width,}
-                \AttributeTok{color=}\NormalTok{Species, }\AttributeTok{shape=}\NormalTok{Species))}\SpecialCharTok{+}
   \FunctionTok{geom\_point}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -569,12 +557,24 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
 \begin{Highlighting}[]
 \FunctionTok{ggplot}\NormalTok{(iris,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Sepal.Length, }\AttributeTok{y=}\NormalTok{Sepal.Width,}
                 \AttributeTok{color=}\NormalTok{Species, }\AttributeTok{shape=}\NormalTok{Species))}\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-12-1.pdf}}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(iris,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Sepal.Length, }\AttributeTok{y=}\NormalTok{Sepal.Width,}
+                \AttributeTok{color=}\NormalTok{Species, }\AttributeTok{shape=}\NormalTok{Species))}\SpecialCharTok{+}
   \FunctionTok{geom\_point}\NormalTok{()}\SpecialCharTok{+}
   \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{se=}\ConstantTok{FALSE}\NormalTok{, }\AttributeTok{method=}\StringTok{"lm"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-12-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-13-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -588,7 +588,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-13-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-14-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]{Gráfico de barras (média e desvio)}
@@ -631,7 +631,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
 \end{frame}
 
 \begin{frame}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-15-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-16-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -650,7 +650,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
 \end{frame}
 
 \begin{frame}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-17-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-18-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -668,7 +668,7 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species \\
 \end{frame}
 
 \begin{frame}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-19-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-20-1.pdf}}
 \end{frame}
 
 \section{Alterando escalas, cores, fontes e
@@ -715,7 +715,7 @@ temas}\label{alterando-escalas-cores-fontes-e-temas}
 \end{frame}
 
 \begin{frame}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-21-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-22-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]{Ordenando variáveis ordinais no ggplot}
@@ -736,7 +736,7 @@ temas}\label{alterando-escalas-cores-fontes-e-temas}
 \end{frame}
 
 \begin{frame}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-23-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-24-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -754,7 +754,7 @@ temas}\label{alterando-escalas-cores-fontes-e-temas}
 \end{frame}
 
 \begin{frame}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-25-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-26-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]{Mudando cores de preenchimento no ggplot}
@@ -904,7 +904,7 @@ argumentos:
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-27-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-28-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -918,7 +918,7 @@ argumentos:
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-28-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-29-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -931,7 +931,7 @@ argumentos:
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-29-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-30-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -944,7 +944,7 @@ argumentos:
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-30-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-31-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -959,7 +959,7 @@ argumentos:
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-31-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-32-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]{Manipulação da legenda}
@@ -994,7 +994,7 @@ utilizaremos o argumento \texttt{legend.position\ =}:
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-32-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-33-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1010,7 +1010,7 @@ utilizaremos o argumento \texttt{legend.position\ =}:
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-33-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-34-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1026,7 +1026,7 @@ utilizaremos o argumento \texttt{legend.position\ =}:
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-34-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-35-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1043,7 +1043,7 @@ utilizaremos o argumento \texttt{legend.position\ =}:
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-35-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-36-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]{Anotação em gráfico}
@@ -1065,7 +1065,7 @@ utilizaremos o argumento \texttt{legend.position\ =}:
 \end{frame}
 
 \begin{frame}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-37-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-38-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1088,7 +1088,7 @@ utilizaremos o argumento \texttt{legend.position\ =}:
 \end{frame}
 
 \begin{frame}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-39-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-40-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1111,7 +1111,7 @@ utilizaremos o argumento \texttt{legend.position\ =}:
 \end{frame}
 
 \begin{frame}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-41-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-42-1.pdf}}
 \end{frame}
 
 \begin{frame}{Temas (\texttt{theme\_*})}
@@ -1161,7 +1161,7 @@ utilizaremos o argumento \texttt{legend.position\ =}:
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-44-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-45-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1173,7 +1173,7 @@ utilizaremos o argumento \texttt{legend.position\ =}:
   elementos matemáticos, como \texttt{/} e \texttt{()}.
 \end{enumerate}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-45-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-46-1.pdf}}
 \end{frame}
 
 \section{Extra}\label{extra}
@@ -1227,7 +1227,7 @@ utilizaremos o argumento \texttt{legend.position\ =}:
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-48-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-49-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1248,7 +1248,7 @@ utilizaremos o argumento \texttt{legend.position\ =}:
 \end{frame}
 
 \begin{frame}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-50-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-51-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1269,7 +1269,7 @@ utilizaremos o argumento \texttt{legend.position\ =}:
 \end{frame}
 
 \begin{frame}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-52-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-53-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1290,7 +1290,7 @@ utilizaremos o argumento \texttt{legend.position\ =}:
 \end{frame}
 
 \begin{frame}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-54-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-55-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]{Paleta de cores para daltônicos}
@@ -1317,7 +1317,7 @@ utilizaremos o argumento \texttt{legend.position\ =}:
 \end{frame}
 
 \begin{frame}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-56-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-57-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]{Temas divertidos}
@@ -1340,7 +1340,7 @@ utilizaremos o argumento \texttt{legend.position\ =}:
 \end{frame}
 
 \begin{frame}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-57-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-58-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1358,7 +1358,7 @@ utilizaremos o argumento \texttt{legend.position\ =}:
 \end{frame}
 
 \begin{frame}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-59-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-60-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1375,7 +1375,7 @@ utilizaremos o argumento \texttt{legend.position\ =}:
 \end{frame}
 
 \begin{frame}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-61-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-62-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1392,7 +1392,7 @@ utilizaremos o argumento \texttt{legend.position\ =}:
 \end{frame}
 
 \begin{frame}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-63-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-64-1.pdf}}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -1410,7 +1410,7 @@ utilizaremos o argumento \texttt{legend.position\ =}:
 \end{frame}
 
 \begin{frame}
-\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-65-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{index_beamer_files/figure-beamer/unnamed-chunk-66-1.pdf}}
 \end{frame}
 
 \begin{frame}{Referências}

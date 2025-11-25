@@ -110,11 +110,17 @@ Para essa oficina será utilizado bancos de dados **iris**.
 #| echo: true
 data(iris)
 ```
+```{r}
+#| echo: false
+#| output: false
+install.packages("gt")
+
+```
+
 
 ::: {.text-center}
 ```{r}
 #| echo: false
-install.packages("gt")
 library(gt)
 gt(head(iris,4)) |>
   tab_options(
