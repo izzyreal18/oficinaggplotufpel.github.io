@@ -213,7 +213,7 @@ Para o gráfico de pizza, iremos seguir uma linha de código semelhante que a an
 ```{r}
 iris%>%group_by(Species)%>%summarise(count=n()/150*100)%>%ggplot(aes(x=" ", fill=Species, y=count))+geom_col(color="black")+coord_polar(theta="y")+theme_void()
 
-iris%>%group_by(Species)%>%summarise(count=round(n()/150*100, 2))%>%ggplot(aes(x=" ", fill=Species, y=count))+geom_col(color="black")+coord_polar(theta="y")+ geom_label(aes(label = count),
+iris%>%group_by(Species)%>%summarise(count=round(n()/150*100, 2))%>%ggplot(aes(x=" ", fill=Species, y=count))+geom_col(color="black")+coord_polar(theta="y")+ geom_label(aes(label = paste0(count, "%")),
              position = position_stack(vjust = 0.5),
              show.legend = FALSE, size=11)+theme_void()
 
